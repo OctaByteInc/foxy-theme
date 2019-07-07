@@ -5,7 +5,8 @@ import 'lazysizes/plugins/bgset/ls.bgset';
 import 'lazysizes';
 import 'lazysizes/plugins/respimg/ls.respimg';
 
-import '../../styles/theme.scss';
+// TODO: remove this for production 
+//import '../../styles/theme.scss';
 import '../../styles/theme.scss.liquid';
 
 import {focusHash, bindInPageLinks} from '@shopify/theme-a11y';
