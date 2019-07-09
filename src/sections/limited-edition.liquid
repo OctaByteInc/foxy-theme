@@ -1,0 +1,28 @@
+<div class="shop-limited-area bg-img pt-90 pb-100" style="background-image: url('{{ "1170-314.jpg" | asset_url }}')" data-overlay="3">
+    <div class="container">
+        <div class="shop-limited-content text-center">
+            <h2>Shop Limited Edition.</h2>
+            <a class="btn-hover limited-btn" href="#">view more</a>
+        </div>
+    </div>
+</div>
+
+{% schema %}
+{
+    "name": "Limited Edition",
+    "settings": [
+        {
+            "type": "text",
+            "id": "title",
+            "label": "Heading",
+            "default": "Limited Edition"
+        }
+    ],
+    "presets": [
+        {
+            "categorey": "Advanced layout",
+            "name":"Limited Edition"
+        }
+    ],
+}
+{% endschema %}
