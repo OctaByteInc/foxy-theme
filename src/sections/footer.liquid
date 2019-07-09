@@ -1,50 +1,69 @@
-<footer>
-
-  {%- assign social_accounts = 'Facebook, Twitter, Pinterest, Instagram, Snapchat, Tumblr, YouTube, Vimeo,' | split: ', ' -%}
-  <ul>
-    {% for social in social_accounts %}
-      {%- assign social_handle = social | handleize -%}
-      {% capture social_link %}social_{{ social_handle }}_link{% endcapture %}
-      {% capture social_icon %}icon-{{ social_handle }}{% endcapture %}
-
-      {% if settings[social_link] != blank %}
-        <li>
-          <a href="{{ settings[social_link] }}" title="{{ 'layout.footer.social_platform' | t: name: shop.name, platform: social }}">
-            {% include social_icon %}
-            <span class="icon-fallback-text">{{ social }}</span>
-          </a>
-        </li>
-      {% endif %}
-
-    {% endfor %}
-  </ul>
-
-  {% if section.settings.show_payment_icons %}
-    {% unless shop.enabled_payment_types == empty %}
-      <span class="visually-hidden">{{ 'layout.footer.payment_methods' | t }}</span>
-      <ul class="payment-icons">
-        {% for type in shop.enabled_payment_types %}
-          <li>
-            {{ type | payment_type_svg_tag: class: 'icon' }}
-          </li>
-        {% endfor %}
-      </ul>
-    {% endunless %}
-  {% endif %}
-
-  {%- assign footer_linklist = section.settings.footer_linklist -%}
-  {% if linklists[footer_linklist].links.size > 0 %}
-    <ul>
-      {% for link in linklists[footer_linklist].links %}
-        <li><a href="{{ link.url }}">{{ link.title }}</a></li>
-      {% endfor %}
-    </ul>
-  {% endif %}
-
-  <div>
-    <small>{{ 'layout.footer.copyright' | t }} &copy; {{ 'now' | date: "%Y" }}, {{ shop.name | link_to: '/' }}. {{ powered_by_link }}</small>
-  </div>
+<footer class="footer-area gray-bg pt-100 pb-95">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-3 col-md-5 col-12">
+                <div class="footer-widget">
+                    <div class="footer-widget-l-content">
+                        <h4>20 Years Experience</h4>
+                        <ul>
+                            <li><a href="#"><i class="ion-social-twitter"></i></a></li> 
+                            <li><a href="#"><i class="ion-social-tumblr"></i></a></li>
+                            <li><a href="#"><i class="ion-social-facebook"></i></a></li> 
+                            <li><a href="#"><i class="ion-social-instagram-outline"></i></a></li> 
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6 col-md-7 col-12">
+                <div class="footer-widget">
+                    <div class="footer-widget-m-content text-center">
+                        <div class="footer-logo">
+                            <a href="#"><img src="{{ 'logo.png' | asset_url }}" alt=""></a>
+                        </div>
+                        <div class="footer-nav">
+                            <nav>
+                                <ul>
+                                    <li><a href="#">home</a></li>
+                                    <li><a href="#">about us</a></li>
+                                    <li><a href="#">shop </a></li>
+                                    <li><a href="#"> blog </a></li>
+                                    <li><a href="#">pages </a></li>
+                                </ul>
+                            </nav>
+                        </div>
+                        <p>Copyright <i class="fa fa-copyright"></i> 2018 <a href="https://octabyte.io/" target="_blank" >OctaByte Themes.</a> All rights reserved. </p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-12 col-12">
+                <div class="footer-widget f-right">
+                    <div class="footer-widget-r-content">
+                        <ul>
+                            <li><span>Phone :</span> +00 123 45 6789</li>
+                            <li><span>Email : </span> <a href="#">Foxy@gmail.com</a></li>
+                            <li><span>Address :</span> Pakistan</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </footer>
+<!-- all js here -->
+<script src="{{ "jquery-1.12.0.min.js" | asset_url }}"></script>
+<script src="{{ "popper.js" | asset_url }}"></script>
+<script src="{{ "bootstrap.min.js" | asset_url }}"></script>
+<script src="{{ "jquery.magnific-popup.min.js" | asset_url }}"></script>
+<script src="{{ "isotope.pkgd.min.js" | asset_url }}"></script>
+<script src="{{ "imagesloaded.pkgd.min.js" | asset_url }}"></script>
+<script src="{{ "jquery.counterup.min.js" | asset_url }}"></script>
+<script src="{{ "waypoints.min.js" | asset_url }}"></script>
+<script src="{{ "slinky.min.js" | asset_url }}"></script>
+<script src="{{ "ajax-mail.js" | asset_url }}"></script>
+<script src="{{ "owl.carousel.min.js" | asset_url }}"></script>
+<script src="{{ "plugins.js" | asset_url }}"></script>
+<script src="{{ "main.js" | asset_url }}"></script>
+
 
 {% schema %}
   {
