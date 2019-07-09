@@ -8,21 +8,19 @@
 </div>
 
 {% schema %}
-{
+  {
     "name": "Limited Edition",
     "settings": [
-        {
-            "type": "text",
-            "id": "title",
-            "label": "Heading",
-            "default": "Limited Edition"
-        }
+      {
+        "type": "text",
+        "id": "title",
+        "label": "Heading",
+        "default": "Limited Edition"
+      }
     ],
-    "presets": [
-        {
-            "categorey": "Advanced layout",
-            "name":"Limited Edition"
-        }
-    ],
-}
+    "presets": [{
+        "name": "Limited Edition",
+        "category": "Advanced layout"
+    }]
+  }
 {% endschema %}
