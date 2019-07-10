@@ -1,0 +1,10 @@
+.badge-notify{
+    background: #e93233;
+    color: #fff;
+    font-size: 13px;
+    position: relative;
+    top: -12px;
+    left: -16px;
+    border-radius: 50%;
+    font-weight: bold;
+}
