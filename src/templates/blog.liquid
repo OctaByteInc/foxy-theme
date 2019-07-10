@@ -1,96 +1,129 @@
-{% paginate blog.articles by 5 %}
+{% section 'hero-breadcrumb' %}
 
-  {%- assign blog_title = blog.title -%}
-
-  {% if current_tags %}
-    {% capture blog_title %}{{ blog.title | link_to: blog.url }} &mdash; {{ current_tags.first }}{% endcapture %}
-  {% endif %}
-
-  <h1>{{ blog_title }}</h1>
-
-  {% if blog.all_tags.size > 0 %}
-    <h2>{{ 'blogs.general.categories' | t }}</h2>
-
-    <ul>
-      {% for tag in blog.all_tags %}
-
-        {% if current_tags contains tag %}
-          <li>{{ tag }}</li>
-        {% else %}
-          <li>{{ tag | link_to_tag: tag }}</li>
-        {% endif %}
-
-      {% endfor %}
-    </ul>
-  {% endif %}
-
-
-  {% comment %}
-
-  Article Previews
-  ====================
-  {% endcomment %}
-
-  {% for article in blog.articles %}
-    <h3>
-      <a href="{{ article.url }}">{{ article.title }}</a>
-    </h3>
-
-    {% capture date %}{{ article.published_at | time_tag: format: 'month_day_year' }}{% endcapture %}
-
-    <p>
-      {{ 'blogs.article.author_on_date_html' | t: author: article.author, date: date }}
-    </p>
-
-    {% if article.image %}
-      <a href="{{ article.url }}">
-        {% include 'responsive-image' with
-          image: article.image,
-          max_width: 1024,
-          max_height: 1024
-        %}
-      </a>
-    {% endif %}
-
-    <div class="rte">
-      {% if article.excerpt.size > 0 %}
-        {{ article.excerpt }}
-      {% else %}
-        <p>
-          {{ article.content | strip_html | truncatewords: 100 }}
-        </p>
-      {% endif %}
+<div class="blog-area pt-100 pb-100">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6 col-lg-4 col-xl-4 col-12">
+                <div class="single-blog mb-50">
+                    <div class="blog-img">
+                        <a href="#"><img src="{{ "370-236.jpg" | asset_url }}" alt=""></a>
+                    </div>
+                    <div class="blog-info">
+                        <h3><a href="#">Standard blog post.</a></h3>
+                        <div class="blog-meta">
+                            <ul>
+                                <li>February 13</li>
+                                <li><a href="#">Momen Bhuiyan</a></li>
+                                <li><a href="#">4 comments</a></li>
+                            </ul>
+                        </div>
+                        <p>Lorem ipsum dolor sit amet, sectetur adipising elit, sed do eimod tempor incididunt ut labore.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 col-lg-4 col-xl-4 col-12">
+                <div class="single-blog mb-50">
+                    <div class="blog-img">
+                        <a href="#"><img src="{{ "370-236.jpg" | asset_url }}" alt=""></a>
+                    </div>
+                    <div class="blog-info">
+                        <h3><a href="#">But I must explain to you.</a></h3>
+                        <div class="blog-meta">
+                            <ul>
+                                <li>February 13</li>
+                                <li><a href="#">Momen Bhuiyan</a></li>
+                                <li><a href="#">4 comments</a></li>
+                            </ul>
+                        </div>
+                        <p>Lorem ipsum dolor sit amet, sectetur adipising elit, sed do eimod tempor incididunt ut labore.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 col-lg-4 col-xl-4 col-12">
+                <div class="single-blog mb-50">
+                    <div class="blog-img">
+                        <a href="#"><img src="{{ "370-236.jpg" | asset_url }}" alt=""></a>
+                    </div>
+                    <div class="blog-info">
+                        <h3><a href="#">Lorem ipsum dolor sit.</a></h3>
+                        <div class="blog-meta">
+                            <ul>
+                                <li>February 13</li>
+                                <li><a href="#">Momen Bhuiyan</a></li>
+                                <li><a href="#">4 comments</a></li>
+                            </ul>
+                        </div>
+                        <p>Lorem ipsum dolor sit amet, sectetur adipising elit, sed do eimod tempor incididunt ut labore.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 col-lg-4 col-xl-4 col-12">
+                <div class="single-blog mb-50">
+                    <div class="blog-img">
+                        <a href="#"><img src="{{ "370-236.jpg" | asset_url }}" alt=""></a>
+                    </div>
+                    <div class="blog-info">
+                        <h3><a href="#">Lorem ipsum dolor sit.</a></h3>
+                        <div class="blog-meta">
+                            <ul>
+                                <li>February 13</li>
+                                <li><a href="#">Momen Bhuiyan</a></li>
+                                <li><a href="#">4 comments</a></li>
+                            </ul>
+                        </div>
+                        <p>Lorem ipsum dolor sit amet, sectetur adipising elit, sed do eimod tempor incididunt ut labore.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 col-lg-4 col-xl-4 col-12">
+                <div class="single-blog mb-50">
+                    <div class="blog-img">
+                        <a href="#"><img src="{{ "370-236.jpg" | asset_url }}" alt=""></a>
+                    </div>
+                    <div class="blog-info">
+                        <h3><a href="#">Standard blog post.</a></h3>
+                        <div class="blog-meta">
+                            <ul>
+                                <li>February 13</li>
+                                <li><a href="#">Momen Bhuiyan</a></li>
+                                <li><a href="#">4 comments</a></li>
+                            </ul>
+                        </div>
+                        <p>Lorem ipsum dolor sit amet, sectetur adipising elit, sed do eimod tempor incididunt ut labore.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 col-lg-4 col-xl-4 col-12">
+                <div class="single-blog mb-50">
+                    <div class="blog-img">
+                        <a href="#"><img src="{{ "370-236.jpg" | asset_url }}" alt=""></a>
+                    </div>
+                    <div class="blog-info">
+                        <h3><a href="#">But I must explain to you.</a></h3>
+                        <div class="blog-meta">
+                            <ul>
+                                <li>February 13</li>
+                                <li><a href="#">Momen Bhuiyan</a></li>
+                                <li><a href="#">4 comments</a></li>
+                            </ul>
+                        </div>
+                        <p>Lorem ipsum dolor sit amet, sectetur adipising elit, sed do eimod tempor incididunt ut labore.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="pagination-style text-center">
+                    <ul>
+                        <li class="active"><a href="#">1</a></li>
+                        <li><a href="#">2</a></li>
+                        <li><a href="#">3</a></li>
+                        <li><a href="#">4</a></li>
+                        <li><a href="#"><i class="ion-chevron-right"></i></a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
     </div>
-
-    {% if blog.comments_enabled? or article.tags.size > 0 %}
-      <ul>
-        {% if blog.comments_enabled? %}
-          <li>
-            <a href="{{ article.url }}#comments">
-              {{ 'blogs.comments.with_count' | t: count: article.comments_count }}
-            </a>
-          </li>
-        {% endif %}
-
-        {% if article.tags.size > 0 %}
-          {% for tag in article.tags %}
-            <li>
-              <a href="{{ blog.url }}/tagged/{{ tag | handle }}">{{ tag }}</a>
-              {% unless forloop.last %}, {% endunless %}
-            </li>
-          {% endfor %}
-        {% endif %}
-      </ul>
-    {% endif %}
-
-    <p>
-      <a href="{{ article.url }}">{{ 'blogs.article.read_more' | t }} &rarr;</a>
-    </p>
-
-  {% endfor %}
-
-  {% if paginate.pages > 1 %}
-    {% include 'pagination' %}
-  {% endif %}
-
-{% endpaginate %}
+</div>
