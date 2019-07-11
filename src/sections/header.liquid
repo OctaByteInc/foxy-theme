@@ -60,6 +60,9 @@ Theme Store optional settings
                         <div class="header-cart common-style">
                             <button class="sidebar-trigger">
                                 <span class="ion-bag"></span>
+                                {% if cart.item_count > 0 %}
+                                    <span class="badge badge-notify">{{ cart.item_count }}</span>
+                                {% endif %}
                             </button>
                         </div>
                         <div class="header-sidebar common-style">
@@ -151,7 +154,7 @@ Theme Store optional settings
       </form>
   </div>
 </div>
-<!-- main-search start -->
+<!-- Right side menu start -->
 <div class="cur-lang-acc-active">
   <div class="wrap-sidebar">
       <div class="sidebar-nav-icon">
@@ -160,25 +163,15 @@ Theme Store optional settings
       <div class="cur-lang-acc-all">
           <div class="single-currency-language-account">
               <div class="cur-lang-acc-title">
-                  <h4>Currency: <span>USD </span></h4>
+                  <h4>Currency: <span>{{ shop.currency }}</span></h4>
               </div>
               <div class="cur-lang-acc-dropdown">
                   <ul>
-                      <li><a href="#">EUR  Euro</a></li>
-                  </ul>
-              </div>
-          </div>
-          <div class="single-currency-language-account">
-              <div class="cur-lang-acc-title">
-                  <h4>Language: <span><img src="assets/img/icon-img/english.png" alt=""> English </span></h4>
-              </div>
-              <div class="cur-lang-acc-dropdown">
-                  <ul>
-                      <li><a href="#"><img src="assets/img/icon-img/english.png" alt=""> English </a></li>
-                      <li><a href="#"><img src="assets/img/icon-img/es.png" alt=""> spanish </a></li>
-                      <li><a href="#"><img src="assets/img/icon-img/fr.png" alt=""> french </a></li>
-                      <li><a href="#"><img src="assets/img/icon-img/ge.png" alt=""> german </a></li>
-                      <li><a href="#"><img src="assets/img/icon-img/es.png" alt=""> spanish </a></li>
+                      <li><a href="#"><img src="{{ "english.png" | asset_url }}" alt=""> English </a></li>
+                      <li><a href="#"><img src="{{ "es.png" | asset_url }}" alt=""> spanish </a></li>
+                      <li><a href="#"><img src="{{ "fr.png" | asset_url }}" alt=""> french </a></li>
+                      <li><a href="#"><img src="{{ "ge.png" | asset_url }}" alt=""> german </a></li>
+                      <li><a href="#"><img src="{{ "es.png" | asset_url }}" alt=""> spanish </a></li>
                   </ul>
               </div>
           </div>
@@ -188,11 +181,28 @@ Theme Store optional settings
               </div>
               <div class="cur-lang-acc-dropdown">
                   <ul>
-                      <li><a href="#">Compare Products </a></li>
-                      <li><a href="#">Default welcome msg!</a></li>
-                      <li><a href="register.html">register</a></li>
-                      <li><a href="wishlist.html">My Wish List</a></li>
-                      <li><a href="login.html">Sign In </a></li>
+                      {% if shop.customer_accounts_enable %}
+                          {% if customer %}
+                              {% if customer.first_name != blank %}
+                                <li><a href="/account">
+                                    {{ 'customer.login_as' | t: first_name: first_name }}
+                                </a></li>
+                              {% else %}
+                                <li><a href="/account">
+                                    {{ 'customer.account' | t }}
+                                </a></li>
+                              {% endif %}
+                              <li>{{ 'customer.log_out' | t | customer_logout_link }}</li>
+                          {% endif %}
+                          <li>
+                              {{ 'customer.log_in' | t | customer_login_link }}
+                          </li>
+                          <li>
+                              {{ 'customer.register' | t | customer_register_link }}
+                          </li>
+                      {% endif %}
+                      <li><a href="/wishlist">My Wish List</a></li>
+                      <li><a href="/cart">Cart</a></li>
                   </ul>
               </div>
           </div>
