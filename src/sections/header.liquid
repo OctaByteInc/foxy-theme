@@ -42,7 +42,7 @@ Theme Store optional settings
                         <a href="index.html">
                             {% if section.settings.logo != blank %}
                                 <img 
-                                    src="{{ section.settings.logo | img_url: 'master' }}" 
+                                    src="{{ section.settings.logo | img_url: '116x31' }}" 
                                     alt="{{ section.settings.log.alt | default: shop.name }}" />
                             {% else %}
                                 {{ shop.name }}            

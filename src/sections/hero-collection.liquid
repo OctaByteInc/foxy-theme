@@ -2,11 +2,16 @@
   Hero Banner section
 {%- endcomment -%}
 
-<section class="hero-banner">
+<section class="hero-banner" data-section-id="{{ section.id }}" data-section-type="hero-banner">
 <div class="slider-area">
     <div class="slider-active owl-carousel">
         <div class="single-slider single-slider-hm1 bg-img ptb-260"
-            style="background-image: url('{{ "1920-785.jpg" | asset_url }}')">
+            {% if section.settings.banner_image != blank %}
+                style="background-image: url('{{ section.settings.banner_image | img_url: "1920x785" }}')"
+            {% else %}
+                style="background-image: url('{{ "1920-785.jpg" | asset_url }}')"        
+            {% endif %}
+            >
             <div class="container">
                 <div class="slider-content slider-content-style-1 slider-animated-1">
                     <h3 class="animated">New Collection <span>2018.</span></h3>
@@ -41,10 +46,33 @@
     "name": "Hero Banner",
     "settings": [
       {
-        "type": "text",
-        "id": "title",
-        "label": "Heading",
-        "default": "Hero Banner"
+          "type": "header",
+          "content": "Banner Image"
+      },
+      {
+          "type": "image_picker",
+          "id": "banner_image",
+          "label": "Pick image for banner **Recommend size 1920x785**"
+      },
+      {
+          "type": "collection",
+          "id": "banner_collection",
+          "label": "Select a collection"
+      },
+      {
+          "type": "text",
+          "id": "collection_name",
+          "label": "Collection name"
+      },
+      {
+          "type": "text",
+          "id": "banner_heading",
+          "label": "Banner Heading"
+      },
+      {
+          "type": "richtext",
+          "id": "banner_desc",
+          "label": "Banner description"
       }
     ],
     "presets": [{
