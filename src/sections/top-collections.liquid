@@ -1,35 +1,62 @@
-<section class="top-collections">
+<section class="top-collections" data-section-id={{ section.id }} data-section-type="top-collections">
     <div class="banner-area pt-100 pb-70">
         <div class="container">
             <div class="row">
-                <div class="col-md-6 col-lg-3 col-12">
-                    <div class="single-banner mb-30">
-                        <a href="shop-grid-view-sidebar.html"><img src="{{ "270-283.jpg" | asset_url }}" alt=""></a>
-                        <div class="banner-content banner-content-position1">
-                            <h3>morden <span>sofa</span></h3>
-                            <p>Sale up to <span>30% off</span> all product in the new collection</p>
+                {% if section.settings.left_collection != blank %}
+                {% assign left_collection = collections[section.settings.left_collection] %}
+                {% assign lc_name_append = section.settings.left_collection.name | split: ' ' | last %}
+                {% assign lc_name = section.settings.left_collection.name | remove: lc_name_append %}
+                    <div class="col-md-6 col-lg-3 col-12">
+                        <div class="single-banner mb-30">
+                            <a href="{{ left_collection.url }}">
+                                <img 
+                                    src="{{ section.settings.left_collection_image | img_url: '270x283' }}" 
+                                    alt="{{ section.settings.left_collection_image.alt | default: shop.name }}">
+                            </a>
+                            <div class="banner-content banner-content-position1">
+                                <h3>{{ lc_name }} <span>{{ lc_name_append }}</span></h3>
+                                <p>{{ section.settings.left_collection.desc }}</p>
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div class="d-sm-none d-lg-block col-lg-6 col-12">
-                    <div class="single-banner mb-30">
-                        <a href="shop-grid-view-sidebar.html"><img src="{{ "572-283.jpg" | asset_url }}" alt=""></a>
-                        <div class="banner-content banner-content-position2">
-                            <span>Summer Sale</span>
-                            <h3>morden <span>chair</span></h3>
-                            <p>Sale up to <span>30% off</span> all product <br>in the new collection</p>
+                {% endif %}
+                {% if section.settings.middle_collection != blank %}
+                {% assign middle_collection = collections[section.settings.middle_collection] %}
+                {% assign mc_name_append = section.settings.middle_collection.name | split: ' ' | last %}
+                {% assign mc_name = section.settings.middle_collection.name | remove: mc_name_append %}
+                    <div class="d-sm-none d-lg-block col-lg-6 col-12">
+                        <div class="single-banner mb-30">
+                            <a href="{{ middle_collection.url }}">
+                                <img 
+                                    src="{{ section.settings.middle_collection_image | img_url: 572x283 }}" 
+                                    alt="{{ section.settings.middle_collection_image.alt | default: shop.name }}">
+                            </a>
+                            <div class="banner-content banner-content-position2">
+                                <span>{{ section.settings.middle_collection_sub_heading }}</span>
+                                <h3>{{ mc_name }} <span>{{ mc_name_append }}</span></h3>
+                                <p>{{ section.settings.middle_collection.desc }}</p>
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div class="col-md-6 col-lg-3 col-12">
-                    <div class="single-banner mb-30">
-                        <a href="shop-grid-view-sidebar.html"><img src="{{ "270-283.jpg" | asset_url }}" alt=""></a>
-                        <div class="banner-content banner-content-position3">
-                            <h3>morden <span>chair</span></h3>
-                            <p>Sale up to <span>30% off</span> all product in the new collection</p>
+                {% endif %}
+                {% if section.settings.right_collection != blank %}
+                {% assign right_collection = collections[section.settings.right_collecction] %}
+                {% assign rc_name_append = section.settings.right_collection | split: ' ' | last %}
+                {% assign rc_name = section.settings.right_collection | remove: rc_name_append %}    
+                    <div class="col-md-6 col-lg-3 col-12">
+                        <div class="single-banner mb-30">
+                            <a href="{{ right_collection.url }}">
+                                <img 
+                                    src="{{ section.settings.right_collection_image | img_url: '270x283' }}" 
+                                    alt="{{ section.settings.right_collection_image.alt | default: shop.name }}">
+                            </a>
+                            <div class="banner-content banner-content-position3">
+                                <h3>{{ rc_name }} <span>{{ rc_name_append }}</span></h3>
+                                <p>{{ section.settings.right_collection.desc }}</p>
+                            </div>
                         </div>
                     </div>
-                </div>
+                {% endif %}
             </div>
         </div>
     </div>
@@ -40,15 +67,86 @@
     "name": "Top Collections",
     "settings": [
       {
-        "type": "text",
-        "id": "title",
-        "label": "Heading",
-        "default": "Top Collections"
+          "type": "header",
+          "content": "Left Collection Block"
+      }
+      {
+          "type": "collection",
+          "id": "left_collection",
+          "label": "Select collection for left block"
+      },
+      {
+          "type": "text",
+          "id": "left_collection_name",
+          "label": "Collection name"
+      },
+      {
+          "type": "richtext",
+          "id": "left_collection_desc",
+          "lable": "Collection description"
+      },
+      {
+          "type": "image_picker",
+          "id": "left_collection_image",
+          "lable": "Collection image *Recommend size 270x283"
+      },
+      {
+          "type": "header",
+          "content": "Middle Collection Block"
+      }
+      {
+          "type": "collection",
+          "id": "middle_collection",
+          "label": "Select collection for middle block"
+      },
+      {
+          "type": "text",
+          "id": "middle_collection_name",
+          "label": "Collection name"
+      },
+      {
+          "type": "text",
+          "id": "middle_collection_sub_heading",
+          "label": "Collection sub heading"
+      }
+      {
+          "type": "richtext",
+          "id": "middle_collection_desc",
+          "lable": "Collection description"
+      },
+      {
+          "type": "image_picker",
+          "id": "middle_collection_image",
+          "lable": "Collection image *Recommend size 572x283"
+      },
+      {
+          "type": "header",
+          "content": "Right Collection Block"
+      }
+      {
+          "type": "collection",
+          "id": "right_collection",
+          "label": "Select collection for right block"
+      },
+      {
+          "type": "text",
+          "id": "right_collection_name",
+          "label": "Collection name"
+      },
+      {
+          "type": "richtext",
+          "id": "right_collection_desc",
+          "lable": "Collection description"
+      },
+      {
+          "type": "image_picker",
+          "id": "right_collection_image",
+          "lable": "Collection image *Recommend size 270x283"
       }
     ],
     "presets": [{
         "name": "Top Collections",
-        "category": "Advanced layout"
+        "category": "Collection"
     }]
   }
 {% endschema %}
