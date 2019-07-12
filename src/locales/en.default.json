@@ -5,5 +5,8 @@
       "log_out": "Log out",
       "log_in": "Log in",
       "register": "Register"
+    },
+    "search":{
+      "placeholder": "Search Entire Store"
     }
 }

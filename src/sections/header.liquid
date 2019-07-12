@@ -144,10 +144,16 @@ Theme Store optional settings
       <button class="search-close"><span class="ion-android-close"></span></button>
   </div>
   <div class="sidebar-search-input">
-      <form>
+      <form method="get" action="/search" role="search">
           <div class="form-search">
-              <input id="search" class="input-text" value="" placeholder="Search Entire Store" type="search">
-              <button>
+              <input
+                name="q" 
+                id="search" 
+                class="input-text" 
+                value="{{ search.terms | escape }}" 
+                placeholder="{{ 'search.placeholder' | t }}" 
+                type="search">
+              <button type="submit">
                   <i class="ion-ios-search-strong"></i>
               </button>
           </div>
