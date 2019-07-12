@@ -9,12 +9,19 @@
             <div class="product-tab-list text-center mb-45 nav product-menu-mrg" role="tablist">
                 {% for block in section.blocks %}
                     {% assign collection = collections[block.settings.collection] %}
+                    {% if forloop.first == true %}
+                        {% assign aria_selected = true %}
+                        {% assign active = 'active' %}
+                    {% else %}
+                        {% assign aria_selected = false %}
+                        {% assign active = nil %}    
+                    {% endif %}
                         <a 
-                            class="active" 
-                            href="#home{{ forlopp.index }}" 
+                            class="{{ active }}" 
+                            href="#home{{ forloop.index }}" 
                             data-toggle="tab" 
                             role="tab" 
-                            aria-selected="true" 
+                            aria-selected="{{ aria_selected }}" 
                             aria-controls="home{{ forloop.index }}">
                             <h4>{{ collection.title | upcase }}</h4>
                         </a>
@@ -23,11 +30,11 @@
             <div class="tab-content jump">
                 {% for block in section.blocks %}
                     {% assign collection = collections[block.settings.collection] %}
-                    {%- capture active_tab -%}
-                        {% if forloop.first == true %}
-                            active show
-                        {% endif %}
-                    {%- endcapture -%}
+                    {% if forloop.first == true %}
+                        {% assign active_tab = 'active show' %}
+                    {% else %}
+                        {% assign active_tab = nil %}    
+                    {% endif %}
                     <div class="tab-pane {{ active_tab }} fade" id="home{{ forloop.index }}" role="tabpanel">
                         <div class="row">
                             <div class="product-slider-active owl-carousel">
