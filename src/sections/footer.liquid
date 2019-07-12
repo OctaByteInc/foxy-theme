@@ -56,15 +56,16 @@
                             </a>
                         </div>
                         <div class="footer-nav">
-                            <nav>
-                                <ul>
-                                    <li><a href="#">home</a></li>
-                                    <li><a href="#">about us</a></li>
-                                    <li><a href="#">shop </a></li>
-                                    <li><a href="#"> blog </a></li>
-                                    <li><a href="#">pages </a></li>
-                                </ul>
-                            </nav>
+                            {% assign footer_linklist = section.settings.footer_linklist %}
+                            {% if linklists[footer_linklist].links.size > 0 %}
+                                <nav>
+                                    <ul>
+                                        {% for link in linklist[footer_linklist].links %}
+                                            <li><a href="{{ link.url }}">{{ link.title }}</a></li>
+                                        {% endfor %}
+                                    </ul>
+                                </nav>
+                            {% endif %}
                         </div>
                         <p>{{ section.settings.copyright }}</p>
                     </div>
@@ -143,6 +144,12 @@
     "name": "Footer",
     "settings": [
       {
+          "type": "link_list",
+          "id": "footer_linklist",
+          "label": "Footer Menu",
+          "default": "footer"
+      },
+      {
           "type": "image_picker",
           "id": "logo",
           "label": "Footer logo"
@@ -160,7 +167,7 @@
       },
       {
           "type": "header",
-          "content": "Contact Inof"
+          "content": "Contact Info"
       },
       {
           "type": "text",
