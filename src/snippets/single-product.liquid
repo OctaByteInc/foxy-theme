@@ -8,9 +8,9 @@
     <div class="single-product {{ single_class }} ">
         <div class="product-img">
             <a href="#"><img src="{{ product.featured_image | img_url: '270x300'  }}" alt=""></a>
-            {% if product.compare_at_price_min > 0 %}
-            {% assign sale_precent = product.compare_at_price_min %}
-                <span>sale {{ sale_precent | append: '%' }}</span>    
+            {% if product.compare_at_price_max > product.price %}
+            {% assign sale_precent = product.compare_at_price_max | minus: product.price | times: 100.0 | divided_by: product.compare_at_price_max | money_without_currency | times: 100 | remove: '.0' %}
+                <span>save {{ sale_precent | append: '%' }}</span>    
             {% endif %}
             <div class="product-action">
                 <a title="Wishlist" class="animate-left" href="#"><i class="ion-ios-heart-outline"></i></a>
