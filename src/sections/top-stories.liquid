@@ -10,7 +10,7 @@
             <p>{{ section.settings.desc }}</p>
         </div>
         <div class="row">
-            {% assign articles = blog.articles | slice: 0, 3 %}
+            {% assign articles = blogs.news.articles | slice: 0, 3 %}
             {% for article in articles %}
                 {% include 'single-article' with article %}
             {% endfor %}
