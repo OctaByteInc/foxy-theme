@@ -1,11 +1,16 @@
-<div class="shop-limited-area bg-img pt-90 pb-100" style="background-image: url('{{ "1170-314.jpg" | asset_url }}')" data-overlay="3">
+<section class="limited-edition" data-section-id="{{ section.id }}" data-section-type="limited-edition">
+<div 
+  class="shop-limited-area bg-img pt-90 pb-100" 
+  style="background-image: url('{{ section.settings.banner | img_url: "1170x314" }}')" 
+  data-overlay="3">
     <div class="container">
         <div class="shop-limited-content text-center">
-            <h2>Shop Limited Edition.</h2>
-            <a class="btn-hover limited-btn" href="#">view more</a>
+            <h2>{{ section.settings.title }}</h2>
+            <a class="btn-hover limited-btn" href="{{ section.settings.link }}">view more</a>
         </div>
     </div>
 </div>
+</section>
 
 {% schema %}
   {
@@ -15,7 +20,17 @@
         "type": "text",
         "id": "title",
         "label": "Heading",
-        "default": "Limited Edition"
+        "default": "Shop Limited Edition"
+      },
+      {
+        "type": "image_picker",
+        "id": "banner",
+        "label": "Pick image for background banner *Recommend size 1170x314"
+      },
+      {
+        "type": "url",
+        "id": "link",
+        "label": "Define where you want to redirect your user"
       }
     ],
     "presets": [{

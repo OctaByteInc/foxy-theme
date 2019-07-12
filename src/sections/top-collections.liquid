@@ -1,3 +1,6 @@
+{%- comment -%}
+    Top collection section
+{%- endcomment -%}
 <section class="top-collections" data-section-id={{ section.id }} data-section-type="top-collections">
     <div class="banner-area pt-100 pb-70">
         <div class="container">
@@ -28,7 +31,7 @@
                         <div class="single-banner mb-30">
                             <a href="{{ middle_collection.url }}">
                                 <img 
-                                    src="{{ section.settings.middle_collection_image | img_url: 572x283 }}" 
+                                    src="{{ section.settings.middle_collection_image | img_url: '572x283' }}" 
                                     alt="{{ section.settings.middle_collection_image.alt | default: shop.name }}">
                             </a>
                             <div class="banner-content banner-content-position2">

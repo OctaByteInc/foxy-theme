@@ -1,0 +1,41 @@
+{%- comment -%}
+    Create Single Layout for featured product
+
+    - Accept
+        - product
+{%- endcomment -%}
+<div class="col-md-3 col-lg-3 col-sm-4">
+    <div class="single-product">
+        <div class="product-img">
+            <a href="#"><img src="{{ product.featured_image | img_url: '270x300'  }}" alt=""></a>
+            {% if product.compare_at_price_min > 0 %}
+            {% assign sale_precent = product.compare_at_price_min %}
+                <span>sale {{ sale_precent | append: '%' }}</span>    
+            {% endif %}
+            <div class="product-action">
+                <a title="Wishlist" class="animate-left" href="#"><i class="ion-ios-heart-outline"></i></a>
+                <a title="Quick View" class="animate-right" href="{{ product.url | within: collection }}">
+                    <i class="ion-ios-eye-outline"></i>
+                </a>
+            </div>
+        </div>
+        <div class="product-content">
+            <div class="product-title-price">
+                <div class="product-title">
+                    <h4><a href="{{ product.url | within: collection }}">{{ product.title }}</a></h4>
+                </div>
+                <div class="product-price">
+                    <span>{{ product.price | money }}</span>
+                </div>
+            </div>
+            <div class="product-cart-categori">
+                <div class="product-cart">
+                    <span>{{ product.collections | first }}</span>
+                </div>
+                <div class="product-categori">
+                    <a href="#"><i class="ion-bag"></i> Add to cart</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
