@@ -49,18 +49,21 @@
                 <div class="footer-widget">
                     <div class="footer-widget-m-content text-center">
                         <div class="footer-logo">
-                            <a href="#">
-                                <img 
-                                    src="{{ section.settings.logo | img_url: '116x31' }}" 
-                                    alt="{{ section.settings.logo.alt | default: shop.name }}">
-                            </a>
+                            {% if section.settings.logo != blank %}
+                                <a href="#">
+                                    <img 
+                                        src="{{ section.settings.logo | img_url: '116x31' }}" 
+                                        alt="{{ section.settings.logo.alt | default: shop.name }}">
+                                </a>
+                            {% endif %}
                         </div>
                         <div class="footer-nav">
+                            
                             {% assign footer_linklist = section.settings.footer_linklist %}
                             {% if linklists[footer_linklist].links.size > 0 %}
                                 <nav>
                                     <ul>
-                                        {% for link in linklist[footer_linklist].links %}
+                                        {% for link in linklists[footer_linklist].links %}
                                             <li><a href="{{ link.url }}">{{ link.title }}</a></li>
                                         {% endfor %}
                                     </ul>
@@ -75,9 +78,15 @@
                 <div class="footer-widget f-right">
                     <div class="footer-widget-r-content">
                         <ul>
-                            <li><span>Phone :</span> {{ section.settings.phone }}</li>
-                            <li><span>Email : </span> {{ section.settings.email }}</a></li>
-                            <li><span>Address :</span> {{ section.settings.address }}</li>
+                            {% if section.settings.phone != blank %}
+                                <li><span>Phone :</span> {{ section.settings.phone }}</li>
+                            {% endif %}
+                            {% if section.settings.email != blank %}
+                                <li><span>Email : </span> {{ section.settings.email }}</a></li>
+                            {% endif %}
+                            {% if section.settings.address != blank %}
+                                <li><span>Address :</span> {{ section.settings.address }}</li>
+                            {% endif %}
                         </ul>
                     </div>
                 </div>
@@ -111,7 +120,8 @@
       {
           "type": "link_list",
           "id": "footer_linklist",
-          "label": "Footer Menu"
+          "label": "Footer Menu",
+          "default": "footer"
       },
       {
           "type": "image_picker",
@@ -122,7 +132,7 @@
           "type": "checkbox",
           "id": "social_icons",
           "label": "Show social icons",
-          "default": true,
+          "default": true
       },
       {
           "type": "text",
