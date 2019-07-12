@@ -30,7 +30,7 @@
             </div>
             <div class="product-cart-categori">
                 <div class="product-cart">
-                    <span>{{ product.collections | first }}</span>
+                    <span>{{ product.tags | slice: 0, 3 | join: ', ' }}</span>
                 </div>
                 <div class="product-categori">
                     <a href="#"><i class="ion-bag"></i> Add to cart</a>
