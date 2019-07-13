@@ -1,5 +1,5 @@
 {%- comment -%}
-    Top collection section
+    Top Collection section
 {%- endcomment -%}
 <section class="top-collections" data-section-id={{ section.id }} data-section-type="top-collections">
     <div class="banner-area pt-100 pb-70">
@@ -7,55 +7,67 @@
             <div class="row">
                 {% if section.settings.left_collection != blank %}
                 {% assign left_collection = collections[section.settings.left_collection] %}
-                {% assign lc_name_append = section.settings.left_collection.name | split: ' ' | last %}
-                {% assign lc_name = section.settings.left_collection.name | remove: lc_name_append %}
+                {% assign lc_name_append = section.settings.left_collection_name | split: ' ' | last %}
+                {% assign lc_name = section.settings.left_collection_name | remove: lc_name_append %}
                     <div class="col-md-6 col-lg-3 col-12">
                         <div class="single-banner mb-30">
                             <a href="{{ left_collection.url }}">
-                                <img 
-                                    src="{{ section.settings.left_collection_image | img_url: '270x283' }}" 
-                                    alt="{{ section.settings.left_collection_image.alt | default: shop.name }}">
+                                {% if section.settings.left_collection_image != blank %}
+                                    <img 
+                                        src="{{ section.settings.left_collection_image | img_url: '270x283' }}" 
+                                        alt="{{ section.settings.left_collection_image.alt | default: shop.name }}">    
+                                {% else %}
+                                    <img src="{{ "270-283.jpg" | asset_url }}" >
+                                {% endif %}
                             </a>
                             <div class="banner-content banner-content-position1">
                                 <h3>{{ lc_name }} <span>{{ lc_name_append }}</span></h3>
-                                <p>{{ section.settings.left_collection.desc }}</p>
+                                <p>{{ section.settings.left_collection_desc }}</p>
                             </div>
                         </div>
                     </div>
                 {% endif %}
                 {% if section.settings.middle_collection != blank %}
                 {% assign middle_collection = collections[section.settings.middle_collection] %}
-                {% assign mc_name_append = section.settings.middle_collection.name | split: ' ' | last %}
-                {% assign mc_name = section.settings.middle_collection.name | remove: mc_name_append %}
+                {% assign mc_name_append = section.settings.middle_collection_name | split: ' ' | last %}
+                {% assign mc_name = section.settings.middle_collection_name | remove: mc_name_append %}
                     <div class="d-sm-none d-lg-block col-lg-6 col-12">
                         <div class="single-banner mb-30">
                             <a href="{{ middle_collection.url }}">
-                                <img 
-                                    src="{{ section.settings.middle_collection_image | img_url: '572x283' }}" 
-                                    alt="{{ section.settings.middle_collection_image.alt | default: shop.name }}">
+                                {% if section.settings.middle_collection_image != blank %}
+                                    <img 
+                                        src="{{ section.settings.middle_collection_image | img_url: '572x283' }}" 
+                                        alt="{{ section.settings.middle_collection_image.alt | default: shop.name }}">    
+                                {% else %}
+                                    <img src="{{ "572-283.jpg" | asset_url }}" >
+                                {% endif %}
                             </a>
                             <div class="banner-content banner-content-position2">
                                 <span>{{ section.settings.middle_collection_sub_heading }}</span>
                                 <h3>{{ mc_name }} <span>{{ mc_name_append }}</span></h3>
-                                <p>{{ section.settings.middle_collection.desc }}</p>
+                                <p>{{ section.settings.middle_collection_desc }}</p>
                             </div>
                         </div>
                     </div>
                 {% endif %}
                 {% if section.settings.right_collection != blank %}
                 {% assign right_collection = collections[section.settings.right_collecction] %}
-                {% assign rc_name_append = section.settings.right_collection | split: ' ' | last %}
-                {% assign rc_name = section.settings.right_collection | remove: rc_name_append %}    
+                {% assign rc_name_append = section.settings.right_collection_name | split: ' ' | last %}
+                {% assign rc_name = section.settings.right_collection_name | remove: rc_name_append %}    
                     <div class="col-md-6 col-lg-3 col-12">
                         <div class="single-banner mb-30">
                             <a href="{{ right_collection.url }}">
-                                <img 
-                                    src="{{ section.settings.right_collection_image | img_url: '270x283' }}" 
-                                    alt="{{ section.settings.right_collection_image.alt | default: shop.name }}">
+                                {% if section.settings.right_collection_image != blank %}
+                                    <img 
+                                        src="{{ section.settings.right_collection_image | img_url: '270x283' }}" 
+                                        alt="{{ section.settings.right_collection_image.alt | default: shop.name }}">    
+                                {% else %}
+                                    <img src="{{ "270-283.jpg" | asset_url }}" >
+                                {% endif %}
                             </a>
                             <div class="banner-content banner-content-position3">
                                 <h3>{{ rc_name }} <span>{{ rc_name_append }}</span></h3>
-                                <p>{{ section.settings.right_collection.desc }}</p>
+                                <p>{{ section.settings.right_collection_desc }}</p>
                             </div>
                         </div>
                     </div>
@@ -72,11 +84,11 @@
       {
           "type": "header",
           "content": "Left Collection Block"
-      }
+      },
       {
           "type": "collection",
           "id": "left_collection",
-          "label": "Select collection for left block"
+          "label": "Select collection for Left block"
       },
       {
           "type": "text",
@@ -86,21 +98,21 @@
       {
           "type": "richtext",
           "id": "left_collection_desc",
-          "lable": "Collection description"
+          "label": "Collection description"
       },
       {
           "type": "image_picker",
           "id": "left_collection_image",
-          "lable": "Collection image (Recommend size 270x283)"
+          "label": "Collection image (Recommend size 270x283)"
       },
       {
           "type": "header",
           "content": "Middle Collection Block"
-      }
+      },
       {
           "type": "collection",
           "id": "middle_collection",
-          "label": "Select collection for middle block"
+          "label": "Select collection for Middle block"
       },
       {
           "type": "text",
@@ -111,25 +123,25 @@
           "type": "text",
           "id": "middle_collection_sub_heading",
           "label": "Collection sub heading"
-      }
+      },
       {
           "type": "richtext",
           "id": "middle_collection_desc",
-          "lable": "Collection description"
+          "label": "Collection description"
       },
       {
           "type": "image_picker",
           "id": "middle_collection_image",
-          "lable": "Collection image (Recommend size 572x283)"
+          "label": "Collection image (Recommend size 572x283)"
       },
       {
           "type": "header",
           "content": "Right Collection Block"
-      }
+      },
       {
           "type": "collection",
           "id": "right_collection",
-          "label": "Select collection for right block"
+          "label": "Select collection for Right block"
       },
       {
           "type": "text",
@@ -139,12 +151,12 @@
       {
           "type": "richtext",
           "id": "right_collection_desc",
-          "lable": "Collection description"
+          "label": "Collection description"
       },
       {
           "type": "image_picker",
           "id": "right_collection_image",
-          "lable": "Collection image (Recommend size 270x283)"
+          "label": "Collection image (Recommend size 270x283)"
       }
     ],
     "presets": [{
