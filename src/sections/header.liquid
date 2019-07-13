@@ -217,7 +217,7 @@ Theme Store optional settings
 </div>
 <!--Left Menu bar-->
 {% assign header_linklist = section.settings.header_linklist %}
-{% if linklist[header_linklist].links.size > 0 %}
+{% if linklists[header_linklist].links.size > 0 %}
     <div class="clickable-mainmenu-btn">
         <a class="clickable-mainmenu-active" href="#"><i class="ion-navicon"></i></a>
     </div>
@@ -229,7 +229,7 @@ Theme Store optional settings
         </div>
         <div id="menu" class="text-left">
             <ul>
-                {% for link in linklist[header_linklist].links %}
+                {% for link in linklists[header_linklist].links %}
                     <li><a href="{{ link.url }}">{{ link.title }}</a></li>
                 {% endfor %}
             </ul>
@@ -253,7 +253,7 @@ Theme Store optional settings
           "type": "link_list",
           "id": "header_linklist",
           "label": "Header Menu",
-          "default": "header"
+          "default": "main-menu"
       },
       {
         "type": "image_picker",
