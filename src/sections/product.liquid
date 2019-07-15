@@ -8,7 +8,7 @@
                     {% if collection.url %}
                         <li>{{ collection.title | link_to: collection.url }}</li>    
                     {% endif %}
-                    <li>{{ product.title }}</li>
+                    <li>{{ product.title | truncatewords: 7 }}</li>
                 </ul>
             </div>
         </div>
