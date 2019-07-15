@@ -8,3 +8,10 @@
     border-radius: 50%;
     font-weight: bold;
 }
+
+.product-regular-price {
+    color: #333;
+    font-size: 21px;
+    margin-left: 10px;
+    font-weight: 400;
+}

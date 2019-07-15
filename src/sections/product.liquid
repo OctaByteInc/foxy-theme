@@ -15,70 +15,91 @@
     </div>
 
 <!-- Product Images with varient and options -->
+{% assign current_variant = product.selected_or_first_available_variant %}
+{% assign featured_image = current_variant.featured_image | default: product.featured_image %}
+
     <div class="product-details ptb-100 pb-90">
         <div class="container">
-            <div class="row">
-                <div class="col-md-12">
-                    <div class="product-details-btn">
-                        <a href="#"><i class="ion-arrow-left-c"></i></a>
-                        <a class="active" href="#"><i class="ion-arrow-right-c"></i></a>
-                    </div>
-                </div>
-            </div>
             <div class="row">
                 <div class="col-md-12 col-lg-7 col-12">
                     <div class="product-details-img-content">
                         <div class="product-details-tab mr-70">
                             <div class="product-details-large tab-content">
-                                <div class="tab-pane active show fade" id="pro-details1" role="tabpanel">
-                                    <div class="easyzoom easyzoom--overlay">
-                                        <a href="assets/img/product-details/bl1.jpg">
-                                            <img src="assets/img/product-details/l1.jpg" alt="">
-                                        </a>
-                                    </div>
-                                </div>
-                                <div class="tab-pane fade" id="pro-details2" role="tabpanel">
-                                    <div class="easyzoom easyzoom--overlay">
-                                        <a href="assets/img/product-details/bl2.jpg">
-                                            <img src="assets/img/product-details/l2.jpg" alt="">
-                                        </a>
-                                    </div>
-                                </div>
-                                <div class="tab-pane fade" id="pro-details3" role="tabpanel">
-                                    <div class="easyzoom easyzoom--overlay">
-                                        <a href="assets/img/product-details/bl3.jpg">
-                                            <img src="assets/img/product-details/l3.jpg" alt="">
-                                        </a>
-                                    </div>
-                                </div>
-                                <div class="tab-pane fade" id="pro-details4" role="tabpanel">
-                                    <div class="easyzoom easyzoom--overlay">
-                                        <a href="assets/img/product-details/bl4.jpg">
-                                            <img src="assets/img/product-details/l4.jpg" alt="">
-                                        </a>
-                                    </div>
-                                </div>
+
+                                {% if product.images.size > 1 %}
+                                    {% for image in product.images %}
+                                        {% capture active_show %}
+                                            {% if forloop.first %}
+                                                active show
+                                            {% endif %}
+                                        {% endcapture %}
+                                        <div 
+                                            class="tab-pane fade {{ active_show }}" 
+                                            id="pro-details{{ forloop.index }}" 
+                                            role="tabpanel">
+                                            <div class="easyzoom easyzoom--overlay">
+                                                <a href="{{ image | img_url '1200x1125' }}">
+                                                    <img 
+                                                        src="{{ image | img_url '600x656' }}" 
+                                                        alt="{{ image.alt }}">
+                                                </a>
+                                            </div>
+                                        </div>
+                                    {% endfor %}
+                                {% else %}
+                                    <div 
+                                        class="tab-pane fade active show" 
+                                        id="pro-details1" 
+                                        role="tabpanel">
+                                        <div class="easyzoom easyzoom--overlay">
+                                            <a href="{{ featured_image | img_url '1200x1125' }}">
+                                                <img 
+                                                    src="{{ featured_image | img_url '600x656' }}" 
+                                                    alt="{{ featured_image.alt }}">
+                                            </a>
+                                        </div>
+                                    </div>    
+                                {% endif %}
                             </div>
+
                             <div class="product-details-small nav mt-12 main-product-details" role=tablist>
-                                <a class="active mr-12" href="#pro-details1" data-toggle="tab" role="tab" aria-selected="true">
-                                    <img src="assets/img/product-details/s1.jpg" alt="">
-                                </a>
-                                <a class="mr-12" href="#pro-details2" data-toggle="tab" role="tab" aria-selected="true">
-                                    <img src="assets/img/product-details/s2.jpg" alt="">
-                                </a>
-                                <a class="mr-12" href="#pro-details3" data-toggle="tab" role="tab" aria-selected="true">
-                                    <img src="assets/img/product-details/s3.jpg" alt="">
-                                </a>
-                                <a class="mr-12" href="#pro-details4" data-toggle="tab" role="tab" aria-selected="true">
-                                    <img src="assets/img/product-details/s4.jpg" alt="">
-                                </a>
+                                {% if product.images.size > 0 %}
+                                    {% for image in product.images %}
+                                        {% capture active %}
+                                            {% if forloop.first %}
+                                                active
+                                            {% endif %}
+                                        {% endcapture %}
+                                        <a 
+                                            class="mr-12 {{ active }}" 
+                                            href="#pro-details{{ forloop.index }}" 
+                                            data-toggle="tab" 
+                                            role="tab" 
+                                            aria-selected="true">
+                                            <img 
+                                                src="{{ image | img_url: '141x135' }}" 
+                                                alt="{{ image.alt }}">
+                                        </a>
+                                    {% endfor %}
+                                {% else %}
+                                    <a 
+                                        class="mr-12 active" 
+                                        href="#pro-details1" 
+                                        data-toggle="tab" 
+                                        role="tab" 
+                                        aria-selected="true">
+                                        <img 
+                                            src="{{ featured_image | img_url: '141x135' }}" 
+                                            alt="{{ featured_image.alt }}">
+                                    </a>        
+                                {% endif %}
                             </div>
                         </div>
                     </div>
                 </div>
                 <div class="col-md-12 col-lg-5 col-12">
                     <div class="product-details-content">
-                        <h3>Handcrafted Supper Mug</h3>
+                        <h3>{{ product.title }}</h3>
                         <div class="rating-number">
                             <div class="quick-view-rating">
                                 <i class="ion-ios-star red-star"></i>
@@ -92,30 +113,45 @@
                             </div>
                         </div>
                         <div class="details-price">
-                            <span>$120.00</span>
+                            <span>{{ current_variant.price | money }}</span>
+                            {% if product.cpmare_at_price_max > product.price %}
+                                <span class="product-regular-price">
+                                    {% if product.compare_at_price > product.price %}
+                                        {{ product.compare_at_price | money }}
+                                    {% endif %}
+                                </span>  
+                            {% endif %}
                         </div>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmol tempor incidid ut labore et dolore magna aliqua. Ut enim ad minim veni quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in</p>
-                        <div class="quick-view-select">
-                            <div class="select-option-part">
-                                <label>Size*</label>
-                                <select class="select">
-                                    <option value="">- Please Select -</option>
-                                    <option value="">xl</option>
-                                    <option value="">ml</option>
-                                    <option value="">m</option>
-                                    <option value="">sl</option>
-                                </select>
+                        <p>{{ product.content | truncatewords: 37 }}</p>
+
+                        {% form 'product', product, 
+                            data-product-form: '', 
+                            data-product-handle: product.handle, 
+                            data-enable-history-state: 'true' 
+                        %}
+                        {% unless product.has_only_default_variant %}
+
+                            <div class="quick-view-select">
+                                {% for option in product.options_with_values %}
+                                        <div class="select-option-part">
+                                            <label for="Option{{ option.position }}">{{ option.name }}</label>
+                                            <select class="select">
+                                                {% for value in optoin.values %}
+                                                    <option 
+                                                        value="{{ value | escape }}"
+                                                        {% if option.selected_value == value %}
+                                                            selected="selected"
+                                                        {% endif %}
+                                                        >
+                                                        {{ value }}
+                                                    </option>
+                                                {% endfor %}
+                                            </select>
+                                        </div>
+                                {% endfor %}
                             </div>
-                            <div class="select-option-part">
-                                <label>Color*</label>
-                                <select class="select">
-                                    <option value="">- Please Select -</option>
-                                    <option value="">orange</option>
-                                    <option value="">pink</option>
-                                    <option value="">yellow</option>
-                                </select>
-                            </div>
-                        </div>
+                            
+                        {% endunless %}
                         <div class="quickview-plus-minus">
                             <div class="cart-plus-minus">
                                 <input type="text" value="02" name="qtybutton" class="cart-plus-minus-box">
@@ -127,6 +163,8 @@
                                 <a class="btn-hover" href="#"><i class="ion-ios-heart-outline"></i></a>
                             </div>
                         </div>
+                        {% endform %}
+
                         <div class="product-categories product-cat-tag">
                             <ul>
                                 <li class="categories-title">Categories :</li>
