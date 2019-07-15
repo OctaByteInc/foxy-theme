@@ -38,9 +38,9 @@
                                             id="pro-details{{ forloop.index }}" 
                                             role="tabpanel">
                                             <div class="easyzoom easyzoom--overlay">
-                                                <a href="{{ image | img_url '1200x1125' }}">
+                                                <a href="{{ image | img_url: '1200x1125' }}">
                                                     <img 
-                                                        src="{{ image | img_url '600x656' }}" 
+                                                        src="{{ image | img_url: '600x656' }}" 
                                                         alt="{{ image.alt }}">
                                                 </a>
                                             </div>
@@ -52,9 +52,9 @@
                                         id="pro-details1" 
                                         role="tabpanel">
                                         <div class="easyzoom easyzoom--overlay">
-                                            <a href="{{ featured_image | img_url '1200x1125' }}">
+                                            <a href="{{ featured_image | img_url: '1200x1125' }}">
                                                 <img 
-                                                    src="{{ featured_image | img_url '600x656' }}" 
+                                                    src="{{ featured_image | img_url: '600x656' }}" 
                                                     alt="{{ featured_image.alt }}">
                                             </a>
                                         </div>
@@ -114,11 +114,13 @@
                         </div>
                         <div class="details-price">
                             <span>{{ current_variant.price | money }}</span>
-                            {% if product.cpmare_at_price_max > product.price %}
+                            {% if product.compare_at_price_max > product.price %}
                                 <span class="product-regular-price">
+                                <del>
                                     {% if product.compare_at_price > product.price %}
                                         {{ product.compare_at_price | money }}
                                     {% endif %}
+                                </del>
                                 </span>  
                             {% endif %}
                         </div>
@@ -135,8 +137,11 @@
                                 {% for option in product.options_with_values %}
                                         <div class="select-option-part">
                                             <label for="Option{{ option.position }}">{{ option.name }}</label>
-                                            <select class="select">
-                                                {% for value in optoin.values %}
+                                            <select 
+                                                id="Option{{ option.position }}"
+                                                name="option{{ option.name | escape }}" 
+                                                class="select">
+                                                {% for value in option.values %}
                                                     <option 
                                                         value="{{ value | escape }}"
                                                         {% if option.selected_value == value %}
@@ -154,7 +159,12 @@
                         {% endunless %}
                         <div class="quickview-plus-minus">
                             <div class="cart-plus-minus">
-                                <input type="text" value="02" name="qtybutton" class="cart-plus-minus-box">
+                                <input 
+                                    type="text"  
+                                    id="Quantity" 
+                                    name="quantity" 
+                                    value="1" min="1" 
+                                    class="cart-plus-minus-box">
                             </div>
                             <div class="quickview-btn-cart">
                                 <a class="btn-hover-black" href="#">add to cart</a>
@@ -167,49 +177,40 @@
 
                         <div class="product-categories product-cat-tag">
                             <ul>
-                                <li class="categories-title">Categories :</li>
-                                <li><a href="#">fashion</a></li>
-                                <li><a href="#">electronics</a></li>
-                                <li><a href="#">toys</a></li>
-                                <li><a href="#">food</a></li>
-                                <li><a href="#">jewellery</a></li>
-                            </ul>
-                        </div>
-                        <div class="product-tags product-cat-tag">
-                            <ul>
                                 <li class="categories-title">Tags :</li>
-                                <li><a href="#">fashion</a></li>
-                                <li><a href="#">electronics</a></li>
-                                <li><a href="#">toys</a></li>
-                                <li><a href="#">food</a></li>
-                                <li><a href="#">jewellery</a></li>
+                                {% for tag in product.tags %}
+                                    <li>{{ tag }}</li>
+                                {% endfor %}
                             </ul>
                         </div>
-                        <div class="product-share">
-                            <ul>
-                                <li class="categories-title">Share :</li>
-                                <li>
-                                    <a href="#">
-                                        <i class="ion-social-twitter"></i>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="#">
-                                        <i class="ion-social-tumblr"></i>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="#">
-                                        <i class="ion-social-facebook"></i>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="#">
-                                        <i class="ion-social-instagram-outline"></i>
-                                    </a>
-                                </li>
-                            </ul>
-                        </div>
+                        {% if section.settings.show_share_buttons == true %}
+                            <div class="product-share">
+                                <ul>
+                                    <li class="categories-title">Share :</li>
+                                    <li>
+                                        <a href="#">
+                                            <i class="ion-social-twitter"></i>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="#">
+                                            <i class="ion-social-tumblr"></i>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="#">
+                                            <i class="ion-social-facebook"></i>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="#">
+                                            <i class="ion-social-instagram-outline"></i>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>    
+                        {% endif %}
+                        
                     </div>
                 </div>
             </div>
@@ -230,7 +231,7 @@
                 </div>
                 <div class="description-review-text tab-content">
                     <div class="tab-pane active show fade" id="pro-dec" role="tabpanel">
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in</p>
+                        <p>{{ product.content }}</p>
                     </div>
                     <div class="tab-pane fade" id="pro-review" role="tabpanel">
                         <a href="#">Be the first to write your review!</a>
