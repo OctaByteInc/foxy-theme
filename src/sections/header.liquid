@@ -60,9 +60,14 @@ Theme Store optional settings
                         <div class="header-cart common-style">
                             <button class="sidebar-trigger">
                                 <span class="ion-bag"></span>
-                                {% if cart.item_count > 0 %}
-                                    <span class="badge badge-notify">{{ cart.item_count }}</span>
+                                {% if cart.item_count == 0 %}
+                                    {% assign hide_badge = 'd-none' %}
                                 {% endif %}
+                                <span 
+                                    id="cart-notify" 
+                                    class="badge badge-notify {{ hide_badge }}">
+                                        {{ cart.item_count }}
+                                </span>
                             </button>
                         </div>
                         <div class="header-sidebar common-style">

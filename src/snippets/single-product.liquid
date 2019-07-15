@@ -3,6 +3,7 @@
 
     - Accept
         - product
+        
 {%- endcomment -%}
 <div class="{{ wrapper_class }}">
     <div class="single-product {{ single_class }} ">
@@ -33,7 +34,12 @@
                     <span>{{ product.tags | slice: 0, 3 | join: ', ' }}</span>
                 </div>
                 <div class="product-categori">
-                    <a href="#"><i class="ion-bag"></i> Add to cart</a>
+                    <a 
+                        class="s-add-to-cart"
+                        href="#" 
+                        data-variant-id="{{ product.first_available_variant.id }}" >
+                            <i class="ion-bag"></i> Add to cart
+                    </a>
                 </div>
             </div>
         </div>
