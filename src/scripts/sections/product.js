@@ -22,9 +22,7 @@ const classes = {
 
 const selectors = {
     productForm: '[data-product-form]',
-    variantDetail: '[data-detail-variant-image]',
-    variantBigImage: '[data-detail-variant-image-big]',
-    variantLowImage: '[data-detail-variant-image-low]',
+    thumbnailById: (id) => `[data-thumbnail-id='${id}']`,
     productPrice: '[data-product-price]',
     productRegularPrice: '[data-product-regular-price]',
     addToCart: '[data-add-to-cart]'
@@ -108,17 +106,8 @@ register('product', {
             tabPaneList[i].classList.remove(classes.paneActive, classes.paneShow);
         }
 
-        // Set variant Big image for zoom
-        const variantBigImage = this.container.querySelector(selectors.variantBigImage);
-        variantBigImage.setAttribute('href', variant.featured_image.src);
-        
-        // Set variant small image
-        const variantLowImage = this.container.querySelector(selectors.variantLowImage);
-        variantLowImage.setAttribute('src', variant.featured_image.src);
-        
-        // Show varient image
-        const variantDetail = this.container.querySelector(selectors.variantDetail);
-        variantDetail.classList.add(classes.paneActive, classes.paneShow);
+        const thumbnail = this.container.querySelector(selectors.thumbnailById(variant.featured_image.id));
+        thumbnail.classList.add(classes.paneActive, classes.paneShow);
     },
 
     // Fetch Product detail from Shopify API

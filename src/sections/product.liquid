@@ -28,26 +28,25 @@
                                 {% assign isFirstImage = true %}
                                 {% if product.images.size > 1 %}
                                     {% for image in product.images %}
-                                        {% unless image.attached_to_variant? %}
-                                            {%- capture active_show -%}
-                                                {%- if isFirstImage == true -%}
-                                                    active show
-                                                    {%- assign isFirstImage = false -%}
-                                                {%- endif -%}
-                                            {%- endcapture -%}
-                                            <div 
-                                                class="tab-pane fade {{ active_show }}" 
-                                                id="pro-details{{ forloop.index }}" 
-                                                role="tabpanel">
-                                                <div class="easyzoom easyzoom--overlay">
-                                                    <a href="{{ image | img_url: '1200x1125' }}">
-                                                        <img 
-                                                            src="{{ image | img_url: '600x656' }}" 
-                                                            alt="{{ image.alt }}">
-                                                    </a>
-                                                </div>
+                                        {%- capture active_show -%}
+                                            {%- if isFirstImage == true -%}
+                                                active show
+                                                {%- assign isFirstImage = false -%}
+                                            {%- endif -%}
+                                        {%- endcapture -%}
+                                        <div
+                                            data-thumbnail-id="{{ image.id }}" 
+                                            class="tab-pane fade {{ active_show }}" 
+                                            id="pro-details{{ forloop.index }}" 
+                                            role="tabpanel">
+                                            <div class="easyzoom easyzoom--overlay">
+                                                <a href="{{ image | img_url: '1200x1125' }}">
+                                                    <img 
+                                                        src="{{ image | img_url: '600x656' }}" 
+                                                        alt="{{ image.alt }}">
+                                                </a>
                                             </div>
-                                        {% endunless %}
+                                        </div>
                                     {% endfor %}
                                 {% else %}
                                     <div 
@@ -64,7 +63,7 @@
                                     </div>    
                                 {% endif %}
                                 <!-- To show variant image in this Div -->
-                                    <div 
+                                   <!--  <div 
                                         class="tab-pane fade"
                                         data-detail-variant-image 
                                         role="tabpanel">
@@ -73,7 +72,7 @@
                                                 <img data-detail-variant-image-low src="" alt="">
                                             </a>
                                         </div>
-                                    </div>
+                                    </div> -->
                             </div>
 
                             <div class="product-details-small nav mt-12 main-product-details" role=tablist>
