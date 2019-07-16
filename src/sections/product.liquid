@@ -25,26 +25,29 @@
                     <div class="product-details-img-content">
                         <div class="product-details-tab mr-70">
                             <div class="product-details-large tab-content">
-
+                                {% assign isFirstImage = true %}
                                 {% if product.images.size > 1 %}
                                     {% for image in product.images %}
-                                        {% capture active_show %}
-                                            {% if forloop.first %}
-                                                active show
-                                            {% endif %}
-                                        {% endcapture %}
-                                        <div 
-                                            class="tab-pane fade {{ active_show }}" 
-                                            id="pro-details{{ forloop.index }}" 
-                                            role="tabpanel">
-                                            <div class="easyzoom easyzoom--overlay">
-                                                <a href="{{ image | img_url: '1200x1125' }}">
-                                                    <img 
-                                                        src="{{ image | img_url: '600x656' }}" 
-                                                        alt="{{ image.alt }}">
-                                                </a>
+                                        {% unless image.attached_to_variant? %}
+                                            {%- capture active_show -%}
+                                                {%- if isFirstImage == true -%}
+                                                    active show
+                                                    {%- assign isFirstImage = false -%}
+                                                {%- endif -%}
+                                            {%- endcapture -%}
+                                            <div 
+                                                class="tab-pane fade {{ active_show }}" 
+                                                id="pro-details{{ forloop.index }}" 
+                                                role="tabpanel">
+                                                <div class="easyzoom easyzoom--overlay">
+                                                    <a href="{{ image | img_url: '1200x1125' }}">
+                                                        <img 
+                                                            src="{{ image | img_url: '600x656' }}" 
+                                                            alt="{{ image.alt }}">
+                                                    </a>
+                                                </div>
                                             </div>
-                                        </div>
+                                        {% endunless %}
                                     {% endfor %}
                                 {% else %}
                                     <div 
@@ -60,26 +63,41 @@
                                         </div>
                                     </div>    
                                 {% endif %}
+                                <!-- To show variant image in this Div -->
+                                    <div 
+                                        class="tab-pane fade"
+                                        data-detail-variant-image 
+                                        role="tabpanel">
+                                        <div class="easyzoom easyzoom--overlay">
+                                            <a data-detail-variant-image-big href="#">
+                                                <img data-detail-variant-image-low src="" alt="">
+                                            </a>
+                                        </div>
+                                    </div>
                             </div>
 
                             <div class="product-details-small nav mt-12 main-product-details" role=tablist>
-                                {% if product.images.size > 0 %}
+                                {% assign isFirstImage = true %}
+                                {% if product.images.size > 1 %}
                                     {% for image in product.images %}
-                                        {% capture active %}
-                                            {% if forloop.first %}
-                                                active
-                                            {% endif %}
-                                        {% endcapture %}
-                                        <a 
-                                            class="mr-12 {{ active }}" 
-                                            href="#pro-details{{ forloop.index }}" 
-                                            data-toggle="tab" 
-                                            role="tab" 
-                                            aria-selected="true">
-                                            <img 
-                                                src="{{ image | img_url: '141x135' }}" 
-                                                alt="{{ image.alt }}">
-                                        </a>
+                                        {% unless image.attached_to_variant? %}
+                                            {%- capture active -%}
+                                                {%- if isFirstImage == true -%}
+                                                    active
+                                                    {%- assign isFirstImage = false -%}
+                                                {%- endif -%}
+                                            {%- endcapture -%}
+                                            <a 
+                                                class="mr-12 {{ active | escape }}" 
+                                                href="#pro-details{{ forloop.index }}" 
+                                                data-toggle="tab" 
+                                                role="tab" 
+                                                aria-selected="true">
+                                                <img 
+                                                    src="{{ image | img_url: '141x135' }}" 
+                                                    alt="{{ image.alt }}">
+                                            </a>
+                                        {% endunless %}
                                     {% endfor %}
                                 {% else %}
                                     <a 
@@ -113,10 +131,10 @@
                             </div>
                         </div>
                         <div class="details-price">
-                            <span>{{ current_variant.price | money }}</span>
+                            <span data-product-price>{{ current_variant.price | money }}</span>
                             {% if product.compare_at_price_max > product.price %}
                                 <span class="product-regular-price">
-                                <del>
+                                <del data-product-regular-price>
                                     {% if product.compare_at_price > product.price %}
                                         {{ product.compare_at_price | money }}
                                     {% endif %}
@@ -139,7 +157,7 @@
                                             <label for="Option{{ option.position }}">{{ option.name }}</label>
                                             <select 
                                                 id="Option{{ option.position }}"
-                                                name="option{{ option.name | escape }}" 
+                                                name="options[{{ option.name | escape }}]" 
                                                 class="select">
                                                 {% for value in option.values %}
                                                     <option 

@@ -10,207 +10,102 @@ import {getUrlWithVariant, ProductForm} from '@shopify/theme-product-form';
 import {formatMoney} from '@shopify/theme-currency';
 import {register} from '@shopify/theme-sections';
 import {forceFocus} from '@shopify/theme-a11y';
+import * as images from '@shopify/theme-images';
 
 const classes = {
-  hide: 'hide',
-};
-
-const keyboardKeys = {
-  ENTER: 13,
-};
+    paneShow: 'show',
+    paneActive: 'active',
+    hide: 'd-none'
+}
 
 const selectors = {
-  submitButton: '[data-submit-button]',
-  submitButtonText: '[data-submit-button-text]',
-  comparePrice: '[data-compare-price]',
-  comparePriceText: '[data-compare-text]',
-  priceWrapper: '[data-price-wrapper]',
-  imageWrapper: '[data-product-image-wrapper]',
-  visibleImageWrapper: `[data-product-image-wrapper]:not(.${classes.hide})`,
-  imageWrapperById: (id) => `${selectors.imageWrapper}[data-image-id='${id}']`,
-  productForm: '[data-product-form]',
-  productPrice: '[data-product-price]',
-  thumbnail: '[data-product-single-thumbnail]',
-  thumbnailById: (id) => `[data-thumbnail-id='${id}']`,
-  thumbnailActive: '[data-product-single-thumbnail][aria-current]',
+    productForm: '[data-product-form]',
+    variantDetail: '[data-detail-variant-image]',
+    variantBigImage: '[data-detail-variant-image-big]',
+    variantLowImage: '[data-detail-variant-image-low]',
+    productPrice: '[data-product-price]',
+    productRegularPrice: '[data-product-regular-price]'
 };
 
 register('product', {
-  async onLoad() {
-    const productFormElement = document.querySelector(selectors.productForm);
+    async onLoad() {
+        const productFromElement = document.querySelector(selectors.productForm);
+        
+        // Load product Json and save into product variable
+        this.product = await this.getProductJson(productFromElement.dataset.productHandle);
+        
+        // Create new Form to listen user actions
+        this.productForm = new ProductForm(productFromElement, this.product, { 
+            onOptionChange: this.onFormOptionChange.bind(this), 
+        })
+    },
 
-    this.product = await this.getProductJson(
-      productFormElement.dataset.productHandle,
-    );
-    this.productForm = new ProductForm(productFormElement, this.product, {
-      onOptionChange: this.onFormOptionChange.bind(this),
-    });
+    // Called whenever user change any option in product form
+    onFormOptionChange(event) {
+        const variant = event.dataset.variant;
+        
+        this.renderVariantImage(variant);
+        this.renderPrice(variant);
+    },
 
-    this.onThumbnailClick = this.onThumbnailClick.bind(this);
-    this.onThumbnailKeyup = this.onThumbnailKeyup.bind(this);
+    // Display variant price
+    renderPrice(variant) {
+        const priceElement = this.container.querySelector(selectors.productPrice);
+        const regularPriceElement = this.container.querySelector(selectors.productRegularPrice);
 
-    this.container.addEventListener('click', this.onThumbnailClick);
-    this.container.addEventListener('keyup', this.onThumbnailKeyup);
-  },
+        if(variant === null) {
+            priceElement.innerHTML = '';
 
-  onUnload() {
-    this.productForm.destroy();
-    this.removeEventListener('click', this.onThumbnailClick);
-    this.removeEventListener('keyup', this.onThumbnailKeyup);
-  },
+            if (regularPriceElement !== null) {
+                regularPriceElement.classList.add(classes.hide);
+            }
+            
+            return;
+        }
 
-  getProductJson(handle) {
-    return fetch(`/products/${handle}.js`).then((response) => {
-      return response.json();
-    });
-  },
+        priceElement.innerHTML = formatMoney(variant.price, theme.moneyFormat);
+        
+        if (variant.compare_at_price > variant.price) {
+            regularPriceElement.classList.remove(classes.hide);
+            regularPriceElement.innerHTML = formatMoney(variant.compare_at_price, theme.moneyFormat);
+        } else if (regularPriceElement !== null) {
+            regularPriceElement.classList.add(classes.hide);
+        }
+    },
 
-  onFormOptionChange(event) {
-    const variant = event.dataset.variant;
+    // Display variant Image
+    renderVariantImage(variant) {
+        if(!variant || variant.featured_image === null) {
+            return;
+        }
 
-    this.renderImages(variant);
-    this.renderPrice(variant);
-    this.renderComparePrice(variant);
-    this.renderSubmitButton(variant);
+        // Remove currently active classes
+        const tabPaneList = document.getElementsByClassName('tab-pane'); 
+        for(let i=0; i < tabPaneList.length; i++) {
+            tabPaneList[i].classList.remove(classes.paneActive, classes.paneShow);
+        }
 
-    this.updateBrowserHistory(variant);
-  },
+        // Set variant Big image for zoom
+        const variantBigImage = document.querySelector(selectors.variantBigImage);
+        variantBigImage.setAttribute('href', variant.featured_image.src);
+        
+        // Set variant small image
+        const variantLowImage = document.querySelector(selectors.variantLowImage);
+        variantLowImage.setAttribute('src', variant.featured_image.src);
+        
+        // Show varient image
+        const variantDetail = document.querySelector(selectors.variantDetail);
+        variantDetail.classList.add(classes.paneActive, classes.paneShow);
+    },
 
-  onThumbnailClick(event) {
-    const thumbnail = event.target.closest(selectors.thumbnail);
+    // Fetch Product detail from Shopify API
+    getProductJson(handle) {
+        return fetch(`/products/${handle}.js`).then((response) => {
+          return response.json();
+        });
+    },
 
-    if (!thumbnail) {
-      return;
+    onUnload() {
+        this.productForm.distroy();
     }
-
-    event.preventDefault();
-
-    this.renderFeaturedImage(thumbnail.dataset.thumbnailId);
-    this.renderActiveThumbnail(thumbnail.dataset.thumbnailId);
-  },
-
-  onThumbnailKeyup(event) {
-    if (
-      event.keyCode !== keyboardKeys.ENTER ||
-      !event.target.closest(selectors.thumbnail)
-    ) {
-      return;
-    }
-
-    const visibleFeaturedImageWrapper = this.container.querySelector(
-      selectors.visibleImageWrapper,
-    );
-
-    forceFocus(visibleFeaturedImageWrapper);
-  },
-
-  renderSubmitButton(variant) {
-    const submitButton = this.container.querySelector(selectors.submitButton);
-    const submitButtonText = this.container.querySelector(
-      selectors.submitButtonText,
-    );
-
-    if (!variant) {
-      submitButton.disabled = true;
-      submitButtonText.innerText = theme.strings.unavailable;
-    } else if (variant.available) {
-      submitButton.disabled = false;
-      submitButtonText.innerText = theme.strings.addToCart;
-    } else {
-      submitButton.disabled = true;
-      submitButtonText.innerText = theme.strings.soldOut;
-    }
-  },
-
-  renderImages(variant) {
-    if (!variant || variant.featured_image === null) {
-      return;
-    }
-
-    this.renderFeaturedImage(variant.featured_image.id);
-    this.renderActiveThumbnail(variant.featured_image.id);
-  },
-
-  renderPrice(variant) {
-    const priceElement = this.container.querySelector(selectors.productPrice);
-    const priceWrapperElement = this.container.querySelector(
-      selectors.priceWrapper,
-    );
-
-    priceWrapperElement.classList.toggle(classes.hide, !variant);
-
-    if (variant) {
-      priceElement.innerText = formatMoney(variant.price, theme.moneyFormat);
-    }
-  },
-
-  renderComparePrice(variant) {
-    if (!variant) {
-      return;
-    }
-
-    const comparePriceElement = this.container.querySelector(
-      selectors.comparePrice,
-    );
-    const compareTextElement = this.container.querySelector(
-      selectors.comparePriceText,
-    );
-
-    if (!comparePriceElement || !compareTextElement) {
-      return;
-    }
-
-    if (variant.compare_at_price > variant.price) {
-      comparePriceElement.innerText = formatMoney(
-        variant.compare_at_price,
-        theme.moneyFormat,
-      );
-      compareTextElement.classList.remove(classes.hide);
-      comparePriceElement.classList.remove(classes.hide);
-    } else {
-      comparePriceElement.innerText = '';
-      compareTextElement.classList.add(classes.hide);
-      comparePriceElement.classList.add(classes.hide);
-    }
-  },
-
-  renderActiveThumbnail(id) {
-    const activeThumbnail = this.container.querySelector(
-      selectors.thumbnailById(id),
-    );
-    const inactiveThumbnail = this.container.querySelector(
-      selectors.thumbnailActive,
-    );
-
-    if (activeThumbnail === inactiveThumbnail) {
-      return;
-    }
-
-    inactiveThumbnail.removeAttribute('aria-current');
-    activeThumbnail.setAttribute('aria-current', true);
-  },
-
-  renderFeaturedImage(id) {
-    const activeImage = this.container.querySelector(
-      selectors.visibleImageWrapper,
-    );
-    const inactiveImage = this.container.querySelector(
-      selectors.imageWrapperById(id),
-    );
-
-    activeImage.classList.add(classes.hide);
-    inactiveImage.classList.remove(classes.hide);
-  },
-
-  updateBrowserHistory(variant) {
-    const enableHistoryState = this.productForm.element.dataset
-      .enableHistoryState;
-
-    if (!variant || enableHistoryState !== 'true') {
-      return;
-    }
-
-    const url = getUrlWithVariant(window.location.href, variant.id);
-    window.history.replaceState({path: url}, '', url);
-  },
 });
