@@ -15,7 +15,9 @@ import * as images from '@shopify/theme-images';
 const classes = {
     paneShow: 'show',
     paneActive: 'active',
-    hide: 'd-none'
+    hide: 'd-none',
+    cartBtnSelector: 's-add-to-cart',
+    cartBtnHover: 'btn-hover-black'
 }
 
 const selectors = {
@@ -24,7 +26,8 @@ const selectors = {
     variantBigImage: '[data-detail-variant-image-big]',
     variantLowImage: '[data-detail-variant-image-low]',
     productPrice: '[data-product-price]',
-    productRegularPrice: '[data-product-regular-price]'
+    productRegularPrice: '[data-product-regular-price]',
+    addToCart: '[data-add-to-cart]'
 };
 
 register('product', {
@@ -46,6 +49,26 @@ register('product', {
         
         this.renderVariantImage(variant);
         this.renderPrice(variant);
+        this.renderAddToCart(variant);
+    },
+
+    // Add To cart button
+    renderAddToCart(variant){
+        const cartBtn = this.container.querySelector(selectors.addToCart);
+
+        if (!variant) {
+            cartBtn.disabled = true;
+            cartBtn.classList.remove(classes.cartBtnSelector, classes.cartBtnHover);
+            cartBtn.innerText = theme.strings.unavailable;
+        } else if(variant.available) {
+            cartBtn.disabled = false;
+            cartBtn.classList.add(classes.cartBtnSelector, classes.cartBtnHover);
+            cartBtn.innerText = theme.strings.addToCart;
+        } else {
+            cartBtn.disabled = true;
+            cartBtn.classList.remove(classes.cartBtnSelector, classes.cartBtnHover);
+            cartBtn.innerText = theme.strings.soldOut;
+        }
     },
 
     // Display variant price
@@ -64,7 +87,7 @@ register('product', {
         }
 
         priceElement.innerHTML = formatMoney(variant.price, theme.moneyFormat);
-        
+
         if (variant.compare_at_price > variant.price) {
             regularPriceElement.classList.remove(classes.hide);
             regularPriceElement.innerHTML = formatMoney(variant.compare_at_price, theme.moneyFormat);
@@ -80,21 +103,21 @@ register('product', {
         }
 
         // Remove currently active classes
-        const tabPaneList = document.getElementsByClassName('tab-pane'); 
+        const tabPaneList = this.container.getElementsByClassName('tab-pane'); 
         for(let i=0; i < tabPaneList.length; i++) {
             tabPaneList[i].classList.remove(classes.paneActive, classes.paneShow);
         }
 
         // Set variant Big image for zoom
-        const variantBigImage = document.querySelector(selectors.variantBigImage);
+        const variantBigImage = this.container.querySelector(selectors.variantBigImage);
         variantBigImage.setAttribute('href', variant.featured_image.src);
         
         // Set variant small image
-        const variantLowImage = document.querySelector(selectors.variantLowImage);
+        const variantLowImage = this.container.querySelector(selectors.variantLowImage);
         variantLowImage.setAttribute('src', variant.featured_image.src);
         
         // Show varient image
-        const variantDetail = document.querySelector(selectors.variantDetail);
+        const variantDetail = this.container.querySelector(selectors.variantDetail);
         variantDetail.classList.add(classes.paneActive, classes.paneShow);
     },
 

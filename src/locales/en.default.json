@@ -8,5 +8,12 @@
     },
     "search":{
       "placeholder": "Search Entire Store"
+    },
+    "products": {
+      "product":{
+        "sold_out": "Sold Out",
+        "unavailable": "Unavailable",
+        "add_to_cart": "Add to cart"
+      }
     }
 }
