@@ -244,6 +244,13 @@
             </div>
         </div>
     </div>    
+
+    <!-- Show Related Products (by collection) -->
+    related products <br>
+    {% if section.settings.related_products %}
+        {% include 'related-products' %}
+    {% endif %}
+
 </section>
 
 
@@ -262,6 +269,12 @@
         "id": "show_share_buttons",
         "label": "Show social sharing buttons",
         "default": true
+      },
+      {
+          "type": "checkbox",
+          "id": "related_products",
+          "label": "Show related products",
+          "default": true
       }
     ]
   }

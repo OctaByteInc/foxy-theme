@@ -1,0 +1,23 @@
+<!-- Related product by collection -->
+<div class="product-collection-area pb-60">
+    <div class="container">
+        <div class="section-title text-center mb-55">
+            <h2>Related products</h2>
+        </div>
+        <div class="row">
+            <div class="new-collection-slider owl-carousel">
+                <!-- Show only first 8 products -->
+                {% assign productCollection = product.collections | first %}
+                {% assign products = productCollection.products %}
+                {% for product in products limit: 8 %}
+                    {% include 'single-product' with 
+                        product: product,
+                        wrapper_class: 'col-md-3 col-lg-3 col-sm-4 col-xs-12',
+                        single_class: 'mb-35'
+                    %}
+                {% endfor %}
+
+            </div>
+        </div>
+    </div>
+</div>
