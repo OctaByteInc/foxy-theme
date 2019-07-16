@@ -62,24 +62,13 @@
                                         </div>
                                     </div>    
                                 {% endif %}
-                                <!-- To show variant image in this Div -->
-                                   <!--  <div 
-                                        class="tab-pane fade"
-                                        data-detail-variant-image 
-                                        role="tabpanel">
-                                        <div class="easyzoom easyzoom--overlay">
-                                            <a data-detail-variant-image-big href="#">
-                                                <img data-detail-variant-image-low src="" alt="">
-                                            </a>
-                                        </div>
-                                    </div> -->
                             </div>
 
                             <div class="product-details-small nav mt-12 main-product-details" role=tablist>
                                 {% assign isFirstImage = true %}
                                 {% if product.images.size > 1 %}
                                     {% for image in product.images %}
-                                        {% unless image.attached_to_variant? %}
+                                        {% if image.attached_to_variant? == false or section.settings.variant_images %}
                                             {%- capture active -%}
                                                 {%- if isFirstImage == true -%}
                                                     active
@@ -96,7 +85,7 @@
                                                     src="{{ image | img_url: '141x135' }}" 
                                                     alt="{{ image.alt }}">
                                             </a>
-                                        {% endunless %}
+                                        {% endif %}
                                     {% endfor %}
                                 {% else %}
                                     <a 
@@ -158,13 +147,9 @@
                                                 id="Option{{ option.position }}"
                                                 name="options[{{ option.name | escape }}]" 
                                                 class="select">
+                                                <option disabled selected value>- Please Select -</option>
                                                 {% for value in option.values %}
-                                                    <option 
-                                                        value="{{ value | escape }}"
-                                                        {% if option.selected_value == value %}
-                                                            selected="selected"
-                                                        {% endif %}
-                                                        >
+                                                    <option value="{{ value | escape }}">
                                                         {{ value }}
                                                     </option>
                                                 {% endfor %}
@@ -184,7 +169,9 @@
                                     class="cart-plus-minus-box">
                             </div>
                             <div class="quickview-btn-cart">
-                                <a data-add-to-cart class="s-add-to-cart btn-hover-black" href="javascript:void(0)">add to cart</a>
+                                <a 
+                                    data-add-to-cart 
+                                    href="javascript:void(0)">select variant</a>
                             </div>
                             <div class="quickview-btn-wishlist">
                                 <a class="btn-hover" href="#"><i class="ion-ios-heart-outline"></i></a>
@@ -264,6 +251,12 @@
   {
     "name": "Product pages",
     "settings": [
+      {
+        "type": "checkbox",
+        "id": "variant_images",
+        "label": "Show variant images along with product images",
+        "default": true
+      },
       {
         "type": "checkbox",
         "id": "show_share_buttons",

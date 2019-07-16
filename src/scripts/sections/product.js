@@ -48,6 +48,7 @@ register('product', {
         this.renderVariantImage(variant);
         this.renderPrice(variant);
         this.renderAddToCart(variant);
+
     },
 
     // Add To cart button
@@ -62,6 +63,7 @@ register('product', {
             cartBtn.disabled = false;
             cartBtn.classList.add(classes.cartBtnSelector, classes.cartBtnHover);
             cartBtn.innerText = theme.strings.addToCart;
+            cartBtn.setAttribute('data-variant-id', variant.id);
         } else {
             cartBtn.disabled = true;
             cartBtn.classList.remove(classes.cartBtnSelector, classes.cartBtnHover);

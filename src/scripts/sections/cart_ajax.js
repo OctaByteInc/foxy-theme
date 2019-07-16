@@ -10,9 +10,8 @@ import * as cart from '@shopify/theme-cart';
 
 register('header', {
     onLoad() {
-        $('.s-add-to-cart').click(function(event){
+        $(document).on('click', '.s-add-to-cart', function(event){
             event.preventDefault();
-
             const btn = $(this);
 
             // disable button
