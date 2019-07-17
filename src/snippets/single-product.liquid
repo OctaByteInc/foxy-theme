@@ -5,10 +5,15 @@
         - product
         
 {%- endcomment -%}
+{%- assign imageDimension = imageDimension | default: '270x300' -%}
 <div class="{{ wrapper_class }}">
     <div class="single-product {{ single_class }} ">
         <div class="product-img">
-            <a href="#"><img src="{{ product.featured_image | img_url: '270x300'  }}" alt=""></a>
+            <a href="#">
+                <img 
+                    src="{{ product.featured_image | img_url: imageDimension  }}" 
+                    alt="{{ product.featured_image.alt }}">
+                </a>
             {% if product.compare_at_price_max > product.price %}
             {% assign sale_precent = product.compare_at_price_max | minus: product.price | times: 100.0 | divided_by: product.compare_at_price_max | money_without_currency | times: 100 | remove: '.0' %}
                 <span>save {{ sale_precent | append: '%' }}</span>    

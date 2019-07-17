@@ -1,10 +1,33 @@
-<div class="breadcrumb-area pt-205 pb-210 bg-img" style="background-image: url('{{ "breadcrumb.jpg" | asset_url }}')">
+{%- capture templateName -%}
+    {%- case template.name -%}
+        {%- when 'collection' -%}
+            Collection
+            {%- assign name = collection.title -%}
+        {%- when 'blog' -%}
+            Blog
+            {%- assign name = blog.name -%}
+        {%- when 'collections' -%}
+            Collections
+            {%- assign name = 'all' -%}    
+        {%- else -%}
+            {{ shop.name }}
+            {%- assign name = nil -%}
+    {%- endcase -%}
+{%- endcapture -%}
+{% if section.settings.hero_image != blank %}
+    {%- assign imageURL = section.settings.hero_image | img_url: '192x500' -%}
+{% else %}
+    {%- assign imageURL = "breadcrumb.jpg" | asset_url -%}    
+{% endif %}
+<div 
+    class="breadcrumb-area pt-205 pb-210 bg-img" 
+    style="background-image: url('{{ imageURL }}')">
     <div class="container">
         <div class="breadcrumb-content">
-            <h2>shop</h2>
+            <h2>{{ templateName }}</h2>
             <ul>
-                <li><a href="#">home</a></li>
-                <li> shop </li>
+                <li><a href="{{ shop.url }}">home</a></li>
+                <li> {{ name }} </li>
             </ul>
         </div>
     </div>
@@ -12,19 +35,18 @@
 
 {% schema %}
 {
-    "name": "Hero Collection",
+    "name": "Hero Breadcrumb",
     "settings": [
         {
-            "type": "text",
-            "id": "title",
-            "label": "Heading",
-            "default": "Hero Collection"
+            "type": "image_picker",
+            "id": "hero_image",
+            "label": "Pick image (Recommend size 1920x500)"
         }
     ],
     "presets": [
         {
             "category": "Advanced layout",
-            "name":"Hero Collection"
+            "name":"Hero Breadcrumb"
         }
     ]
 }
