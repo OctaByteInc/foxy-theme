@@ -10,11 +10,11 @@
                 {% for block in section.blocks %}
                     {% assign collection = collections[block.settings.collection] %}
                     {% if forloop.first == true %}
-                        {% assign aria_selected = true %}
-                        {% assign active = 'active' %}
+                        {%- assign aria_selected = true -%}
+                        {%- assign active = 'active' -%}
                     {% else %}
-                        {% assign aria_selected = false %}
-                        {% assign active = nil %}    
+                        {%- assign aria_selected = false -%}
+                        {%- assign active = nil -%}    
                     {% endif %}
                         <a 
                             class="{{ active }}" 
@@ -31,9 +31,9 @@
                 {% for block in section.blocks %}
                     {% assign collection = collections[block.settings.collection] %}
                     {% if forloop.first == true %}
-                        {% assign active_tab = 'active show' %}
+                        {%- assign active_tab = 'active show' -%}
                     {% else %}
-                        {% assign active_tab = nil %}    
+                        {%- assign active_tab = nil -%}    
                     {% endif %}
                     <div class="tab-pane {{ active_tab }} fade" id="home{{ forloop.index }}" role="tabpanel">
                         <div class="row">
