@@ -1,3 +1,37 @@
-<div class="pagination">
-  {{ paginate | default_pagination }}
-</div>
+{%- capture previousDisabled -%}
+  {%- unless paginate.previous -%}
+  disabled
+  {%- endunless -%}
+{%- endcapture -%}
+{%- capture nextDisabled -%}
+  {%- unless paginate.next -%}
+  disabled
+  {%- endunless -%}
+{%- endcapture -%}
+<nav aria-label="Page navigation example">
+    <ul class="pagination justify-content-end">
+        <li class="page-item {{ previousDisabled }} ">
+          <a class="page-link" href="{{ paginate.previous.url }}">Previous</a>
+        </li>
+        {% for part in paginate.parts %}
+          {% if part.is_link %}
+            <li class="page-item">
+              <a class="page-link" href="{{ part.url }}">{{ part.title }}</a>
+            </li>
+          {% else %}
+            {% if part.title == paginate.current_page %}
+              <li class="page-item active">
+                <a class="page-link" href="javascript:void(0)">{{ part.title }}</a>
+              </li>
+            {% else %}
+              <li class="page-item">
+                <a class="page-link" href="javascript:void(0)">{{ part.title }}</a>
+              </li>  
+            {% endif %}      
+          {% endif %}
+        {% endfor %}
+        <li class="page-item {{ nextDisabled }}">
+          <a class="page-link" href="{{ paginate.next.url }}">Next</a>
+        </li>
+    </ul>
+</nav>

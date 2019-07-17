@@ -15,3 +15,12 @@
     margin-left: 10px;
     font-weight: 400;
 }
+
+.pagination .page-link {
+    color: #333 !important;
+}
+
+.pagination .page-item.active .page-link {
+    background-color: #999 !important;
+    border-color: #999 !important;
+}

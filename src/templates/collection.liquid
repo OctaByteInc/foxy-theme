@@ -57,20 +57,26 @@
                 <div class="shop-bar">
                     <div class="shop-found-selector">
                         <div class="shop-selector">
-                            <label>Sort By : </label>
                             {% assign sort_by = collection.sort_by | default: collection.default_sort_by %}
-                            <select name="sort_by" onchange="location = this.value;">
+                            <label>Sort By : </label>
+                            <button 
+                                class="btn dropdown-toggle" 
+                                type="button" 
+                                data-toggle="dropdown"
+                            >
+                                {{ sort_by }}
+                                <span class="caret"></span>
+                            </button>
+                            <ul class="dropdown-menu">
                                 {% for option in collection.sort_options %}
-                                    <option 
-                                        value="{{ request.path | append: '?sort_by=' | append: option.value }}"
-                                        {% if sort_by == option.value %}
-                                            selected="selected"
-                                        {% endif %}
+                                    <a 
+                                        class="dropdown-item" 
+                                        href="{{ request.path | append: '?sort_by=' | append: option.value }}"
                                     >
                                         {{ option.name }}
-                                    </option>
+                                    </a>
                                 {% endfor %}
-                            </select>
+                            </ul>
                         </div>
                     </div>
                     <div class="shop-filter-tab">
@@ -102,6 +108,9 @@
                         {% endfor %}
 
                     </div>
+                    {% if paginate.pages > 1 %}
+                        {% include 'pagination' %}
+                    {% endif %}
                 </div>
 
                 <div id="grid-5-col2" class="tab-pane fade">
@@ -112,14 +121,13 @@
                         {% endfor %}
 
                     </div>
+                    {% if paginate.pages > 1 %}
+                        {% include 'pagination' %}
+                    {% endif %}
                 </div>
             </div>
         </div>
     </div>
 </div>
-
-{% if paginate.pages > 1 %}
-    {{ paginate | default_pagination }}
-{% endif %}
     
 {% endpaginate %}
