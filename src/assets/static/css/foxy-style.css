@@ -49,3 +49,7 @@
     color: #fff;
     border: 1px solid #ee3333;
 }
+
+.form-invalid {
+    border-color: #dc3545;
+}
