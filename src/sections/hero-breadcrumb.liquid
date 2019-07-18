@@ -12,6 +12,12 @@
         {%- when 'cart' -%}
             Cart
             {%- assign name = 'cart' -%}
+        {%- when 'register' -%}
+            Account
+            {%- assign name = 'register' -%}
+        {%- when 'login' -%}
+            Account
+            {%- assign name = 'login' -%}            
         {%- else -%}
             {{ shop.name }}
             {%- assign name = nil -%}

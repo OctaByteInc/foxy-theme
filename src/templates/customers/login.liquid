@@ -4,25 +4,105 @@
     <div class="container">
         <div class="row">
             <div class="col-md-12 col-12 col-lg-6 col-xl-6 ml-auto mr-auto">
-                <div class="login">
+                <div id="login" class="login">
                     <div class="login-form-container">
                         <div class="login-form">
-                            <form action="#" method="post">
-                                <input type="text" name="user-name" placeholder="Username">
-                                <input type="password" name="user-password" placeholder="Password">
+                            {% form 'customer_login' %}
+                                {{ form.errors | default_errors }}
+
+                                <input 
+                                    type="email" 
+                                    name="customer[email]" 
+                                    placeholder="Email"
+                                    id="CustomerEmail"
+                                    class="{% if form.errors contains 'email' %}form-invalid{% endif %}"
+                                    spellcheck="false"
+                                    autocomplete="off"
+                                    autocapitalize="off"
+                                    autofocus>
+                                
+                                {% if form.password_needed %}
+                                    <input type="password"
+                                        name="customer[password]"
+                                        id="CustomerPassword"
+                                        class="{% if form.errors contains 'password' %}form-invalid{% endif %}"
+                                        placeholder="Password">
+                                {% endif %}    
+
                                 <div class="button-box">
                                     <div class="login-toggle-btn">
-                                        <input type="checkbox">
-                                        <label>Remember me</label>
-                                        <a href="#">Forgot Password?</a>
+                                        <label><a href="/account/register">Create Account</a></label>
+                                        {% if form.password_needed %}
+                                            <a href="javascript:void(0)" onclick="showForget()">Forgot Password?</a>     
+                                        {% endif %}
                                     </div>
                                     <button type="submit" class="default-btn floatright">Login</button>
                                 </div>
-                            </form>
+                            {% endform %}
                         </div>
                     </div>
                 </div>
+
+                <div id="forget" class="login" style="display: none">
+                    <div class="login-form-container">
+                        <div class="login-form">
+                            {% form 'recover_customer_password' %}
+                                {{ form.errors | default_errors }}
+
+                                <input 
+                                    type="email" 
+                                    name="email" 
+                                    placeholder="Recove rEmail"
+                                    id="RecoverEmail"
+                                    spellcheck="false"
+                                    autocomplete="off"
+                                    autocapitalize="off">
+                                
+                                <div class="button-box">
+                                    <div class="login-toggle-btn">
+                                        <a href="javascript:void(0)" onclick="showLogin()">Login?</a>
+                                    </div>
+                                    <button type="submit" class="default-btn floatright">Recover</button>
+                                </div>
+                            {% endform %}
+                        </div>
+                    </div>
+                </div>
+
+                {% if shop.checkout.guest_login %}
+                    <div id="forget" class="login" style="display: none">
+                        <div class="login-form-container">
+                            <div class="login-form">
+                                {% form 'guest_login' %}
+                                    <div class="button-box">
+                                        <button type="submit" class="default-btn floatright">
+                                            Login as Guest
+                                        </button>
+                                    </div>
+                                {% endform %}
+                            </div>
+                        </div>
+                    </div>
+                {% endif %}
+
             </div>
         </div>
     </div>
 </div>
+
+<script>
+    function showForget() {
+        var forgetElement = document.getElementById('forget');
+        var loginElement = document.getElementById('login');
+
+        forget.style.display = 'block';
+        login.style.display = 'none';
+    }
+    function showLogin() {
+        var forgetElement = document.getElementById('forget');
+        var loginElement = document.getElementById('login');
+
+        forget.style.display = 'none';
+        login.style.display = 'block';
+    }
+</script>
