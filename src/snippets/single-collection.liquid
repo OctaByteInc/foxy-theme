@@ -1,0 +1,15 @@
+<div class="{{ wrapper_class }}">
+    <div class="single-banner-3 mb-10">
+        <a href="{{ collection.url }}">
+            {% if collection.image != blank or collection.products.first != blank %}
+                {%- assign image_object = collection.image | default: collectin.products.first.featured_image -%}
+                <img src="{{ image_object | img_url: image_size }}" alt="{{ image_object.alt }}">
+            {% endif %}
+        </a>
+        <div class="{{ banner_position }} common-banner-style-3">
+            {%- assign collectionAppend = collection.title | split: ' ' | last -%}
+            {%- assign collectionTitle = collection.title | remove: collectionAppend -%}
+            <h2>{{ collectionTitle }} <span>{{ collectionAppend }}</span> </h2>
+        </div>
+    </div>
+</div>
