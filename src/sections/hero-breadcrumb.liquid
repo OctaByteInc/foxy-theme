@@ -9,6 +9,9 @@
         {%- when 'collections' -%}
             Collections
             {%- assign name = 'all' -%}    
+        {%- when 'cart' -%}
+            Cart
+            {%- assign name = 'cart' -%}
         {%- else -%}
             {{ shop.name }}
             {%- assign name = nil -%}

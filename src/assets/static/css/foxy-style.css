@@ -24,3 +24,28 @@
     background-color: #999 !important;
     border-color: #999 !important;
 }
+
+.cart-discount-price {
+    margin-left: 5px;
+    font-size: 13px;
+    color: #777;
+}
+
+.cart-page-total .checkout-btn{
+    background-color: #333;
+    border: 1px solid #333;
+    color: #fff;
+    display: inline-block;
+    margin-top: 30px;
+    padding: 9px 20px;
+    text-transform: capitalize;
+    -webkit-transition: all 0.3s ease 0s;
+    transition: all 0.3s ease 0s;
+    cursor: pointer;
+}
+
+.cart-page-total .checkout-btn:hover {
+    background-color: #ee3333;
+    color: #fff;
+    border: 1px solid #ee3333;
+}
