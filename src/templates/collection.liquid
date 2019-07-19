@@ -109,7 +109,7 @@
 
                     </div>
                     {% if paginate.pages > 1 %}
-                        {% include 'pagination' %}
+                        {% include 'pagination' with nav_side: 'justify-content-end' %}
                     {% endif %}
                 </div>
 
@@ -122,7 +122,7 @@
 
                     </div>
                     {% if paginate.pages > 1 %}
-                        {% include 'pagination' %}
+                        {% include 'pagination' with nav_side: 'justify-content-end' %}
                     {% endif %}
                 </div>
             </div>

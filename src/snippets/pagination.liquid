@@ -9,7 +9,7 @@
   {%- endunless -%}
 {%- endcapture -%}
 <nav aria-label="Page navigation example">
-    <ul class="pagination justify-content-end">
+    <ul class="pagination {{ nav_side }}">
         <li class="page-item {{ previousDisabled }} ">
           <a class="page-link" href="{{ paginate.previous.url }}">Previous</a>
         </li>

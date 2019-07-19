@@ -1,127 +1,26 @@
 {% section 'hero-breadcrumb' %}
 
+{% paginate blog.articles by 6 %}
+
 <div class="blog-area pt-100 pb-100">
     <div class="container">
         <div class="row">
-            <div class="col-md-6 col-lg-4 col-xl-4 col-12">
-                <div class="single-blog mb-50">
-                    <div class="blog-img">
-                        <a href="#"><img src="{{ "370-236.jpg" | asset_url }}" alt=""></a>
-                    </div>
-                    <div class="blog-info">
-                        <h3><a href="#">Standard blog post.</a></h3>
-                        <div class="blog-meta">
-                            <ul>
-                                <li>February 13</li>
-                                <li><a href="#">Momen Bhuiyan</a></li>
-                                <li><a href="#">4 comments</a></li>
-                            </ul>
-                        </div>
-                        <p>Lorem ipsum dolor sit amet, sectetur adipising elit, sed do eimod tempor incididunt ut labore.</p>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-6 col-lg-4 col-xl-4 col-12">
-                <div class="single-blog mb-50">
-                    <div class="blog-img">
-                        <a href="#"><img src="{{ "370-236.jpg" | asset_url }}" alt=""></a>
-                    </div>
-                    <div class="blog-info">
-                        <h3><a href="#">But I must explain to you.</a></h3>
-                        <div class="blog-meta">
-                            <ul>
-                                <li>February 13</li>
-                                <li><a href="#">Momen Bhuiyan</a></li>
-                                <li><a href="#">4 comments</a></li>
-                            </ul>
-                        </div>
-                        <p>Lorem ipsum dolor sit amet, sectetur adipising elit, sed do eimod tempor incididunt ut labore.</p>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-6 col-lg-4 col-xl-4 col-12">
-                <div class="single-blog mb-50">
-                    <div class="blog-img">
-                        <a href="#"><img src="{{ "370-236.jpg" | asset_url }}" alt=""></a>
-                    </div>
-                    <div class="blog-info">
-                        <h3><a href="#">Lorem ipsum dolor sit.</a></h3>
-                        <div class="blog-meta">
-                            <ul>
-                                <li>February 13</li>
-                                <li><a href="#">Momen Bhuiyan</a></li>
-                                <li><a href="#">4 comments</a></li>
-                            </ul>
-                        </div>
-                        <p>Lorem ipsum dolor sit amet, sectetur adipising elit, sed do eimod tempor incididunt ut labore.</p>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-6 col-lg-4 col-xl-4 col-12">
-                <div class="single-blog mb-50">
-                    <div class="blog-img">
-                        <a href="#"><img src="{{ "370-236.jpg" | asset_url }}" alt=""></a>
-                    </div>
-                    <div class="blog-info">
-                        <h3><a href="#">Lorem ipsum dolor sit.</a></h3>
-                        <div class="blog-meta">
-                            <ul>
-                                <li>February 13</li>
-                                <li><a href="#">Momen Bhuiyan</a></li>
-                                <li><a href="#">4 comments</a></li>
-                            </ul>
-                        </div>
-                        <p>Lorem ipsum dolor sit amet, sectetur adipising elit, sed do eimod tempor incididunt ut labore.</p>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-6 col-lg-4 col-xl-4 col-12">
-                <div class="single-blog mb-50">
-                    <div class="blog-img">
-                        <a href="#"><img src="{{ "370-236.jpg" | asset_url }}" alt=""></a>
-                    </div>
-                    <div class="blog-info">
-                        <h3><a href="#">Standard blog post.</a></h3>
-                        <div class="blog-meta">
-                            <ul>
-                                <li>February 13</li>
-                                <li><a href="#">Momen Bhuiyan</a></li>
-                                <li><a href="#">4 comments</a></li>
-                            </ul>
-                        </div>
-                        <p>Lorem ipsum dolor sit amet, sectetur adipising elit, sed do eimod tempor incididunt ut labore.</p>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-6 col-lg-4 col-xl-4 col-12">
-                <div class="single-blog mb-50">
-                    <div class="blog-img">
-                        <a href="#"><img src="{{ "370-236.jpg" | asset_url }}" alt=""></a>
-                    </div>
-                    <div class="blog-info">
-                        <h3><a href="#">But I must explain to you.</a></h3>
-                        <div class="blog-meta">
-                            <ul>
-                                <li>February 13</li>
-                                <li><a href="#">Momen Bhuiyan</a></li>
-                                <li><a href="#">4 comments</a></li>
-                            </ul>
-                        </div>
-                        <p>Lorem ipsum dolor sit amet, sectetur adipising elit, sed do eimod tempor incididunt ut labore.</p>
-                    </div>
-                </div>
-            </div>
+
+            {% for article in blog.articles %}
+                {% include 'single-article' with
+                    article: article,
+                    wrapper_class: 'col-md-6 col-lg-4 col-xl-4 col-12',
+                    single_class: 'mb-50'
+                %}
+            {% endfor %}
+
         </div>
         <div class="row">
             <div class="col-md-12">
                 <div class="pagination-style text-center">
-                    <ul>
-                        <li class="active"><a href="#">1</a></li>
-                        <li><a href="#">2</a></li>
-                        <li><a href="#">3</a></li>
-                        <li><a href="#">4</a></li>
-                        <li><a href="#"><i class="ion-chevron-right"></i></a></li>
-                    </ul>
+                    {% if paginate.pages > 1 %}
+                        {% include 'pagination' %}
+                    {% endif %}
                 </div>
             </div>
         </div>

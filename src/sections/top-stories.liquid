@@ -12,7 +12,11 @@
         <div class="row">
             {% assign articles = blogs.news.articles | slice: 0, 3 %}
             {% for article in articles %}
-                {% include 'single-article' with article %}
+                {% include 'single-article' with 
+                    article: article,
+                    wrapper_class: 'col-lg-4 col-md-6',
+                    single_class: 'mb-30'
+                %}
             {% endfor %}
         </div>
     </div>
