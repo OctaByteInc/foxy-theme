@@ -17,18 +17,17 @@
 
   <meta name="description" content="{{ 'gift_cards.issued.subtext' | t }}">
 
-  <!-- CSS FILES -->
-    
-  <link rel="stylesheet" href="https://d29u17ylf1ylz9.cloudfront.net/neha/assets/css/bootstrap.min.css">
-  <link rel="stylesheet" href="https://d29u17ylf1ylz9.cloudfront.net/neha/assets/css/responsive.css">
-  <link rel="stylesheet" href="{{ 'gift-card.css' | asset_url }}">
+  {% include 'style-tags', layout: 'gift_card' %}
+  {% include 'css-variables' %}
 
-    {% include 'script-tags', layout: 'gift_card' %}
+  {% include 'script-tags', layout: 'gift_card' %}
 
   {{ content_for_header }}
 </head>
 
 <body class="template-giftcard">
+  <main role="main" id="MainContent">
     {{ content_for_layout }}
+  </main>
 </body>
 </html>
