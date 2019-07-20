@@ -1,0 +1,14 @@
+<div class="blog-top">
+    <div class="news-allreply">
+        <a href="#"><img src="{{ 'comment-blank.jpg' | asset_url }}" alt="Comment image"></a>
+    </div>
+    <div class="blog-img-details">
+        <div class="blog-title">
+            <h3>{{ comment.author }}</h3>
+            <span>{{ comment.created_at | date: "%B %d" }}</span>
+        </div>
+        <p class="p-border">
+            {{ comment.content }}
+        </p>
+    </div>
+</div>

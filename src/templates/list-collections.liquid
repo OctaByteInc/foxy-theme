@@ -1,10 +1,7 @@
 <div class="banner-area pt-100 pb-85">
     <div class="container custom">
-        <!-- <div class="row"> -->
+        <div class="row">
             {% for collection in collections %}
-                {% if forloop.index0 | modulo: 2 == 0 %}
-                    <div class="row">
-                {% endif %}
                 {% unless collection.handle == 'frontpage' %}
                     {%- capture wrapper_class -%}
                         {%- cycle 'group1': 'col-md-7', 'col-md-5', 'col-md-5', 'col-md-7',
@@ -23,10 +20,7 @@
                         collection, wrapper_class, banner_position, image_size
                     %}
                 {% endunless %}
-                {% if forloop.index0 | modulo: 2 != 0 or forloop.last %}
-                    </div>
-                {% endif %}
             {% endfor %}
-        <!-- </div> -->
+        </div>
     </div>
 </div>

@@ -53,3 +53,28 @@
 .form-invalid {
     border-color: #dc3545;
 }
+
+.collection-wrapper {
+    background-color: #eee;
+}
+
+
+.header-cart > a {
+    color: #4b4a48;
+    font-size: 20px;
+}
+
+.header-cart > a {
+    background: transparent none repeat scroll 0 0;
+    border: medium none;
+    line-height: 1;
+    padding: 0;
+    margin-left: 25px;
+    cursor: pointer;
+    -webkit-transition: all .3s ease 0s;
+    transition: all .3s ease 0s;
+}
+
+.header-cart > a:hover {
+    color: #ee3333;
+}

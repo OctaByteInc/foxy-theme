@@ -17,7 +17,10 @@
             {%- assign name = 'register' -%}
         {%- when 'login' -%}
             Account
-            {%- assign name = 'login' -%}            
+            {%- assign name = 'login' -%}
+        {%- when 'article' -%}
+            Article
+            {%- assign name = article.title | truncatewords: 5 -%}                
         {%- else -%}
             {{ shop.name }}
             {%- assign name = nil -%}

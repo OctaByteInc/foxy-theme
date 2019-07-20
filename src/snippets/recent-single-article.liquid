@@ -1,0 +1,15 @@
+<div class="sidebar-top-rated mb-30">
+    <div class="single-top-rated">
+        <div class="top-rated-img">
+            <a href="{{ article.url }}">
+                <img 
+                    src="{{ article.image | img_url: '91x88' }}" 
+                    alt="{{ article.image.alt }}">
+                </a>
+        </div>
+        <div class="top-rated-text">
+            <span>{{ article.published_at | date: "%B %d" }}</span>
+            <h4><a href="{{ article.url }}">{{ article.title }}</a></h4>
+        </div>
+    </div>
+</div>
