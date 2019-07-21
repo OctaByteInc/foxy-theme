@@ -1,110 +1,101 @@
-{% comment %}
-  The data-label attributes on <td> elements are mobile-friendly
-  helpers used for responsive-table labels
-{% endcomment %}
+<div class="text-center mt-5">
+    <h2>My Account</h2 <a href="#">Logout</a>
+    <div class="divider" style="border: 1px solid #eee; width:10%; margin:auto; margin-top:10px"></div>
+</div>
 
-<h1>{{ 'customer.account.title' | t }}</h1>
+<div class="container ptb-50">
+    <div class="row">
+        <div class="col-sm-8">
+            <h3>ORDER #1003</h3>
+            <i>July 20, 2019 at 11:25 pm</i>
+        </div>
+        <div class="col-sm-4">
+            <h3>BILLING ADDRESS</h3>
+            </h>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-8">
+            <table class="table">
+                <thead class="thead-dark">
+                    <tr>
+                        <th scope="col">Product</th>
+                        <th scope="col">SKU</th>
+                        <th scope="col">Price</th>
+                        <th scope="col">Quantity</th>
+                        <th scope="col">Total</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <th scope="row">
+                            2019 hakuna matata tank top womens
+                            aloha gothic plus size tanks white
+                            girl clothes beach love festival
+                            tops - L / Black
+                        </th>
+                        <td>1239102392-3</td>
+                        <td>Rs.7.61</td>
+                        <td>1</td>
+                        <td>Rs.7.61</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">
+                            2019 hakuna matata tank top womens
+                            aloha gothic plus size tanks white
+                            girl clothes beach love festival
+                            tops - L / Black
+                        </th>
+                        <td>1239102392-3</td>
+                        <td>Rs.7.61</td>
+                        <td>1</td>
+                        <td>Rs.7.61</td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div class="login-form-container" style="padding-top:20px;padding-bottom:20px">
+                                Fulfilled July 20, 2019 <br>
+                                <a href="#">Track shipment</a> <br>
+                                <strong>TNT #123445677</strong>
+                            </div>
+                        </td>
+                        <td colspan="4"></td>
+                    </tr>
+                    <tr class="table-dark">
+                        <th scope="row" colspan="4">Subtotal</th>
+                        <td>Rs.7.61</td>
+                    </tr>
+                    <tr class="table-dark">
+                        <th scope="row" colspan="4">Tax (GST 16.0%)</th>
+                        <td>Rs.1.22</td>
+                    </tr>
+                    <tr>
+                        <th scope="row" colspan="4">TOTAL</th>
+                        <td>RS.8.83 PKR</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="col-sm-4">
+            <div class="login-form-container">
+                <strong>Payment Status: Paid</strong>
+                <br><br>
+                First last name <br>
+                Your shipping address <br>
+                Postcode 123 <br>
+                Some other information
 
-<p><a href="/account">{{ 'customer.account.return' | t }}</a></p>
+            </div>
+            <h3 class="mt-5">SHIPPING ADDRESS</h3>
+            <div class="login-form-container">
+                <strong>Fulfillment Status: Fulfilled</strong>
+                <br><br>
+                First last name <br>
+                Your shipping address <br>
+                Postcode 123 <br>
+                Some other information
 
-<h2>{{ 'customer.order.title' | t: name: order.name }}</h2>
-
-<p>{{ 'customer.order.date' | t: date: order.created_at | date: "%B %d, %Y %I:%M%p" }}</p>
-
-{% if order.cancelled %}
-  {%- assign cancelled_at = order.cancelled_at | date: "%B %d, %Y %I:%M%p" -%}
-  <p>{{ 'customer.order.cancelled' | t: date: cancelled_at }}</p>
-  <p>{{ 'customer.order.cancelled_reason' | t: reason: order.cancel_reason }}</p>
-{% endif %}
-
-<table class="responsive-table">
-  <thead>
-    <tr>
-      <th>{{ 'customer.order.product' | t }}</th>
-      <th>{{ 'customer.order.sku' | t }}</th>
-      <th>{{ 'customer.order.price' | t }}</th>
-      <th>{{ 'customer.order.quantity' | t }}</th>
-      <th>{{ 'customer.order.total' | t }}</th>
-    </tr>
-  </thead>
-  <tbody>
-    {% for line_item in order.line_items %}
-      <tr id="{{ line_item.key }}" class="responsive-table-row">
-        <td data-label="{{ 'customer.order.product' | t }}">
-          {{ line_item.title | link_to: line_item.product.url }}
-          {% if line_item.fulfillment %}
-            <dl>
-              <dt>{{ 'customer.order.fulfilled_at' | t }}</dt>
-              <dd>{{ line_item.fulfillment.created_at | date: format: 'month_day_year' }}</dd>
-
-              {% if line_item.fulfillment.tracking_url %}
-                <dt>{{ 'customer.order.tracking_url' | t }}</dt>
-                <dd>
-                  <a href="{{ line_item.fulfillment.tracking_url }}">
-                    {{ 'customer.order.track_shipment' | t }}
-                  </a>
-                </dd>
-              {% endif %}
-
-              <dt>{{ 'customer.order.tracking_company' | t }}</dt>
-              <dd>{{ line_item.fulfillment.tracking_company }}</dd>
-
-              {% if line_item.fulfillment.tracking_number %}
-                <dt>{{ 'customer.order.tracking_number' | t }}</dt>
-                <dd>{{ line_item.fulfillment.tracking_number }}</dd>
-              {% endif %}
-            </dl>
-          {% endif %}
-        </td>
-        <td data-label="{{ 'customer.order.sku' | t }}">{{ line_item.sku }}</td>
-        <td data-label="{{ 'customer.order.price' | t }}">{{ line_item.price | money }}</td>
-        <td data-label="{{ 'customer.order.quantity' | t }}">{{ line_item.quantity }}</td>
-        <td data-label="{{ 'customer.order.total' | t }}">{{ line_item.quantity | times: line_item.price | money }}</td>
-      </tr>
-    {% endfor %}
-  </tbody>
-  <tfoot>
-    <tr class="responsive-table-row">
-      <td colspan="4" class="small--hide">{{ 'customer.order.subtotal' | t }}</td>
-      <td data-label="{{ 'customer.order.subtotal' | t }}">{{ order.line_items_subtotal_price | money }}</td>
-    </tr>
-
-    {% for discount in order.discounts %}
-      <tr>
-        <td colspan="4" class="small--hide">{{ discount.code }} {{ 'customer.order.discount' | t }}</td>
-        <td data-label="{{ 'customer.order.discount' | t }}">{{ discount.savings | money }}</td>
-      </tr>
-    {% endfor %}
-
-    {% for shipping_method in order.shipping_methods %}
-      <tr>
-        <td colspan="4" class="small--hide">{{ 'customer.order.shipping' | t }} ({{ shipping_method.title }})</td>
-        <td data-label="{{ 'customer.order.shipping' | t }} ({{ shipping_method.title }})">{{ shipping_method.price | money }}</td>
-      </tr>
-    {% endfor %}
-
-    {% for tax_line in order.tax_lines %}
-      <tr>
-        <td colspan="4" class="small--hide">{{ 'customer.order.tax' | t }} ({{ tax_line.title }} {{ tax_line.rate | times: 100 }}%)</td>
-        <td data-label="{{ 'customer.order.tax' | t }} ({{ tax_line.title }} {{ tax_line.rate | times: 100 }}%)">{{ tax_line.price | money }}</td>
-      </tr>
-    {% endfor %}
-
-    <tr>
-      <td colspan="4" class="small--hide">{{ 'customer.order.total' | t }}</td>
-      <td data-label="{{ 'customer.order.total' | t }}">{{ order.total_price | money }} {{ order.currency }}</td>
-    </tr>
-  </tfoot>
-</table>
-
-<h3>{{ 'customer.order.billing_address' | t }}</h3>
-
-<p>{{ 'customer.order.payment_status' | t }}: {{ order.financial_status_label }}</p>
-
-{{ order.billing_address | format_address }}
-
-<h3>{{ 'customer.order.shipping_address' | t }}</h3>
-
-<p>{{ 'customer.order.fulfillment_status' | t }}: {{ order.fulfillment_status_label }}</p>
-
-{{ order.shipping_address | format_address }}
+            </div>
+        </div>
+    </div>
+</div>
