@@ -1,7 +1,10 @@
 <div class="text-center mt-5">
-    <h2>My Account</h2 <a href="#">Logout</a>
+    <h2>My Account</h2> 
+    {{ 'customer.log_out' | t | customer_logout_link }}
     <div class="divider" style="border: 1px solid #eee; width:10%; margin:auto; margin-top:10px"></div>
 </div>
+
+{% paginate customer.addresses by 5 %}
 
 <div class="container ptb-50">
     <div class="row">
@@ -12,56 +15,206 @@
     </div>
     <div class="row">
         <div class="col-sm-4">
-            <button class="btn btn-dark">ADD NEW ADDRESS</button>
+            <button class="btn btn-dark" onlcick="addNewAddress()">ADD NEW ADDRESS</button>
         </div>
         <div class="col-sm-8">
             <div class="row">
-                <div class="col-sm-12" id="address">
-                    <strong>Defaul Address</strong>
-                    First last name <br>
-                    Your shiiping address <br>
-                    Postal code 123 <br>
-                    Pakistan
-                    <br><br>
-                    <button class="btn btn-dark" onclick="editAddress()">Edit</button>
-                    <button class="btn btn-danger ml-3">Delete</button>
-                </div>
+                {% for address in customer.addresses %}
+                    <div class="col-sm-12" id="address">
+                        {% if address == customer.default_address %}
+                            <strong>Defaul Address</strong>
+                        {% endif %}
+                        {{ address | format_address }}
+                        <br><br>
+                        <button class="btn btn-dark" onclick="editAddress()">Edit</button>
+                        <form 
+                            data-address-delete-form 
+                            method="post" 
+                            action="/account/addresses/{{ address.id }}"
+                            data-confirm-message="Are you sure you wish to delete this address?">
+                            <input type="hidden" name="_method" value="delete" />
+                            <button type="submit" class="btn btn-danger ml-3">Delete</button>
+                        </form>
+                    </div>
+                    <div class="col-sm-12" id="edit-address-" style="display: none">
+                        <div class="login">
+                            <div class="login-form-container">
+                                <div class="login-form">
+                                    {% form 'customer_address', address %}
+                                        <input type="text"
+                                            placeholder="First Name"
+                                            name="address[first_name]"
+                                            id="AddressFirstNameNew"
+                                            value="{{ form.first_name }}"
+                                            autocapitalize="words">
+                                        <input type="text"
+                                            placeholder="Last Name"
+                                            name="address[last_name]"
+                                            id="AddressLastNameNew"
+                                            value="{{ form.last_name }}"
+                                            autocapitalize="words">
+                                        <input type="text"
+                                            placeholder="Company"
+                                            name="address[company]"
+                                            id="AddressCompanyNew"
+                                            value="{{ form.company }}"
+                                            autocapitalize="words">
+                                        <input type="text"
+                                            placeholder="Address1"
+                                            name="address[address1]"
+                                            id="AddressAddress1New"
+                                            value="{{ form.address1 }}"
+                                            autocapitalize="words">   
+                                        <input type="text"
+                                            placeholder="Address2"
+                                            name="address[address2]"
+                                            id="AddressAddress2New"
+                                            value="{{ form.address2 }}"
+                                            autocapitalize="words">
+                                        <input type="text"
+                                            placeholder="City"
+                                            name="address[city]"
+                                            id="AddressCityNew"
+                                            value="{{ form.city }}"
+                                            autocapitalize="words">                  
+                                        <select
+                                            name="address[country]"
+                                            id="AddressCountryNew"
+                                            data-default="{{ form.country }}">
+                                        </select>
+                                        <br><br>
+                                        <select
+                                            name="address[province]"
+                                            id="AddressProvinceNew"
+                                            data-default="{{ form.province }}">
+                                        </select>
+                                        <br><br>
+                                        <input 
+                                            placeholder="Postal/Zip Code"
+                                            type="text"
+                                            name="address[zip]"
+                                            id="AddressZipNew"
+                                            value="{{ form.zip }}"
+                                            autocapitalize="characters">
+                                        <input 
+                                            placeholder="Phone"
+                                            type="tel"
+                                            name="address[phone]"
+                                            id="AddressPhoneNew"
+                                            value="{{ form.phone }}"
+                                            pattern="[0-9\-]*">
+    
+                                        <div class="button-box">
+                                            <div class="login-toggle-btn">
+                                                {{ form.set_as_default_checkbox }}
+                                                <label>Set as default address</label>
+                                            </div>
+                                            <button type="submit" class="default-btn floatright">Update</button>
+                                            <button onclick="cancelNewAddress(event)" 
+                                                class="default-btn floatright ml-3">Cancel</button>
+                                        </div>
+                                    {% endform %}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+                
 
-                <div class="col-sm-12" id="edit-address" style="display: none">
+                <div class="col-sm-12" id="add-new-address" style="display: none">
                     <div class="login">
                         <div class="login-form-container">
                             <div class="login-form">
-                                <form action="#" method="post">
-                                    <input type="text" name="user-name" placeholder="First Name">
-                                    <input type="text" name="user-name" placeholder="Last Name">
-                                    <input type="text" name="user-name" placeholder="Company">
-                                    <input type="text" name="user-name" placeholder="Address1">
-                                    <input type="text" name="user-name" placeholder="Address2">
-                                    <input type="text" name="user-name" placeholder="City">
-                                    <select>
-                                        <option>Country</option>
+                                {% form 'customer_address', customer.new_address %}
+                                    <input type="text"
+                                        placeholder="First Name"
+                                        name="address[first_name]"
+                                        id="AddressFirstNameNew"
+                                        value="{{ form.first_name }}"
+                                        autocapitalize="words">
+                                    <input type="text"
+                                        placeholder="Last Name"
+                                        name="address[last_name]"
+                                        id="AddressLastNameNew"
+                                        value="{{ form.last_name }}"
+                                        autocapitalize="words">
+                                    <input type="text"
+                                        placeholder="Company"
+                                        name="address[company]"
+                                        id="AddressCompanyNew"
+                                        value="{{ form.company }}"
+                                        autocapitalize="words">
+                                    <input type="text"
+                                        placeholder="Address1"
+                                        name="address[address1]"
+                                        id="AddressAddress1New"
+                                        value="{{ form.address1 }}"
+                                        autocapitalize="words">   
+                                    <input type="text"
+                                        placeholder="Address2"
+                                        name="address[address2]"
+                                        id="AddressAddress2New"
+                                        value="{{ form.address2 }}"
+                                        autocapitalize="words">
+                                    <input type="text"
+                                        placeholder="City"
+                                        name="address[city]"
+                                        id="AddressCityNew"
+                                        value="{{ form.city }}"
+                                        autocapitalize="words">                  
+                                    <select
+                                        name="address[country]"
+                                        id="AddressCountryNew"
+                                        data-default="{{ form.country }}">
                                     </select>
                                     <br><br>
-                                    <input type="text" name="user-name" placeholder="Postal/Zip Code">
-                                    <input type="text" name="user-name" placeholder="Phone">
+                                    <select
+                                        name="address[province]"
+                                        id="AddressProvinceNew"
+                                        data-default="{{ form.province }}">
+                                    </select>
+                                    <br><br>
+                                    <input 
+                                        placeholder="Postal/Zip Code"
+                                        type="text"
+                                        name="address[zip]"
+                                        id="AddressZipNew"
+                                        value="{{ form.zip }}"
+                                        autocapitalize="characters">
+                                    <input 
+                                        placeholder="Phone"
+                                        type="tel"
+                                        name="address[phone]"
+                                        id="AddressPhoneNew"
+                                        value="{{ form.phone }}"
+                                        pattern="[0-9\-]*">
+
                                     <div class="button-box">
                                         <div class="login-toggle-btn">
-                                            <input type="checkbox">
+                                            {{ form.set_as_default_checkbox }}
                                             <label>Set as default address</label>
                                         </div>
-                                        <button type="submit" class="default-btn floatright">Update</button>
-                                        <button onclick="cancelEditAddress(event)"
+                                        <button type="submit" class="default-btn floatright">Submit</button>
+                                        <button onclick="cancelNewAddress(event)" 
                                             class="default-btn floatright ml-3">Cancel</button>
                                     </div>
-                                </form>
+                                {% endform %}
                             </div>
                         </div>
                     </div>
                 </div>
+
             </div>
         </div>
     </div>
 </div>
+
+{% if paginate.pages > 1 %}
+    {% include 'pagination' %}
+{% endif %}
+
+{% endpaginate %}
+
 <script>
     function editAddress() {
         var addressHeading = document.getElementById('address-heading');
@@ -71,7 +224,10 @@
         addressElement.style.display = "none";
 
         var editAddress = document.getElementById("edit-address");
-        editAddress.style.display = "block"
+        editAddress.style.display = "block";
+
+        var addNewAddress = document.getElementById("add-new-address");
+        addNewAddress.style.display = "none";
     }
 
     function cancelEditAddress(event) {
@@ -84,6 +240,40 @@
         addressElement.style.display = "block";
 
         var editAddress = document.getElementById("edit-address");
-        editAddress.style.display = "none"
+        editAddress.style.display = "none";
+
+        var addNewAddress = document.getElementById("add-new-address");
+        addNewAddress.style.display = "none";
+    }
+
+    function addNewAddress() {
+
+        var addressHeading = document.getElementById('address-heading');
+        addressHeading.innerText = "NEW ADDRESS";
+
+        var addressElement = document.getElementById('address');
+        addressElement.style.display = "none";
+
+        var editAddress = document.getElementById("edit-address");
+        editAddress.style.display = "none";
+
+        var addNewAddress = document.getElementById("add-new-address");
+        addNewAddress.style.display = "block";
+    }
+
+    function cancelNewAddress(event) {
+        event.preventDefault();
+
+        var addressHeading = document.getElementById('address-heading');
+        addressHeading.innerText = "YOUR ADDRESSES";
+
+        var addressElement = document.getElementById('address');
+        addressElement.style.display = "block";
+
+        var editAddress = document.getElementById("edit-address");
+        editAddress.style.display = "none";
+
+        var addNewAddress = document.getElementById("add-new-address");
+        addNewAddress.style.display = "none";
     }
 </script>
