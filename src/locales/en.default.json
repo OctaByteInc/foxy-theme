@@ -1,4 +1,16 @@
 {
+    "general": {
+      "home": "home",
+      "shop_now": "shop now",
+      "view_more": "view more",
+      "please_select": "Please Select",
+      "newsletter_form": {
+        "newsletter_email": "Join our mailing list",
+        "email_placeholder": "Email address",
+        "confirmation": "Thanks for subscribing",
+        "submit": "Subscribe"
+      }
+    },
     "customer":{
       "account": "Account",
       "login_as": "Logged in as {{ first_name }}",
@@ -13,7 +25,17 @@
       "product":{
         "sold_out": "Sold Out",
         "unavailable": "Unavailable",
-        "add_to_cart": "Add to cart"
+        "add_to_cart": "Add to cart",
+        "select_variant": "select variant",
+        "tags": "Tags :",
+        "share": "Share :",
+        "description": "Description"
+      }
+    },
+    "addon":{
+      "product":{
+        "reviews": "Reviews (0)",
+        "be_first_to_write_review": "Be the first to write your review!"
       }
     },
     "gift_cards": {
@@ -47,5 +69,33 @@
           "Your comment was posted successfully. We will publish it in a little while, as our blog is moderated.",
         "success": "Your comment was posted successfully! Thank you!"
       }
+    },
+    "layout":{
+      "enter_store_using_pass" : "ENTER STORE USING PASSWORD:",
+      "password_close_button": "Close(X)",
+      "are_you_owner": "Are you the store owner?",
+      "login_here": "Log in here"
+    },
+    "footer":{
+      "follow_us": "Follow us on:",
+      "phone": "Phone :",
+      "email": "Email :",
+      "address": "Address :"
+    },
+    "header": {
+      "my_account": "My Account:",
+      "my_wish_list": "My Wish List",
+      "cart": "Cart"
+    },
+    "breadcrumb":{
+      "collection": "Collection",
+      "blog_page": "Blog Page",
+      "collections": "Collections",
+      "all": "all",
+      "cart": "Cart",
+      "account": "Account",
+      "register": "register",
+      "login": "login",
+      "article": "Article"
     }  
 }

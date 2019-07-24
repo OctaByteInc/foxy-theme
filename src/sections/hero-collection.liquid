@@ -20,7 +20,7 @@
                     <h2 class="animated">{{ section.settings.collection_heading }}</h2>
                     <p class="animated"> {{ section.settings.collection_desc }} </p>
                     {% assign collection = collections[section.settings.collection] %}   
-                    <a class="btn-hover slider-btn-style animated" href="{{ collection.url }}">shop now</a>
+                    <a class="btn-hover slider-btn-style animated" href="{{ collection.url }}">{{ 'general.shop_now' | t }}</a>
                 </div>
             </div>
         </div>

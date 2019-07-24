@@ -10,7 +10,7 @@
                 <div class="col-lg-3 col-md-5 col-12">
                     <div class="footer-widget">
                         <div class="footer-widget-l-content">
-                            <h4>Follow us on:</h4>
+                            <h4>{{ 'footer.follow_us' | t }}</h4>
                             <ul>
                                 {% if settings.social_twitter_link != blank %}
                                    <li>
@@ -79,13 +79,13 @@
                     <div class="footer-widget-r-content">
                         <ul>
                             {% if section.settings.phone != blank %}
-                                <li><span>Phone :</span> {{ section.settings.phone }}</li>
+                                <li><span>{{ 'footer.phone' | t }} </span> {{ section.settings.phone }}</li>
                             {% endif %}
                             {% if section.settings.email != blank %}
-                                <li><span>Email : </span> {{ section.settings.email }}</a></li>
+                                <li><span>{{ 'footer.email' | t }} </span> {{ section.settings.email }}</a></li>
                             {% endif %}
                             {% if section.settings.address != blank %}
-                                <li><span>Address :</span> {{ section.settings.address }}</li>
+                                <li><span>{{ 'footer.address' | t }} </span> {{ section.settings.address }}</li>
                             {% endif %}
                         </ul>
                     </div>

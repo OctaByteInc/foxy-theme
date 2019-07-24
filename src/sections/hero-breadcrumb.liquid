@@ -1,25 +1,25 @@
 {%- capture templateName -%}
     {%- case template.name -%}
         {%- when 'collection' -%}
-            Collection
+            {{ 'breadcrumb.collection' | t }}
             {%- assign name = collection.title -%}
         {%- when 'blog' -%}
-            Blog Page
+            {{ 'breadcrumb.blog_page' | t }}
             {%- assign name = blog.name -%}
         {%- when 'collections' -%}
-            Collections
-            {%- assign name = 'all' -%}    
+            {{ 'breadcrumb.collections' | t }}
+            {%- assign name = 'breadcrumb.all' | t -%}    
         {%- when 'cart' -%}
-            Cart
-            {%- assign name = 'cart' -%}
+            {{ 'breadcrumb.cart' | t }}
+            {%- assign name = 'breadcrumb.cart' | t -%}
         {%- when 'register' -%}
-            Account
-            {%- assign name = 'register' -%}
+            {{ 'breadcrumb.account' | t }}
+            {%- assign name = 'breadcrumb.register' | t -%}
         {%- when 'login' -%}
-            Account
-            {%- assign name = 'login' -%}
+            {{ 'breadcrumb.account' | t }}
+            {%- assign name = 'breadcrumb.login' | t -%}
         {%- when 'article' -%}
-            Article
+            {{ 'breadcrumb.article' | t }}
             {%- assign name = article.title | truncatewords: 5 -%}                
         {%- else -%}
             {{ shop.name }}
