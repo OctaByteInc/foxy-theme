@@ -58,35 +58,35 @@
                         </tr>
                     {% endfor %}
                     <tr class="table-dark">
-                        <th scope="row" colspan="4">Subtotal</th>
-                        <td>{{ order.line_items_subtotal_price | money }}</td>
+                        <th scope="row" colspan="3">Subtotal</th>
+                        <td class="text-right" colspan="2">{{ order.line_items_subtotal_price | money }}</td>
                     </tr>
                     {% for discount in order.discounts %}
                         <tr class="table-success">
-                            <th scope="row" colspan="4">{{ discount.code }} Discount</th>
-                            <td>{{ discount.savings | money }}</td>
+                            <th scope="row" colspan="3">{{ discount.code }} Discount</th>
+                            <td class="text-right" colspan="2">{{ discount.savings | money }}</td>
                         </tr>
                     {% endfor %}
 
                     {% for shipping_method in order.shipping_methods %}
                         <tr class="table-dark">
-                            <th scope="row" colspan="4">Shipping {{ shipping_method.title }}</th>
-                            <td>{{ shipping_method.price | money }}</td>
+                            <th scope="row" colspan="3">Shipping {{ shipping_method.title }}</th>
+                            <td class="text-right" colspan="2">{{ shipping_method.price | money }}</td>
                         </tr>
                     {% endfor %}
 
                     {% for tax_line in order.tax_lines %}
                         <tr class="table-dark">
-                            <th scope="row" colspan="4">
+                            <th scope="row" colspan="3">
                                 Tax ({{ tax_line.title }} {{ tax_line.rate | times: 100 }}%)
                             </th>
-                            <td>{{ tax_line.price | money }}</td>
+                            <td class="text-right" colspan="2">{{ tax_line.price | money }}</td>
                         </tr>
                     {% endfor %}
 
-                    <tr>
-                        <th scope="row" colspan="4">TOTAL</th>
-                        <td>{{ order.total_price | money }} {{ order.currency }}</td>
+                    <tr class="table-primary">
+                        <th scope="row" colspan="3">TOTAL</th>
+                        <td class="text-right" colspan="2">{{ order.total_price | money }} {{ order.currency }}</td>
                     </tr>
                 </tbody>
             </table>
