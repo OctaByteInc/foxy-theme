@@ -1,0 +1,34 @@
+{% form 'customer_address', customer.new_address %}
+<div data-address-fields>
+    <input type="text" placeholder="First Name" name="address[first_name]" id="AddressFirstNameNew"
+        value="{{ form.first_name }}" autocapitalize="words">
+    <input type="text" placeholder="Last Name" name="address[last_name]" id="AddressLastNameNew"
+        value="{{ form.last_name }}" autocapitalize="words">
+    <input type="text" placeholder="Company" name="address[company]" id="AddressCompanyNew" value="{{ form.company }}"
+        autocapitalize="words">
+    <input type="text" placeholder="Address1" name="address[address1]" id="AddressAddress1New"
+        value="{{ form.address1 }}" autocapitalize="words">
+    <input type="text" placeholder="Address2" name="address[address2]" id="AddressAddress2New"
+        value="{{ form.address2 }}" autocapitalize="words">
+    <input type="text" placeholder="City" name="address[city]" id="AddressCityNew" value="{{ form.city }}"
+        autocapitalize="words">
+    <select name="address[country]" id="AddressCountryNew" data-default="{{ form.country }}">
+    </select>
+    <br><br>
+    <select name="address[province]" id="AddressProvinceNew" data-default="{{ form.province }}">
+    </select>
+    <br><br>
+    <input placeholder="Postal/Zip Code" type="text" name="address[zip]" id="AddressZipNew" value="{{ form.zip }}"
+        autocapitalize="characters">
+    <input placeholder="Phone" type="tel" name="address[phone]" id="AddressPhoneNew" value="{{ form.phone }}"
+        pattern="[0-9\-]*">
+</div>
+<div class="button-box">
+    <div class="login-toggle-btn">
+        {{ form.set_as_default_checkbox }}
+        <label>Set as default address</label>
+    </div>
+    <button type="submit" class="default-btn floatright">Submit</button>
+    <button data-address-toggle class="default-btn floatright ml-3">Cancel</button>
+</div>
+{% endform %}
