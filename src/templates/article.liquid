@@ -36,7 +36,7 @@
                     {% endfor %}
                     
                     <div class="sidebar-widget mb-50">
-                        <h3 class="sidebar-title">Search Products</h3>
+                        <h3 class="sidebar-title">{{ 'products.search_products' | t }}</h3>
                         <div class="sidebar-search">
                             <form method="get" action="/search" role="search">
                                 <input placeholder="Search Products..." type="search" name="q" id="search">
@@ -45,7 +45,7 @@
                         </div>
                     </div>
                     <div class="sidebar-widget mb-45">
-                        <h3 class="sidebar-title">Categories</h3>
+                        <h3 class="sidebar-title">{{ 'products.categories' | t}}</h3>
                         <div class="sidebar-categories">
                             <ul>
                                 {% for tag in blog.all_tags %}
@@ -55,7 +55,7 @@
                         </div>
                     </div>
                     <div class="sidebar-widget mb-50">
-                        <h3 class="sidebar-title">Recent Posts</h3>
+                        <h3 class="sidebar-title">{{ 'products.recent_posts' | t}}</h3>
                         <div class="sidebar-top-rated-all">
                             {% for recentPost in blog.articles %}
                                 {% include 'recent-single-article' with article: recentPost %}
@@ -63,7 +63,7 @@
                         </div>
                     </div>
                     <div class="sidebar-widget mb-40">
-                        <h3 class="sidebar-title">Social Network</h3>
+                        <h3 class="sidebar-title">{{ 'article.social_network' | t}}</h3>
                         <div class="social-network">
                             <a href="//twitter.com/share?text={{ article.title | url_param_escape }}&amp;url={{ blog.url | append: article.url }}">
                                 <i class="ion-social-twitter"></i>
@@ -74,7 +74,7 @@
                         </div>
                     </div>
                     <div class="sidebar-widget mb-40">
-                        <h3 class="sidebar-title">Tags</h3>
+                        <h3 class="sidebar-title">{{ 'article.tags' | t}}</h3>
                         <div class="blog-tags-style">
                             <ul>
                                 {% for tag in article.tags %}
@@ -135,7 +135,9 @@
                         {% endif %}
                     {% endif %}
                     <div class="news-details-bottom mtb-60">
-                        <h3 class="leave-comment-text">Comments</h3>
+                        <h3 class="leave-comment-text">{{ 'products.recent_posts' | t}}
+                            {{ 'article.comments' | t}}
+                        </h3>
                         <p>{{ comment_msg }}</p>
                         {% if comment and comment.status != 'published' and comment.id != blank %}
                             {% include 'single-comment' with comment %}
@@ -152,7 +154,7 @@
                     {% endpaginate %}
 
                     <div class="leave-comment">
-                        <h3 class="leave-comment-text">Write a comment</h3>
+                        <h3 class="leave-comment-text">{{ 'article.write_comment' | t}}</h3>
                         {% form 'new_comment', article %}
                             {{ form.errors | default_errors }}
 

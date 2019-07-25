@@ -1,5 +1,5 @@
 <div class="text-center mt-5">
-    <h2>My Account</h2> 
+    <h2>{{ 'account.my_account' | t }}</h2> 
     {{ 'customer.log_out' | t | customer_logout_link }}
     <div class="divider" style="border: 1px solid #eee; width:10%; margin:auto; margin-top:10px"></div>
 </div>
@@ -7,11 +7,11 @@
 <div class="container ptb-50">
     <div class="row">
         <div class="col-sm-8">
-            <h3>ORDER {{ order.name }}</h3>
+            <h3>{{ 'account.order_big' | t }} {{ order.name }}</h3>
             <i>{{ order.created_at | date: "%B %d, %Y %I:%M%p" }}</i>
         </div>
         <div class="col-sm-4">
-            <h3>BILLING ADDRESS</h3>
+            <h3>{{ 'account.billing_address' | t }}</h3>
             </h>
         </div>
     </div>
@@ -20,11 +20,11 @@
             <table class="table">
                 <thead class="thead-dark">
                     <tr>
-                        <th scope="col">Product</th>
-                        <th scope="col">SKU</th>
-                        <th scope="col">Price</th>
-                        <th scope="col">Quantity</th>
-                        <th scope="col">Total</th>
+                        <th scope="col">{{ 'account.products' | t }}</th>
+                        <th scope="col">{{ 'account.sku' | t }}</th>
+                        <th scope="col">{{ 'account.price' | t }}</th>
+                        <th scope="col">{{ 'account.quantity' | t }}</th>
+                        <th scope="col">{{ 'account.total' | t }}</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -36,10 +36,10 @@
                                     <div 
                                         class="login-form-container mt-3" 
                                         style="padding-top:20px;padding-bottom:20px">
-                                        Fulfilled {{ line_item.fulfillment.created_at | date: '%B %d, %Y' }} <br>
+                                        {{ 'account.fulfilled' | t }} {{ line_item.fulfillment.created_at | date: '%B %d, %Y' }} <br>
                                         {% if line_item.fulfillment.tracking_url %}
                                             <a href="{{ line_item.fulfillment.tracking_url }}">
-                                                Track shipment
+                                                {{ 'account.track_shipment' | t }}
                                             </a> <br>
                                             <strong>
                                                 {{ line_item.fulfillment.tracking_company }} 
@@ -58,19 +58,19 @@
                         </tr>
                     {% endfor %}
                     <tr class="table-dark">
-                        <th scope="row" colspan="3">Subtotal</th>
+                        <th scope="row" colspan="3">{{ 'account.subtotal' | t }}</th>
                         <td class="text-right" colspan="2">{{ order.line_items_subtotal_price | money }}</td>
                     </tr>
                     {% for discount in order.discounts %}
                         <tr class="table-success">
-                            <th scope="row" colspan="3">{{ discount.code }} Discount</th>
+                            <th scope="row" colspan="3">{{ discount.code }} {{ 'account.discount' | t }}</th>
                             <td class="text-right" colspan="2">{{ discount.savings | money }}</td>
                         </tr>
                     {% endfor %}
 
                     {% for shipping_method in order.shipping_methods %}
                         <tr class="table-dark">
-                            <th scope="row" colspan="3">Shipping {{ shipping_method.title }}</th>
+                            <th scope="row" colspan="3">{{ 'account.shipping' | t }} {{ shipping_method.title }}</th>
                             <td class="text-right" colspan="2">{{ shipping_method.price | money }}</td>
                         </tr>
                     {% endfor %}
@@ -78,14 +78,14 @@
                     {% for tax_line in order.tax_lines %}
                         <tr class="table-dark">
                             <th scope="row" colspan="3">
-                                Tax ({{ tax_line.title }} {{ tax_line.rate | times: 100 }}%)
+                                {{ 'account.tax' | t }} ({{ tax_line.title }} {{ tax_line.rate | times: 100 }}%)
                             </th>
                             <td class="text-right" colspan="2">{{ tax_line.price | money }}</td>
                         </tr>
                     {% endfor %}
 
                     <tr class="table-primary">
-                        <th scope="row" colspan="3">TOTAL</th>
+                        <th scope="row" colspan="3">{{ 'account.total_big' | t }}</th>
                         <td class="text-right" colspan="2">{{ order.total_price | money }} {{ order.currency }}</td>
                     </tr>
                 </tbody>
@@ -93,13 +93,13 @@
         </div>
         <div class="col-sm-4">
             <div class="login-form-container">
-                <strong>Payment Status: {{ order.financial_status_label }}</strong>
+                <strong>{{ 'account.payment_status' | t }} {{ order.financial_status_label }}</strong>
                 <br><br>
                 {{ order.billing_address | format_address }}
             </div>
-            <h3 class="mt-5">SHIPPING ADDRESS</h3>
+            <h3 class="mt-5">{{ 'account.shipping_address' | t }}</h3>
             <div class="login-form-container">
-                <strong>Fulfillment Status: {{ order.fulfillment_status_label }}</strong>
+                <strong>{{ 'account.fulfillment_status' | t }} {{ order.fulfillment_status_label }}</strong>
                 <br><br>
                 {{ order.shipping_address | format_address }}
             </div>

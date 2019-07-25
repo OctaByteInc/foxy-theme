@@ -6,13 +6,13 @@
         <div class="shop-filters-left is-visible">
             <div class="shop-sidebar">
                 <div class="sidebar-widget mb-50">
-                    <h3 class="sidebar-title">Search Products</h3>
+                    <h3 class="sidebar-title">{{ 'products.search_products' | t }}</h3>
                     <div class="sidebar-search">
                         <form method="get" action="/search" role="search">
                             <input 
                                 name="q" 
                                 id="search"
-                                placeholder="Search Products..." 
+                                placeholder="{{ 'products.search_products' | t }}..." 
                                 type="text" 
                                 value="{{ search.terms | escape }}">
                             <button type="submit"><i class="ion-ios-search-strong"></i></button>
@@ -20,7 +20,7 @@
                     </div>
                 </div>
                 <div class="sidebar-widget mb-45">
-                    <h3 class="sidebar-title">Categories</h3>
+                    <h3 class="sidebar-title">{{ 'products.categories' | t }}</h3>
                     <div class="sidebar-categories">
                         <ul>
                             {% for tag in collection.all_tags %}
@@ -43,7 +43,7 @@
                     </div>
                 </div>
                 <div class="sidebar-widget mb-50">
-                    <h3 class="sidebar-title">New Arrival</h3>
+                    <h3 class="sidebar-title">{{ 'products.new_arrival' | t }}</h3>
                     <div class="sidebar-top-rated-all">
                         {% for product in collection.products limit: 4 %}
                             {% include 'sidebar-product' with product %}
@@ -58,7 +58,7 @@
                     <div class="shop-found-selector">
                         <div class="shop-selector">
                             {% assign sort_by = collection.sort_by | default: collection.default_sort_by %}
-                            <label>Sort By : </label>
+                            <label>{{ 'products.sort_by' | t }} </label>
                             <button 
                                 class="btn dropdown-toggle" 
                                 type="button" 
@@ -81,7 +81,7 @@
                     </div>
                     <div class="shop-filter-tab">
                         <div class="shop-filter">
-                            <a class="shop-filter-active" href="#">Filters <i class="ion-android-options"></i></a>
+                            <a class="shop-filter-active" href="#">{{ 'products.filters' | t }} <i class="ion-android-options"></i></a>
                         </div>
                         <div class="shop-tab nav" role=tablist>
                            <a class="active" href="#grid-5-col1" data-toggle="tab" role="tab" aria-selected="false">

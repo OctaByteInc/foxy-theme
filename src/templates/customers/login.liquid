@@ -31,12 +31,19 @@
 
                                 <div class="button-box">
                                     <div class="login-toggle-btn">
-                                        <label><a href="/account/register">Create Account</a></label>
+                                        <label><a href="/account/register">
+                                                {{ 'login.create_account' | t }}
+                                                </a>
+                                        </label>
                                         {% if form.password_needed %}
-                                            <a href="javascript:void(0)" onclick="showForget()">Forgot Password?</a>     
+                                            <a href="javascript:void(0)" onclick="showForget()">
+                                                {{ 'login.forget_password' }}
+                                            </a>     
                                         {% endif %}
                                     </div>
-                                    <button type="submit" class="default-btn floatright">Login</button>
+                                    <button type="submit" class="default-btn floatright">
+                                        {{ 'customer.login' | t }}
+                                    </button>
                                 </div>
                             {% endform %}
                         </div>
@@ -60,9 +67,13 @@
                                 
                                 <div class="button-box">
                                     <div class="login-toggle-btn">
-                                        <a href="javascript:void(0)" onclick="showLogin()">Login?</a>
+                                        <a href="javascript:void(0)" onclick="showLogin()">
+                                            {{ 'customer.login' }}?
+                                        </a>
                                     </div>
-                                    <button type="submit" class="default-btn floatright">Recover</button>
+                                    <button type="submit" class="default-btn floatright">
+                                        {{ 'login.recover' | t }}
+                                    </button>
                                 </div>
                             {% endform %}
                         </div>
@@ -76,7 +87,7 @@
                                 {% form 'guest_login' %}
                                     <div class="button-box">
                                         <button type="submit" class="default-btn floatright">
-                                            Login as Guest
+                                            {{ 'login.as_guest' | t }}
                                         </button>
                                     </div>
                                 {% endform %}

@@ -14,20 +14,20 @@
                                     type="text" 
                                     id="FirstName"
                                     name="customer[first_name]" 
-                                    placeholder="First name"
+                                    placeholder="{{ 'address.first_name' | t }}"
                                     {% if form.first_name %}value="{{ form.first_name }}"{% endif %}>
                                 <input
                                     type="text" 
                                     id="LastName"
                                     name="customer[last_name]" 
-                                    placeholder="Last name"
+                                    placeholder="{{ 'address.last_name' | t }}"
                                     {% if form.last_name %}value="{{ form.last_name }}"{% endif %}>    
                                 <input 
                                     type="email"
                                     name="customer[email]"
                                     id="Email"
                                     class="{% if form.errors contains 'email' %}form-invalid{% endif %}" 
-                                    placeholder="Email"
+                                    placeholder="{{ 'address.email' | t }}"
                                     value="{% if form.email %}{{ form.email }}{% endif %}"
                                     spellcheck="false"
                                     autocomplete="off"
@@ -39,7 +39,9 @@
                                     placeholder="Password">
                                 
                                 <div class="button-box">
-                                    <button type="submit" class="default-btn floatright">Register</button>
+                                    <button type="submit" class="default-btn floatright">
+                                        {{ 'customer.register' | t }}
+                                    </button>
                                 </div>
                             {% endform %}
                         </div>

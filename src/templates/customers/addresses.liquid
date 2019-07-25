@@ -1,5 +1,5 @@
 <div class="text-center mt-5">
-    <h2>My Account</h2> 
+    <h2>{{ 'account.my_account' | t }}</h2> 
     {{ 'customer.log_out' | t | customer_logout_link }}
     <div class="divider" style="border: 1px solid #eee; width:10%; margin:auto; margin-top:10px"></div>
 </div>
@@ -10,14 +10,14 @@
     <div class="row">
         <div class="col-sm-4"></div>
         <div class="col-sm-8">
-            <h3 id="address-heading" data-address-heading-element>YOUR ADDRESSES</h3>
+            <h3 id="address-heading" data-address-heading-element>{{ 'account.your_addresses' | t }}</h3>
         </div>
     </div>
     <div class="row" data-address>
         <div class="col-sm-4">
             <button 
                 class="btn btn-dark"
-                data-s-add-new-address >ADD NEW ADDRESS</button>
+                data-s-add-new-address >{{ 'account.add_new_address' | t }}</button>
         </div>
 
         <div class="col-sm-8 mt-5" style="display: none" id="add-new-address" data-address-form>
@@ -27,58 +27,107 @@
                         {% form 'customer_address', customer.new_address %}
                         <div data-address-fields class="address-form">
                             <div>
-                                <input placeholder="First Name" type="text" name="address[first_name]" id="AddressFirstNameNew"
-                                    value="{{ form.first_name }}" autocapitalize="words">
+                                <input 
+                                    placeholder="{{ 'address.first_name' | t }}" 
+                                    type="text" name="address[first_name]" 
+                                    id="AddressFirstNameNew"
+                                    value="{{ form.first_name }}" 
+                                    autocapitalize="words">
                             </div>
                             <div>
-                                <input placeholder="Last Name" type="text" name="address[last_name]" id="AddressLastNameNew"
-                                    value="{{ form.last_name }}" autocapitalize="words">
+                                <input 
+                                    placeholder="{{ 'address.last_name' | t }}" 
+                                    type="text" 
+                                    name="address[last_name]" 
+                                    id="AddressLastNameNew"
+                                    value="{{ form.last_name }}" 
+                                    autocapitalize="words">
                             </div>
                             <div>
-                                <input placeholder="Company" type="text" name="address[company]" id="AddressCompanyNew"
-                                    value="{{ form.company }}" autocapitalize="words">
+                                <input 
+                                    placeholder="{{ 'address.company' | t }}" 
+                                    type="text" 
+                                    name="address[company]" 
+                                    id="AddressCompanyNew"
+                                    value="{{ form.company }}" 
+                                    autocapitalize="words">
                             </div>
                             <div>
-                                <input placeholder="Address1" type="text" name="address[address1]" id="AddressAddress1New"
-                                    value="{{ form.address1 }}" autocapitalize="words">
+                                <input 
+                                    placeholder="{{ 'address.address1' | t }}" 
+                                    type="text" 
+                                    name="address[address1]" 
+                                    id="AddressAddress1New"
+                                    value="{{ form.address1 }}" 
+                                    autocapitalize="words">
                             </div>
                             <div>
-                                <input type="text" placeholder="Address2" name="address[address2]" id="AddressAddress2New"
-                                    value="{{ form.address2 }}" autocapitalize="words">
+                                <input 
+                                    type="text" 
+                                    placeholder="{{ 'address.address2' | t }}" 
+                                    name="address[address2]" 
+                                    id="AddressAddress2New"
+                                    value="{{ form.address2 }}" 
+                                    autocapitalize="words">
                             </div>
                             <div>
-                                <input type="text" placeholder="City" name="address[city]" id="AddressCityNew"
-                                    value="{{ form.city }}" autocapitalize="words">
+                                <input 
+                                    type="text" 
+                                    placeholder="{{ 'address.city' | t }}" 
+                                    name="address[city]" 
+                                    id="AddressCityNew"
+                                    value="{{ form.city }}" 
+                                    autocapitalize="words">
                             </div>
                             <div>
-                                <label for="AddressCountryNew">Country</label>
-                                <select name="address[country]" id="AddressCountryNew" data-default="{{ form.country }}">
+                                <label for="AddressCountryNew">{{ 'address.country' | t }}</label>
+                                <select 
+                                    name="address[country]" 
+                                    id="AddressCountryNew" 
+                                    data-default="{{ form.country }}">
                                 </select>
                                 <br><br>
                             </div>
                             <div>
-                                <label for="AddressProvinceNew">Provice</label>
-                                <select name="address[province]" id="AddressProvinceNew" data-default="{{ form.province }}">
+                                <label for="AddressProvinceNew">{{ 'address.province' | t }}</label>
+                                <select 
+                                    name="address[province]" 
+                                    id="AddressProvinceNew" 
+                                    data-default="{{ form.province }}">
                                 </select>
                                 <br>
                                 <br>
                             </div>
                             <div>
-                                <input type="text" placeholder="Postal/Zip Code" name="address[zip]" id="AddressZipNew"
-                                    value="{{ form.zip }}" autocapitalize="characters">
+                                <input 
+                                    type="text" 
+                                    placeholder="{{ 'address.postal' | t }}" 
+                                    name="address[zip]" 
+                                    id="AddressZipNew"
+                                    value="{{ form.zip }}" 
+                                    autocapitalize="characters">
                             </div>
                             <div>
-                                <input type="tel" placeholder="Phone" name="address[phone]" id="AddressPhoneNew"
-                                    value="{{ form.phone }}" pattern="[0-9\-]*">
+                                <input 
+                                    type="tel" 
+                                    placeholder="{{ 'address.phone' | t }}" 
+                                    name="address[phone]" 
+                                    id="AddressPhoneNew"
+                                    value="{{ form.phone }}" 
+                                    pattern="[0-9\-]*">
                             </div>
                         </div>
                         <div class="button-box">
                             <div class="login-toggle-btn">
                                 {{ form.set_as_default_checkbox }}
-                                <label>Set as default address</label>
+                                <label>{{ 'address.set_as_default_address' | t }}</label>
                             </div>
-                            <button type="submit" class="default-btn floatright">Submit</button>
-                            <button data-s-cancel-new-address class="default-btn floatright ml-3">Cancel</button>
+                            <button type="submit" class="default-btn floatright">
+                                {{ 'general.submit' | t }}
+                            </button>
+                            <button data-s-cancel-new-address class="default-btn floatright ml-3">
+                                {{ 'general.submit' | t }}
+                            </button>
                         </div>
                         {% endform %}
                     </div>
@@ -93,14 +142,14 @@
                   <div data-address style="width:100%">
                     <div class="col-sm-12" data-s-customer-address>
                         {% if address == customer.default_address %}
-                            <strong>Defaul Address</strong> <br>
+                            <strong>{{ 'address.default_address' | t }}</strong> <br>
                         {% endif %}
                         {{ address | format_address }}
                         <br><br>
                         <button 
                             class="btn btn-dark"
                             data-address-id="{{ address.id }}" 
-                            data-s-edit-address>Edit</button>
+                            data-s-edit-address>{{ 'general.edit' | t }}</button>
                         <form 
                             style="width: 90%"
                             class="float-right"
@@ -109,7 +158,7 @@
                             action="/account/addresses/{{ address.id }}"
                             data-confirm-message="Are you sure you wish to delete this address?">
                             <input type="hidden" name="_method" value="delete" />
-                            <button type="submit" class="btn btn-danger">Delete</button>
+                            <button type="submit" class="btn btn-danger">{{ 'general.delete' | t }}</button>
                         </form>
                     </div>
                     <div 
@@ -122,61 +171,115 @@
                                     {% form 'customer_address', address %}
                                     <div data-address-fields class="address-form">
                                         <div>
-                                            <input placeholder="First Name" type="text" name="address[first_name]" id="AddressFirstNameNew"
-                                                value="{{ form.first_name }}" autocapitalize="words">
-                                        </div>
-                                        <div>
-                                            <input placeholder="Last Name" type="text" name="address[last_name]" id="AddressLastNameNew"
-                                                value="{{ form.last_name }}" autocapitalize="words">
-                                        </div>
-                                        <div>
-                                            <input placeholder="Company" type="text" name="address[company]" id="AddressCompanyNew"
-                                                value="{{ form.company }}" autocapitalize="words">
-                                        </div>
-                                        <div>
-                                            <input placeholder="Address1" type="text" name="address[address1]" id="AddressAddress1New"
-                                                value="{{ form.address1 }}" autocapitalize="words">
-                                        </div>
-                                        <div>
-                                            <input type="text" placeholder="Address2" name="address[address2]" id="AddressAddress2New"
-                                                value="{{ form.address2 }}" autocapitalize="words">
-                                        </div>
-                                        <div>
-                                            <input type="text" placeholder="City" name="address[city]" id="AddressCityNew" value="{{ form.city }}"
+                                            <input 
+                                                placeholder="{{ 'address.first_name' | t }}" 
+                                                type="text" 
+                                                name="address[first_name]" 
+                                                id="AddressFirstNameNew"
+                                                value="{{ form.first_name }}" 
                                                 autocapitalize="words">
                                         </div>
                                         <div>
-                                            <label for="AddressCountryNew{{ form.id }}">Country</label>
-                                            <select name="address[country]" id="AddressCountryNew{{ form.id }}" data-default="{{ form.country }}">
+                                            <input 
+                                                placeholder="{{ 'address.last_name' | t }}" 
+                                                type="text" 
+                                                name="address[last_name]" 
+                                                id="AddressLastNameNew"
+                                                value="{{ form.last_name }}" 
+                                                autocapitalize="words">
+                                        </div>
+                                        <div>
+                                            <input 
+                                                placeholder="{{ 'address.company' | t }}" 
+                                                type="text" 
+                                                name="address[company]" 
+                                                id="AddressCompanyNew"
+                                                value="{{ form.company }}" 
+                                                autocapitalize="words">
+                                        </div>
+                                        <div>
+                                            <input 
+                                                placeholder="{{ 'address.address1' | t }}" 
+                                                type="text" 
+                                                name="address[address1]" 
+                                                id="AddressAddress1New"
+                                                value="{{ form.address1 }}" 
+                                                autocapitalize="words">
+                                        </div>
+                                        <div>
+                                            <input 
+                                                type="text" 
+                                                placeholder="{{ 'address.address2' | t }}" 
+                                                name="address[address2]" 
+                                                id="AddressAddress2New"
+                                                value="{{ form.address2 }}" 
+                                                autocapitalize="words">
+                                        </div>
+                                        <div>
+                                            <input 
+                                                type="text" 
+                                                placeholder="{{ 'address.city' | t }}" 
+                                                name="address[city]" 
+                                                id="AddressCityNew" 
+                                                value="{{ form.city }}"
+                                                autocapitalize="words">
+                                        </div>
+                                        <div>
+                                            <label for="AddressCountryNew{{ form.id }}">
+                                                {{ 'address.country' | t }}
+                                            </label>
+                                            <select 
+                                                name="address[country]" 
+                                                id="AddressCountryNew{{ form.id }}" 
+                                                data-default="{{ form.country }}">
                                             </select>
                                             <br><br>
                                         </div>
                                         <div>
-                                            <label for="AddressProvinceNew{{ form.id }}">Province</label>
-                                            <select name="address[province]" id="AddressProvinceNew{{ form.id }}" data-default="{{ form.province }}">
+                                            <label for="AddressProvinceNew{{ form.id }}">
+                                                {{ 'address.province' | t }}
+                                            </label>
+                                            <select 
+                                                name="address[province]" 
+                                                id="AddressProvinceNew{{ form.id }}" 
+                                                data-default="{{ form.province }}">
                                             </select>
                                             <br>
                                             <br>
                                         </div>
                                         <div>
-                                            <input type="text" placeholder="Postal/Zip Code" name="address[zip]" id="AddressZipNew"
-                                                value="{{ form.zip }}" autocapitalize="characters">
+                                            <input 
+                                                type="text" 
+                                                placeholder="{{ 'address.postal' | t }}" 
+                                                name="address[zip]" 
+                                                id="AddressZipNew"
+                                                value="{{ form.zip }}" 
+                                                autocapitalize="characters">
                                         </div>
                                         <div>
-                                            <input type="tel" placeholder="Phone" name="address[phone]" id="AddressPhoneNew" value="{{ form.phone }}"
+                                            <input 
+                                                type="tel" 
+                                                placeholder="{{ 'address.phone' | t }}" 
+                                                name="address[phone]" 
+                                                id="AddressPhoneNew" 
+                                                value="{{ form.phone }}"
                                                 pattern="[0-9\-]*">
                                         </div>
                                     </div>
                                     <div class="button-box">
                                         <div class="login-toggle-btn">
                                             {{ form.set_as_default_checkbox }}
-                                            <label>Set as default address</label>
+                                            <label>{{ 'address.set_as_default_address' | t }}</label>
                                         </div>
-                                        <button type="submit" class="default-btn floatright">Submit</button>
+                                        <button type="submit" class="default-btn floatright">
+                                            {{ 'general.submit' | t }}
+                                        </button>
                                         <button
                                             data-address-id="{{ address.id }}" 
                                             data-s-cancel-address 
-                                            class="default-btn floatright ml-3">Cancel</button>
+                                            class="default-btn floatright ml-3">
+                                            {{ 'general.cancel' | t }}
+                                        </button>
                                     </div>
                                     {% endform %}
                                 </div>

@@ -6,6 +6,16 @@
       "please_select": "Please Select",
       "no_content":
         "This section doesn’t currently include any content. Add content to this section using the sidebar.",
+      "submit": "Submit",
+      "cancel": "Cancel",  
+      "edit": "Edit",  
+      "delete": "Delete",  
+      "update": "Update",
+      "404": {
+        "title": "404 Page Not Found",
+        "subtext_html":
+          "The page you requested does not exist. Click <a href=\"/collections/all\">here</a> to continue shopping."
+      },  
       "newsletter_form": {
         "newsletter_email": "Join our mailing list",
         "email_placeholder": "Email address",
@@ -16,15 +26,22 @@
     "customer":{
       "account": "Account",
       "login_as": "Logged in as {{ first_name }}",
-      "log_out": "Log out",
-      "log_in": "Log in",
-      "register": "Register"
+      "log_out": "Logout",
+      "log_in": "Login",
+      "register": "Register",
+      "recover_email": "Recover Email"
     },
     "search":{
       "placeholder": "Search Entire Store"
     },
     "products": {
       "related_products": "Related products",
+      "search_products": "Search Products",
+      "categories": "Categories",
+      "recent_posts": "Recent Posts",
+      "sort_by": "Sort By : ",
+      "filters": "Filters",
+      "new_arrival": "New Arrival",
       "product":{
         "sold_out": "Sold Out",
         "unavailable": "Unavailable",
@@ -105,5 +122,77 @@
     "pagination": {
       "previous": "Previous",
       "next": "Next"
-    }  
+    },
+    "account": {
+      "order_history": "ORDER HISTORY",
+      "account_details": "ACCOUNT DETAILS",
+      "order": "Order",
+      "date": "Date",
+      "payment": "Payment",
+      "fulfilment": "Fulfilment",
+      "total": "Total",
+      "view_addresses": "View Addresses",
+      "activate": "Activate",
+      "my_account": "My Account",
+      "your_addresses": "YOUR ADDRESSES",
+      "add_new_address": "ADD NEW ADDRESS",
+      "order_big": "ORDER",
+      "billing_address": "BILLING ADDRESS",
+      "product": "Product",
+      "sku": "SKU",
+      "price": "Price",
+      "fulfilled": "Fulfilled",
+      "track_shipment": "Track shipment",
+      "subtotal": "Subtotal",
+      "discount": "Discount",
+      "shipping": "Shipping",
+      "tax": "Tax",
+      "total_big": "TOTAL",
+      "payment_status:": "Payment Status:",
+      "shipping_address:": "SHIPPING ADDRESS:",
+      "fulfillment_status::": "Fulfillment Status::",
+      "quantity": "Quantity"
+    },
+    "address": {
+      "first_name": "First Name",
+      "last_name": "Last Name",
+      "company": "Company",
+      "address1": "Address1",
+      "address2": "Address2",
+      "city": "City",
+      "country": "Country",
+      "province": "Province",
+      "postal": "Postal/Zip Code",
+      "Phone": "Phone",
+      "set_as_default_address": "Set as default address",
+      "email": "Email",
+      "default_address": "Defaul Address"
+    },
+    "login": {
+      "create_account": "Create Account",
+      "forgot_password": "Forgot Password?",
+      "recover": "Recover",
+      "as_guest": "Login as Guest"
+    },
+    "article": {
+      "social_network": "Social Network",
+      "tags": "Tags",
+      "write_comment": "Write a comment",
+      "comments": "Comments"
+    },
+    "cart": {
+      "remove": "remove",
+      "images": "images",
+      "cart_totals": "Cart totals",
+      "proceed_to_checkout": "Proceed to checkout"
+    },
+    "password": {
+      "enter_using_password": "ENTER USING PASSWORD",
+      "be_first_to_know": "BE THE FIRST TO KNOW WHEN WE LAUNCH.",
+      "vistor_msg": "We will send you an email right before we open!",
+      "enter_email": "Enter Email",
+      "speard_word": "SPREAD THE WORD",
+      "powered_by": "This shop will be powered by ",
+      "opening_soon": "Opening Soon"
+    }
 }
