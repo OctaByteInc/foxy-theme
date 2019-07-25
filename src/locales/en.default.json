@@ -148,9 +148,9 @@
       "shipping": "Shipping",
       "tax": "Tax",
       "total_big": "TOTAL",
-      "payment_status:": "Payment Status:",
-      "shipping_address:": "SHIPPING ADDRESS:",
-      "fulfillment_status::": "Fulfillment Status::",
+      "payment_status": "Payment Status:",
+      "shipping_address": "SHIPPING ADDRESS:",
+      "fulfillment_status": "Fulfillment Status::",
       "quantity": "Quantity"
     },
     "address": {
