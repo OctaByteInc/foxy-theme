@@ -11,6 +11,7 @@
       "edit": "Edit",  
       "delete": "Delete",  
       "update": "Update",
+      "no_results_html": "Please try a different search term or go back to the <a href=\"/\">homepage</a>.",
       "404": {
         "title": "404 Page Not Found",
         "subtext_html":

@@ -75,6 +75,10 @@
             <div class="shop-product-content tab-content">
                 <div id="grid-5-col1" class="tab-pane fade active show">
                     <div class="row custom-row">
+
+                        {% if search.results_count == 0 %}
+                            <h3> {{ 'general.no_results_html' | t }} </h3>
+                        {% endif %}
                             
                         {% for product in search.results %}
                         {% if product.object_type == 'product' %}
@@ -92,6 +96,26 @@
                         {% include 'pagination' with nav_side: 'justify-content-end' %}
                     {% endif %}
                 </div>
+
+                <div id="grid-5-col2" class="tab-pane fade">
+                    <div class="row">
+
+                        {% if search.results_count == 0 %}
+                            <h3> {{ 'general.no_results_html' | t }} </h3>
+                        {% endif %}
+                        
+                        {% for product in search.results %}
+                        {% if product.object_type == 'product' %}
+                            {% include 'single-product-listview' with product %}   
+                        {% endif %}                                 
+                        {% endfor %}
+
+                    </div>
+                    {% if paginate.pages > 1 %}
+                        {% include 'pagination' with nav_side: 'justify-content-end' %}
+                    {% endif %}
+                </div>
+
             </div>
         </div>
     </div>
