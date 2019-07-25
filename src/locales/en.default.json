@@ -4,6 +4,8 @@
       "shop_now": "shop now",
       "view_more": "view more",
       "please_select": "Please Select",
+      "no_content":
+        "This section doesn’t currently include any content. Add content to this section using the sidebar.",
       "newsletter_form": {
         "newsletter_email": "Join our mailing list",
         "email_placeholder": "Email address",
@@ -22,6 +24,7 @@
       "placeholder": "Search Entire Store"
     },
     "products": {
+      "related_products": "Related products",
       "product":{
         "sold_out": "Sold Out",
         "unavailable": "Unavailable",
@@ -29,7 +32,8 @@
         "select_variant": "select variant",
         "tags": "Tags :",
         "share": "Share :",
-        "description": "Description"
+        "description": "Description",
+        "save": "save"
       }
     },
     "addon":{
@@ -97,5 +101,9 @@
       "register": "register",
       "login": "login",
       "article": "Article"
+    },
+    "pagination": {
+      "previous": "Previous",
+      "next": "Next"
     }  
 }

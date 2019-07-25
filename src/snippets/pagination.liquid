@@ -11,7 +11,7 @@
 <nav aria-label="Page navigation example">
     <ul class="pagination {{ nav_side }}">
         <li class="page-item {{ previousDisabled }} ">
-          <a class="page-link" href="{{ paginate.previous.url }}">Previous</a>
+          <a class="page-link" href="{{ paginate.previous.url }}">{{ 'pagination.previous' | t }}</a>
         </li>
         {% for part in paginate.parts %}
           {% if part.is_link %}
@@ -31,7 +31,7 @@
           {% endif %}
         {% endfor %}
         <li class="page-item {{ nextDisabled }}">
-          <a class="page-link" href="{{ paginate.next.url }}">Next</a>
+          <a class="page-link" href="{{ paginate.next.url }}">{{ 'pagination.next' | t }}</a>
         </li>
     </ul>
 </nav>
