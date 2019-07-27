@@ -17,10 +17,10 @@
     </td>
     <td class="product-price">
         {% if item.original_line_price != item.line_price %}
-            <span>{{ item.price | money }}</span>
-            <span class="amount cart-discount-price"><del>{{ item.original_price | money }}</del></span>
+            <span class="addon-price">{{ item.price | money }}</span>
+            <span class="addon-price amount cart-discount-price"><del>{{ item.original_price | money }}</del></span>
         {% else %}
-            <span>{{ item.price | money }}</span>    
+            <span class="addon-price">{{ item.price | money }}</span>    
         {% endif %}
     </td>
     <td class="product-quantity">
@@ -30,5 +30,5 @@
             value="{{ item.quantity }}"
             min="0">
     </td>
-    <td class="product-subtotal">{{ item.line_price | money }}</td>
+    <td class="product-subtotal addon-price">{{ item.line_price | money }}</td>
 </tr>

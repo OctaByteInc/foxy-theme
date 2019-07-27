@@ -41,9 +41,9 @@
                             <div class="cart-page-total">
                                 <h2>{{ 'cart.cart_totals' | t }}</h2>
                                 <ul>
-                                    <li>{{ 'account.subtotal' | t }}<span>{{ cart.total_price | money }}</span></li>
+                                    <li>{{ 'account.subtotal' | t }}<span class="addon-price">{{ cart.total_price | money }}</span></li>
                                     {% if cart.total_discounts > 0 %}
-                                        <li>{{ 'account.discount' | t }}<span>{{ cart.total_discounts | money }}</span></li>
+                                        <li>{{ 'account.discount' | t }}<span class="addon-price">{{ cart.total_discounts | money }}</span></li>
                                     {% endif %}
                                 </ul>
                                 <input 

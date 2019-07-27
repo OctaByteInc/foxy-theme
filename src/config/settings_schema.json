@@ -108,5 +108,26 @@
         "info": "Will be scaled down to 32 x 32px"
       }
     ]
+  },
+  {
+    "name": "Addon",
+    "settings":[
+      {
+        "type": "header",
+        "content": "Curreny Converter"
+      },
+      {
+        "type": "checkbox",
+        "id": "currency_converter_enable",
+        "label": "Enable curreny converter",
+        "default": false
+      },
+      {
+        "type":"checkbox",
+        "id": "currency_convert_location",
+        "label": "Enable Geo Location to convert currency based on user location",
+        "default": true
+      }
+    ]
   }
 ]
