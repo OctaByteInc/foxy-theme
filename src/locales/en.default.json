@@ -13,9 +13,10 @@
       "update": "Update",
       "no_results_html": "Please try a different search term or go back to the <a href=\"/\">homepage</a>.",
       "404": {
-        "title": "404 Page Not Found",
+        "title": "Oops! This Page Could Not Be Found",
         "subtext_html":
-          "The page you requested does not exist. Click <a href=\"/collections/all\">here</a> to continue shopping."
+          "Sorry but the page you are looking for does not exist, have been removed. name changed or is temporarily unavailable",
+          "home_page": "Go To Homepage"
       },  
       "newsletter_form": {
         "newsletter_email": "Join our mailing list",
