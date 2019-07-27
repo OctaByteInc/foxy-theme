@@ -10,8 +10,8 @@
 }
 
 .product-regular-price {
-    color: #333;
-    font-size: 21px;
+    color: #333 !important;
+    font-size: 21px !important;
     margin-left: 10px;
     font-weight: 400;
 }

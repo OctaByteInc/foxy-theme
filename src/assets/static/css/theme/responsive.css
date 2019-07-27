@@ -1074,7 +1074,7 @@
   padding: 0 0 7px;
 } 
 .slinky-theme-default .back::before {
-  background: rgba(0, 0, 0, 0) url("{{ '14.png' | asset_url }}") no-repeat scroll center center / 30px auto;
+  background: rgba(0, 0, 0, 0) url("../../assets/img/icon-img/14.png") no-repeat scroll center center / 30px auto;
   height: 30px;
   width: 30px;
 }

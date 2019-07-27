@@ -63,20 +63,36 @@
 <!-- CONTENT FOR HEADER-->
         {{ content_for_header }}
 
-<!-- TEMP: all css here -->
-        <link rel="stylesheet" href="https://d29u17ylf1ylz9.cloudfront.net/neha/assets/css/bootstrap.min.css">
-        <link rel="stylesheet" href="https://d29u17ylf1ylz9.cloudfront.net/neha/assets/css/magnific-popup.css">
-        <link rel="stylesheet" href="https://d29u17ylf1ylz9.cloudfront.net/neha/assets/css/animate.css">
-        <link rel="stylesheet" href="https://d29u17ylf1ylz9.cloudfront.net/neha/assets/css/owl.carousel.min.css">
-        <link rel="stylesheet" href="https://d29u17ylf1ylz9.cloudfront.net/neha/assets/css/slinky.min.css">
-        <link rel="stylesheet" href="https://d29u17ylf1ylz9.cloudfront.net/neha/assets/css/slick.css">
-        <link rel="stylesheet" href="https://d29u17ylf1ylz9.cloudfront.net/neha/assets/css/ionicons.min.css">
-        <link rel="stylesheet" href="https://d29u17ylf1ylz9.cloudfront.net/neha/assets/css/bundle.css">
-        <link rel="stylesheet" href="https://d29u17ylf1ylz9.cloudfront.net/neha/assets/css/style.css">
-        <link rel="stylesheet" href="https://d29u17ylf1ylz9.cloudfront.net/neha/assets/css/responsive.css">
-        <!-- For Product-->
-        <link rel="stylesheet" href="https://d29u17ylf1ylz9.cloudfront.net/neha/assets/css/easyzoom.css">
+<!-- Custom Font -->
+<style>
+@font-face{
+        font-family:"Ionicons";
+        src:url("{{ 'ionicons.eot?v=2.0.0' | asset_url }}");
+        src:url("{{ 'ionicons.eot?v=2.0.0#iefix' | asset_url }}") format("embedded-opentype"),
+                url("{{ 'ionicons.ttf?v=2.0.0' | asset_url }}") format("truetype"),
+                url("{{ 'ionicons.woff?v=2.0.0' | asset_url }}") format("woff"),
+                url("{{ 'ionicons.svg?v=2.0.0#Ionicons' | asset_url }}") format("svg");
+        font-weight:normal;
+        font-style:normal
+}
+</style>
+
+<!-- All css here -->
+        <link rel="stylesheet" href="{{ "bootstrap.min.css" | asset_url }}">
+        <link rel="stylesheet" href="{{ "magnific-popup.css" | asset_url }}">
+        <link rel="stylesheet" href="{{ "animate.css" | asset_url }}">
+        <link rel="stylesheet" href="{{ "owl.carousel.min.css" | asset_url }}">
+        <link rel="stylesheet" href="{{ "slinky.min.css" | asset_url }}">
+        <link rel="stylesheet" href="{{ "slick.css" | asset_url }}">
+        <link rel="stylesheet" href="{{ "ionicons.min.css" | asset_url }}">
+        <link rel="stylesheet" href="{{ "bundle.css" | asset_url }}">
+        <link rel="stylesheet" href="{{ "style.css" | asset_url }}">
+        <link rel="stylesheet" href="{{ "responsive.css" | asset_url }}">
+        {% if template.name == 'product' %}
+                <link rel="stylesheet" href="{{ "easyzoom.css" | asset_url }}">        
+        {% endif %}
         <link rel="stylesheet" href="{{ "foxy-style.css" | asset_url }}">
+
 
 <!-- ADDON scripts-->        
     <!-- <script src="https://cdn.shopify.com/s/javascripts/currencies.js"></script>     

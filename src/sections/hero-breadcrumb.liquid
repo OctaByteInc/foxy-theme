@@ -28,12 +28,18 @@
 {%- endcapture -%}
 {% if section.settings.hero_image != blank %}
     {%- assign imageURL = section.settings.hero_image | img_url: '192x500' -%}
+    {%- capture bgImage -%}
+        background-image: url('{{ imageURL }}')
+    {%- endcapture -%}
 {% else %}
-    {%- assign imageURL = "breadcrumb.jpg" | asset_url -%}    
+    {%- capture bgImage -%}
+        background-image: linear-gradient(141deg, #f1f1f1 0%, #cccccc 51%, #cccccc 75%);
+    {%- endcapture -%}   
 {% endif %}
+
 <div 
     class="breadcrumb-area pt-205 pb-210 bg-img" 
-    style="background-image: url('{{ imageURL }}')">
+    style="{{ bgImage }}">
     <div class="container">
         <div class="breadcrumb-content">
             <h2>{{ templateName }}</h2>
@@ -53,6 +59,24 @@
             "type": "image_picker",
             "id": "hero_image",
             "label": "Pick image (Recommend size 1920x500)"
+        },
+        {
+            "type": "color",
+            "id": "color1",
+            "label": "First Color",
+            "default": "#f1f1f1"
+        },
+        {
+            "type": "color",
+            "id": "color2",
+            "label": "Second Color",
+            "default": "#cccccc"
+        },
+        {
+            "type": "color",
+            "id": "color3",
+            "label": "Third Color",
+            "default": "#cccccc"
         }
     ],
     "presets": [
