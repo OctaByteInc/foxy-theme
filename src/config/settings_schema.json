@@ -124,7 +124,7 @@
       },
       {
         "type":"checkbox",
-        "id": "currency_convert_location",
+        "id": "currency_converter_location",
         "label": "Enable Geo Location to convert currency based on user location",
         "default": true
       }

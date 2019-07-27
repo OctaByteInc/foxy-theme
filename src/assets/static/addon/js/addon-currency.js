@@ -22,7 +22,6 @@ var geoPluginCurrencyCode;
 function saveOriginalValue(){
     moneySpan = document.getElementsByClassName(currenyClassName);
     for (money of moneySpan) {
-        money.style.display = 'block';
         money.setAttribute(addonCurrency.originalValue, money.innerText);
     }
 }
