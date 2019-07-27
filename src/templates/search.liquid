@@ -77,7 +77,7 @@
                     <div class="row custom-row">
 
                         {% if search.results_count == 0 %}
-                            <h3> {{ 'general.no_results_html' | t }} </h3>
+                            <h2> {{ 'general.no_results_html' | t }} </h2>
                         {% endif %}
                             
                         {% for product in search.results %}
@@ -101,7 +101,7 @@
                     <div class="row">
 
                         {% if search.results_count == 0 %}
-                            <h3> {{ 'general.no_results_html' | t }} </h3>
+                            <h2> {{ 'general.no_results_html' | t }} </h2>
                         {% endif %}
                         
                         {% for product in search.results %}
