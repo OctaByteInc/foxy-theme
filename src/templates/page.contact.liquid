@@ -5,75 +5,49 @@
         <div class="contact-info">
             <h2 class="contact-title">contact info</h2>
             <div class="row">
-                <div class="col-lg-4 col-md-12 col-12">
-                    <div class="single-contact-info mb-40">
-                        <div class="contact-info-icon">
-                            <i class="ion-ios-location-outline"></i>
-                        </div>
-                        <div class="contact-info-content">
-                            <p>
-                                Location : <br> 77, avenue, Brat road USA.
-                            </p>
-                        </div>
-                    </div>
+                <div class="col-sm-2"></div>
+
+                <div class="col-sm-8">
+                    {% form 'contact' %}
+                
+                    {% if form.posted_successfully? %}
+                    <p class="form-success">
+                        {{ 'contact.form.post_success' | t }}
+                    </p>
+                    {% endif %}
+                
+                    {{ form.errors | default_errors }}
+                
+                    <label for="ContactFormName">{{ 'contact.form.name' | t }}</label>
+                    <input type="text" class="form-control" name="contact[name]" id="ContactFormName" placeholder="{{ 'contact.form.name' | t }}"
+                        value="{% if form[name] %}{{ form[name] }}{% elsif customer %}{{ customer.name }}{% endif %}">
+                
+                    <label for="ContactFormEmail">{{ 'contact.form.email' | t }}</label>
+                    <input class="form-control" type="email" name="contact[email]" id="ContactFormEmail" placeholder="{{ 'contact.form.email' | t }}"
+                        value="{% if form.email %}{{ form.email }}{% elsif customer %}{{ customer.email }}{% endif %}"
+                        spellcheck="false" autocomplete="off" autocapitalize="off">
+                
+                    <label for="ContactFormPhone">{{ 'contact.form.phone' | t }}</label>
+                    <input type="tel" class="form-control" name="contact[phone]" id="ContactFormPhone" placeholder="{{ 'contact.form.phone' | t }}"
+                        value="{% if form[phone] %}{{ form.phone }}{% elsif customer %}{{ customer.phone }}{% endif %}"
+                        pattern="[0-9\-]*">
+                
+                    <label for="ContactFormMessage">{{ 'contact.form.message' | t }}</label>
+                    <textarea class="form-control" rows="10" name="contact[body]" id="ContactFormMessage" placeholder="{{ 'contact.form.message' | t }}">
+                    {%- if form.body -%}
+                      {{- form.body -}}
+                    {%- endif -%}
+                  </textarea>
+                
+                    <input type="submit" class="btn btn-primary" value="{{ 'contact.form.send' | t }}">
+                
+                    {% endform %}
+                
                 </div>
-                <div class="col-lg-4 col-md-6 col-12">
-                    <div class="single-contact-info mb-40">
-                        <div class="contact-info-icon">
-                            <i class="ion-ios-telephone-outline"></i>
-                        </div>
-                        <div class="contact-info-content">
-                            <p>
-                                Phone : <br> +012 345 678 102
-                            </p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-md-6 col-12">
-                    <div class="single-contact-info mb-40">
-                        <div class="contact-info-icon">
-                            <i class="ion-ios-email-outline"></i>
-                        </div>
-                        <div class="contact-info-content">
-                            <p>Mail : <br> <a href="#">info@example.com</a> </p>
-                        </div>
-                    </div>
-                </div>
+                
+                <div class="col-sm-2"></div>
             </div>
         </div>
-        <div class="contact-form-wrap">
-            <h2 class="contact-title">Get In Touch</h2>
-            <div class="contact-message">
-                <form id="contact-form" action="assets/mail.php" method="post">
-                    <div class="row">
-                        <div class="col-lg-6">
-                            <div class="contact-form-style contact-font-one">
-                                <input name="name" placeholder="Your Name" type="text">
-                            </div>
-                        </div>
-                        <div class="col-lg-6">
-                            <div class="contact-form-style contact-font-two">
-                                <input name="email" placeholder="Your Email" type="email">
-                            </div>
-                        </div>
-                        <div class="col-lg-12">
-                            <div class="contact-form-style contact-font-three">
-                                <input name="subject" placeholder="Your Title" type="text">
-                            </div>
-                        </div>
-                        <div class="col-lg-12">
-                            <div class="contact-form-style contact-font-four">
-                                <textarea name="message" placeholder="Message"></textarea>
-                                <button class="submit btn-hover" type="submit"> Send Message</button>
-                            </div>
-                        </div>
-                    </div>
-                </form>
-                <p class="form-messege"></p>
-            </div>
-        </div>
-        <div class="contact-map">
-            <div id="octabyte2"></div>
-        </div>
+        
     </div>
 </div>

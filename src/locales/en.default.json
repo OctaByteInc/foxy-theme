@@ -195,5 +195,16 @@
       "speard_word": "SPREAD THE WORD",
       "powered_by": "This shop will be powered by ",
       "opening_soon": "Opening Soon"
+    },
+    "contact": {
+      "form": {
+        "name": "Name",
+        "email": "Email",
+        "phone": "Phone Number",
+        "message": "Message",
+        "send": "Send",
+        "post_success":
+          "Thanks for contacting us. We'll get back to you as soon as possible."
+      }
     }
 }
