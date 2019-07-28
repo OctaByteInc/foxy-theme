@@ -2,7 +2,10 @@ var currenyClassName = "addon-price";
 
 var addonCurrency = {
     originalValue: 'addon-money',
-    switch: '.addon-currency-switch'
+    switch: 'addon-currency-switch',
+    currentCurrency: 'addon-current-currency',
+    mutationPrice: 'addon-price-mutation',
+    userMutationPrice: 'money'
 }
 
 var addonCurrencySetting = {
@@ -31,23 +34,27 @@ function convertCurrency(currencyCode, rateFrom, rateTo){
     for (money of moneySpan) {
         var m = money.getAttribute(addonCurrency.originalValue);
 
-        var thenum = m.replace( /^\D+/g, '');
-        
-        var isOnlyNum = /^[0-9, .]+$/.test(m);
-        
-        var newMoney = (parseFloat(thenum) * rateFrom) / rateTo;
-
-        
-        newMoney = newMoney.toFixed(2);
-        
-        if (isOnlyNum) {
-            var moneyCode = '';
-        } else {
-            var moneyCode = ' ' + currencyCode;
-        }
-
-        money.innerText = newMoney + moneyCode;
+        money.innerText = amountConverter(currencyCode, m, rateFrom, rateTo);
     }
+}
+
+function amountConverter(currencyCode, money, rateFrom, rateTo){
+    var thenum = m.replace(/^\D+/g, '');
+
+    var isOnlyNum = /^[0-9, .]+$/.test(money);
+
+    var newMoney = (parseFloat(thenum) * rateFrom) / rateTo;
+
+
+    newMoney = newMoney.toFixed(2);
+
+    if (isOnlyNum) {
+        var moneyCode = '';
+    } else {
+        var moneyCode = ' ' + currencyCode;
+    }
+
+    return newMoney + moneyCode;
 }
 
 function loadGeoPlugin(){
@@ -67,20 +74,62 @@ function loadGeoPlugin(){
     );
 }
 
+function currencyMutation() {
+    var mutatePrices;
+    mutatePrices = document.getElementsByClassName(addonCurrency.userMutationPrice);
+
+    if (mutatePrice.length == 0) {
+        mutatePrices = document.getElementsByClassName(addonCurrency.mutationPrice);
+    }
+
+    var observer = new MutationObserver(function(mutations) {
+        mutatePrice(mutations[0].target);   
+    });
+    var config = { childList: true};
+
+    for (priceNode of mutationPrices) {
+        observer.observe(priceNode, config);
+    }
+}
+
+function mutatePrice(mutantElement) {
+    var price = mutantElement.innerText;
+
+    if (mutantElement.dataset.addonMutantPrice != price) {
+        mutantElement.dataset.addonMutantPrice = price;
+
+        var currencyCode = localStorage.getItem(userSelectedCurreny);
+        var rateFrom = localStorage.getItem(user.currencyRateFrom);
+        var rateTo = localStorage.getItem(user.currencyRateTo);
+
+        mutantElement.innerText = amountConverter(currencyCode, price, rateFrom, rateTo);
+    }
+}
+
 function currency_init(){
 
     // Save original values
     saveOriginalValue();
 
+    // Set price mutation if it is a product page
+    if (window.location.pathname.includes('products')) {
+        currencyMutation();
+    }
+
+    // Currenct curreny holder
+    var currentCurrency = document.getElementById(addonCurrency.currentCurrency);
+
     // Set Event Listener to currency switches
     var currencySwitches = document.getElementsByClassName(addonCurrency.switch);
     for (switchElement of currencySwitches) {
-        var switchCurrencyCode = switchElement.dataset.addonCurrencyCode;
 
         switchElement.addEventListener('click', function(){
-            var currencyCode = switchCurrencyCode;
+            var currencyCode = this.dataset.addonCurrencyCode;
             var rateFrom = Currency.rates[addonCurrencySetting.storeCurrency];
-            var rateTo = Currency.rateTo[currencyCode];
+            var rateTo = Currency.rates[currencyCode];
+
+            // Set Currenct currency
+            currentCurrency.innerText = currencyCode;
 
             convertCurrency(currencyCode, rateFrom, rateTo);
 
