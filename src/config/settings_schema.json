@@ -120,7 +120,7 @@
         "type": "checkbox",
         "id": "currency_converter_enable",
         "label": "Enable curreny converter",
-        "default": true
+        "default": false
       },
       {
         "type":"checkbox",

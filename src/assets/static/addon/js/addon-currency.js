@@ -4,8 +4,7 @@ var addonCurrency = {
     originalValue: 'addon-money',
     switch: 'addon-currency-switch',
     currentCurrency: 'addon-current-currency',
-    mutationPrice: 'addon-price-mutation',
-    userMutationPrice: 'money'
+    mutationPrice: 'addon-price-mutation'
 }
 
 var addonCurrencySetting = {
@@ -39,7 +38,7 @@ function convertCurrency(currencyCode, rateFrom, rateTo){
 }
 
 function amountConverter(currencyCode, money, rateFrom, rateTo){
-    var thenum = m.replace(/^\D+/g, '');
+    var thenum = money.replace(/^\D+/g, '');
 
     var isOnlyNum = /^[0-9, .]+$/.test(money);
 
@@ -75,30 +74,38 @@ function loadGeoPlugin(){
 }
 
 function currencyMutation() {
-    var mutatePrices;
-    mutatePrices = document.getElementsByClassName(addonCurrency.userMutationPrice);
-
-    if (mutatePrice.length == 0) {
-        mutatePrices = document.getElementsByClassName(addonCurrency.mutationPrice);
-    }
+    
+    var mutationPrices = document.getElementsByClassName(addonCurrency.mutationPrice);
 
     var observer = new MutationObserver(function(mutations) {
         mutatePrice(mutations[0].target);   
     });
+    var observer2 = new MutationObserver(function(mutations) {
+        mutatePrice(mutations[0].target);   
+    });
+
     var config = { childList: true};
 
-    for (priceNode of mutationPrices) {
-        observer.observe(priceNode, config);
+    observer.observe(mutationPrices[0], config);
+
+    if (mutationPrices.length == 2){
+        observer2.observe(mutationPrices[1], config);
     }
+
 }
 
 function mutatePrice(mutantElement) {
+
+    if ( localStorage.getItem(user.selectedCurreny) == null ) {
+        return;
+    }
+
     var price = mutantElement.innerText;
 
     if (mutantElement.dataset.addonMutantPrice != price) {
         mutantElement.dataset.addonMutantPrice = price;
 
-        var currencyCode = localStorage.getItem(userSelectedCurreny);
+        var currencyCode = localStorage.getItem(user.selectedCurreny);
         var rateFrom = localStorage.getItem(user.currencyRateFrom);
         var rateTo = localStorage.getItem(user.currencyRateTo);
 
