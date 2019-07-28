@@ -1,0 +1,12 @@
+
+{% if settings.currency_converter_enable %}
+<!-- ADDON Currency scripts-->
+<script>
+var addonCurrencySetting = {
+    enableLocation: {{ settings.currency_converter_location }},
+    storeCurrency: '{{ currency.iso_code }}'
+}
+</script>
+        <script src="https://cdn.shopify.com/s/javascripts/currencies.js"></script>     
+        <script src="{{ 'addon-currency.js' | asset_url }}"></script>    
+{% endif %}     
