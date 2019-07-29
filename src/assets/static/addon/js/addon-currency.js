@@ -1,10 +1,14 @@
 var currenyClassName = "addon-price";
 
+var userTemorarySelectedCurrency = null;
+
 var addonCurrency = {
     originalValue: 'addon-money',
     switch: 'addon-currency-switch',
     currentCurrency: 'addon-current-currency',
-    mutationPrice: 'addon-price-mutation'
+    mutationPrice: 'addon-price-mutation',
+    cartExplanation: 'addon-currency-cart-explanation',
+    currentCartCurrency: 'addon-cuurent-curreny-code'
 }
 
 var addonCurrencySetting = {
@@ -24,6 +28,15 @@ var geoPluginCurrencyCode;
 function saveOriginalValue(){
     moneySpan = document.getElementsByClassName(currenyClassName);
     for (money of moneySpan) {
+
+        if(
+            localStorage.getItem(user.selectedCurreny) == null 
+            ||
+            addonCurrencySetting.storeCurrency == localStorage.getItem(user.selectedCurreny)
+        ) {
+            money.style.display = 'initial';
+        }
+
         money.setAttribute(addonCurrency.originalValue, money.innerText);
     }
 }
@@ -31,6 +44,8 @@ function saveOriginalValue(){
 function convertCurrency(currencyCode, rateFrom, rateTo){
 
     for (money of moneySpan) {
+        money.style.display = 'initial';
+
         var m = money.getAttribute(addonCurrency.originalValue);
 
         money.innerText = amountConverter(currencyCode, m, rateFrom, rateTo);
@@ -109,8 +124,28 @@ function mutatePrice(mutantElement) {
         var rateFrom = localStorage.getItem(user.currencyRateFrom);
         var rateTo = localStorage.getItem(user.currencyRateTo);
 
+        if(userTemorarySelectedCurrency != null) {
+            currencyCode = userTemorarySelectedCurrency;
+        }
+
         mutantElement.innerText = amountConverter(currencyCode, price, rateFrom, rateTo);
     }
+}
+
+function customerExplanation(){
+
+    var currencyCode = localStorage.getItem(user.selectedCurreny);
+
+    if (currencyCode != addonCurrencySetting.storeCurrency) {
+
+        var cartExplanation = document.getElementById(addonCurrency.cartExplanation);
+        var currentCurrency = document.getElementById(addonCurrency.currentCartCurrency);
+
+        cartExplanation.style.display = 'block';
+        currentCurrency.innerText = currencyCode;
+
+    }
+
 }
 
 function currency_init(){
@@ -121,6 +156,11 @@ function currency_init(){
     // Set price mutation if it is a product page
     if (window.location.pathname.includes('products')) {
         currencyMutation();
+    }
+
+    // Set customer explanation on cart page
+    if ( window.location.pathname.includes('cart') ) {
+        customerExplanation();
     }
 
     // Currenct curreny holder
@@ -134,6 +174,8 @@ function currency_init(){
             var currencyCode = this.dataset.addonCurrencyCode;
             var rateFrom = Currency.rates[addonCurrencySetting.storeCurrency];
             var rateTo = Currency.rates[currencyCode];
+
+            userTemorarySelectedCurrency = currencyCode;
 
             // Set Currenct currency
             currentCurrency.innerText = currencyCode;

@@ -37,7 +37,23 @@
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col-md-5 ml-auto">
+                        <div class="col-md-7">
+                            <div 
+                                id="addon-currency-cart-explanation"
+                                style="display: none"
+                                class="cart-page-total">
+                                <div class="alert alert-success m-5" role="alert">
+                                    <h4 class="alert-heading">Currency Exchange Rates!</h4>
+                                    <p>
+                                        <b>{{shop.name}}</b> process all orders in <b>{{shop.currency}}</b>. 
+                                        While the content of your cart is currently displayed in 
+                                        <b id="addon-cuurent-curreny-code"></b>,  you will checkout using 
+                                        <b>{{shop.currency}}</b> at the most current exchange rate.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-5">
                             <div class="cart-page-total">
                                 <h2>{{ 'cart.cart_totals' | t }}</h2>
                                 <ul>

@@ -8,7 +8,12 @@ var addonCurrencySetting = {
 }
 </script>
         <script src="https://cdn.shopify.com/s/javascripts/currencies.js"></script>     
-        <script src="{{ 'addon-currency.js' | asset_url }}"></script>    
+        <script src="{{ 'addon-currency.js' | asset_url }}"></script>
+<style>
+.addon-price {
+    display: none;
+}
+</style>    
 {% endif %}     
 
 <!--########################################################-->
