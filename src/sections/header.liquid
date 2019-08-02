@@ -58,7 +58,7 @@ Theme Store optional settings
                             </button>
                         </div>
                         <div class="header-cart common-style">
-                            <a href="/cart" class="sidebar-trigger">
+                            <a href="/cart">
                                 <span class="ion-bag"></span>
                                 {% if cart.item_count == 0 %}
                                     {% assign hide_badge = 'd-none' %}
@@ -75,12 +75,22 @@ Theme Store optional settings
                                 <span class="ion-navicon"></span>
                             </button>
                         </div>
+                        {%- if settings.addon_wishlist -%}
+                            <div class="header-cart common-style">
+                                <button class="sidebar-trigger">
+                                    <span class="ion-ios-heart-outline"></span>
+                                </button>
+                            </div>
+                        {%- endif -%}
                     </div>
                 </div>
             </div>
         </div>
     </div>
 </header>
+{% if settings.addon_wishlist %}
+    {% include 'wishlist' %}
+{% endif %}
 <!-- main-search start -->
 <div class="main-search-active">
   <div class="sidebar-search-icon">
