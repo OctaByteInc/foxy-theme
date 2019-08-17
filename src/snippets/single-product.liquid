@@ -9,7 +9,7 @@
 <div class="{{ wrapper_class }}">
     <div class="single-product {{ single_class }} ">
         <div class="product-img">
-            <a href="#">
+            <a href="{{ product.url | within: collection }}">
                 <img 
                     src="{{ product.featured_image | img_url: imageDimension  }}" 
                     alt="{{ product.featured_image.alt }}">
@@ -19,7 +19,15 @@
                 <span>{{ 'products.product.save' | t }} {{ sale_precent | append: '%' }}</span>    
             {% endif %}
             <div class="product-action">
-                <a title="Wishlist" class="animate-left" href="#"><i class="ion-ios-heart-outline addon-wishlist"></i></a>
+                <a title="Wishlist" class="animate-left" href="javascript:void(0)">
+                    <i 
+                        data-product-handle="{{ product.handle }}"
+                        data-product-title="{{ product.title }}" 
+                        data-product-image="{{ product.featured_image | img_url: '80x80' }}" 
+                        data-product-sale-price="{{ product.price | money }}" 
+                        data-product-regular-price="{{ product.compare_at_price | money }}"
+                        class="ion-ios-heart-outline addon-wishlist"></i>
+                </a>
                 <a title="Quick View" class="animate-right" href="{{ product.url | within: collection }}">
                     <i class="ion-ios-eye-outline"></i>
                 </a>

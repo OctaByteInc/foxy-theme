@@ -1,7 +1,7 @@
 <div class="col-md-12 col-lg-12 col-xl-6">
     <div class="single-product single-product-list product-list-right-pr mb-40">
         <div class="product-img list-img-width">
-            <a href="#">
+            <a href="{{ product.url | within: collection }}">
                 <img 
                     src="{{ product.featured_image | img_url: '320x364' }}" 
                     alt="{{ product.featured_image.alt }}">
@@ -32,7 +32,15 @@
                     </a>
                 </div>
                 <div class="product-list-wishlist">
-                    <a class="btn-hover list-btn-wishlist" href="#"><i class="ion-ios-heart-outline addon-wishlist"></i></a>
+                    <a class="btn-hover list-btn-wishlist" href="javascript:void(0)">
+                        <i
+                            data-product-handle="{{ product.handle }}"
+                            data-product-title="{{ product.title }}" 
+                            data-product-image="{{ product.featured_image | img_url: '80x80' }}" 
+                            data-product-sale-price="{{ product.price | money }}" 
+                            data-product-regular-price="{{ product.compare_at_price | money }}" 
+                            class="ion-ios-heart-outline addon-wishlist"></i>
+                    </a>
                 </div>
             </div>
         </div>
