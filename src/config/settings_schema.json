@@ -137,6 +137,16 @@
         "id":"addon_wishlist",
         "label": "Enable wish list",
         "default":true
+      },
+      {
+        "type": "header",
+        "content": "Product Swatches"
+      },
+      {
+        "type": "checkbox",
+        "id": "addon_product_swatches",
+        "label": "Enable product swatches",
+        "default": true
       }
     ]
   }
