@@ -146,17 +146,51 @@
                                     {% assign option_index = forloop.index0 %}
                                         <div class="select-option-part">
                                             <label for="Option{{ option.position }}">{{ option.name }}</label>
-                                            <select 
-                                                id="Option{{ option.position }}"
-                                                name="options[{{ option.name | escape }}]" 
-                                                class="select">
-                                                <option disabled selected value>- {{ 'general.please_select' | t }} -</option>
-                                                {% for value in option.values %}
-                                                    <option value="{{ value | escape }}">
-                                                        {{ value }}
-                                                    </option>
-                                                {% endfor %}
-                                            </select>
+                                            
+                                            {% if settings.addon_product_swatches %}
+                                                <div class="addon-swatch-wrapper">
+                                                <input 
+                                                    type="hidden"
+                                                    id="Option{{ option.position }}" 
+                                                    name="options[{{ option.name | escape }}]">
+                                                
+                                                {% assign option_name = option.name | downcase %}
+
+                                                {% if option_name contains 'color' or option_name contains 'colour' %}
+                                                    {% assign unique_variants = '' %}
+                                                    {% for value in option.values %}
+                                                        {% for variant in product.variants %}
+                                                            {% unless unique_variants contains variant.options[option_index] %}
+                                                                <img 
+                                                                    class="addon-swatch-img"
+                                                                    data-toggle="tooltip" 
+                                                                    data-placement="top" 
+                                                                    title="{{ value }}"
+                                                                    src="{{ variant.image | img_url: '80x80' }}" />
+                                                                {% assign unique_variants = unique_variants | append: variant.options[option_index] %}
+                                                            {% endunless %}
+                                                        {% endfor %}
+                                                    {% endfor %}
+                                                {% else %}
+                                                    {% for value in option.values %}
+                                                        <span class="addon-swatch-size">{{ value }}</span>
+                                                    {% endfor %}
+                                                {% endif %}
+
+                                                </div>
+                                            {% else %}
+                                                <select 
+                                                    id="Option{{ option.position }}"
+                                                    name="options[{{ option.name | escape }}]" 
+                                                    class="select">
+                                                    <option disabled selected value>- {{ 'general.please_select' | t }} -</option>
+                                                    {% for value in option.values %}
+                                                        <option value="{{ value | escape }}">
+                                                            {{ value }}
+                                                        </option>
+                                                    {% endfor %}
+                                                </select>
+                                            {% endif %}
 
                                         </div>
                                 {% endfor %}
