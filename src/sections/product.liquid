@@ -149,10 +149,17 @@
                                             
                                             {% if settings.addon_product_swatches %}
                                                 <div class="addon-swatch-wrapper">
-                                                <input 
-                                                    type="hidden"
-                                                    id="Option{{ option.position }}" 
-                                                    name="options[{{ option.name | escape }}]">
+                                                <select
+                                                    id="Option{{ option.position }}"
+                                                    name="options[{{ option.name | escape }}]" 
+                                                    class="select d-none">
+                                                    <option disabled selected value>- {{ 'general.please_select' | t }} -</option>
+                                                    {% for value in option.values %}
+                                                        <option value="{{ value | escape }}">
+                                                            {{ value }}
+                                                        </option>
+                                                    {% endfor %}
+                                                </select>
                                                 
                                                 {% assign option_name = option.name | downcase %}
 
@@ -161,19 +168,41 @@
                                                     {% for value in option.values %}
                                                         {% for variant in product.variants %}
                                                             {% unless unique_variants contains variant.options[option_index] %}
-                                                                <img 
-                                                                    class="addon-swatch-img"
-                                                                    data-toggle="tooltip" 
-                                                                    data-placement="top" 
-                                                                    title="{{ value }}"
-                                                                    src="{{ variant.image | img_url: '80x80' }}" />
-                                                                {% assign unique_variants = unique_variants | append: variant.options[option_index] %}
+                                                                {% if variant.image %}
+                                                                    <img
+                                                                        data-swatch-type="img"
+                                                                        data-option-id="Option{{ option.position }}"
+                                                                        data-option-value="{{ variant.options[option_index] }}" 
+                                                                        class="addon-swatch-img addon-swatch"
+                                                                        data-toggle="tooltip" 
+                                                                        data-placement="top" 
+                                                                        title="{{ variant.options[option_index] }}"
+                                                                        src="{{ variant.image | img_url: '50x50' }}" />
+                                                                {% else %}
+                                                                    <!-- If image is not show color in image -->
+                                                                    <img
+                                                                        style="background-color: {{ variant.options[option_index] }}"
+                                                                        data-swatch-type="img"
+                                                                        data-option-id="Option{{ option.position }}"
+                                                                        data-option-value="{{ variant.options[option_index] }}" 
+                                                                        data-toggle="tooltip" 
+                                                                        data-placement="top" 
+                                                                        title="{{ variant.options[option_index] }}"
+                                                                        class="addon-swatch-imgplaceholder addon-swatch" />        
+                                                                {% endif %}        
+                                                                {% assign unique_variants = unique_variants | append: ' ' | append: variant.options[option_index] %}
                                                             {% endunless %}
                                                         {% endfor %}
                                                     {% endfor %}
                                                 {% else %}
                                                     {% for value in option.values %}
-                                                        <span class="addon-swatch-size">{{ value }}</span>
+                                                        <span
+                                                            data-swatch-type="size"
+                                                            data-option-id="Option{{ option.position }}"
+                                                            data-option-value="{{ value }}" 
+                                                            class="addon-swatch-size addon-swatch">
+                                                                {{ value }}
+                                                        </span>
                                                     {% endfor %}
                                                 {% endif %}
 

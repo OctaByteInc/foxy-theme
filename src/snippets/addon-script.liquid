@@ -1,4 +1,7 @@
 
+<!-- ADDON CSS Style -->
+<link rel="stylesheet" href="{{ "addon-style.css" | asset_url }}">
+
 {% if settings.currency_converter_enable %}
 <!-- ADDON Currency scripts-->
 <script>
@@ -16,9 +19,16 @@ var addonCurrencySetting = {
 </style>    
 {% endif %}     
 
-<!--########################################################-->
+<!--########################## WISH LIST ##############################-->
 
 {% if settings.addon_wishlist %}
     <!-- ADDON Wish list script -->
     <script src="{{ 'addon-wishlist.js' | asset_url }}"></script>
+{% endif %}
+
+<!---- #################### SWATCHES ################### -->
+
+{% if settings.addon_product_swatches %}
+    <!-- ADDON Swatches script -->
+    <script src="{{ 'addon-swatches.js' | asset_url }}"></script>
 {% endif %}

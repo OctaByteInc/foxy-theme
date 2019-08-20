@@ -1,0 +1,26 @@
+.addon-swatch-size{
+    padding: 8px 25px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+    cursor: pointer;
+    margin-right: 5px;
+}
+.addon-swatch-size-active{
+    background-color: #e33;
+    color: #fff;
+    border-color: #e33;
+}
+.addon-swatch-img {
+    cursor: pointer;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+}
+.addon-swatch-img-active{
+    border: 2px solid #e33;
+}
+.addon-swatch-imgplaceholder {
+    cursor: pointer;
+    border-radius: 3px;
+    width:50px;
+    height: 50px;
+}

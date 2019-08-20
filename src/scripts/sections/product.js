@@ -109,7 +109,10 @@ register('product', {
         }
 
         const thumbnail = this.container.querySelector(selectors.thumbnailById(variant.featured_image.id));
-        thumbnail.classList.add(classes.paneActive, classes.paneShow);
+
+        if(thumbnail != null)
+            thumbnail.classList.add(classes.paneActive, classes.paneShow);
+            
     },
 
     // Fetch Product detail from Shopify API
