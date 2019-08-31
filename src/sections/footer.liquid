@@ -116,6 +116,16 @@
     });
 </script>
 
+<!---- #################### Product Review ################### -->
+
+{% if settings.addon_product_reviews %}
+    {% if template.name == 'product' %}
+        <!-- Product review script -->
+        <script src="{{ 'addon-product-review.js' | asset_url }}"></script>
+    {% endif %}
+{% endif %}
+
+
 {% schema %}
   {
     "name": "Footer",

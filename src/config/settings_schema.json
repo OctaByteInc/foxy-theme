@@ -147,6 +147,16 @@
         "id": "addon_product_swatches",
         "label": "Enable product swatches",
         "default": true
+      },
+      {
+        "type":"header",
+        "content": "Product Reviews"
+      },
+      {
+        "type":"checkbox",
+        "id":"addon_product_reviews",
+        "label": "Enable reviews on products",
+        "default": true
       }
     ]
   }

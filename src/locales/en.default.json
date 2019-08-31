@@ -57,8 +57,8 @@
     },
     "addon":{
       "product":{
-        "reviews": "Reviews (0)",
-        "be_first_to_write_review": "Be the first to write your review!"
+        "reviews": "Reviews",
+        "be_first_to_write_review": "write your review for this post!"
       }
     },
     "gift_cards": {

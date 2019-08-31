@@ -106,18 +106,13 @@
                 <div class="col-md-12 col-lg-5 col-12">
                     <div class="product-details-content">
                         <h3>{{ product.title }}</h3>
-                        <div class="rating-number">
-                            <div class="quick-view-rating">
-                                <i class="ion-ios-star red-star"></i>
-                                <i class="ion-ios-star red-star"></i>
-                                <i class="ion-android-star-outline"></i>
-                                <i class="ion-android-star-outline"></i>
-                                <i class="ion-android-star-outline"></i>
+                        
+                        {% if settings.addon_product_reviews %}
+                            <div class="rating-number" id="rating-number">
+                                <!-- rating stars -->
                             </div>
-                            <div class="quick-view-number">
-                                <span>2 Ratting (S)</span>
-                            </div>
-                        </div>
+                        {% endif %}
+
                         <div class="details-price">
                             <span data-product-price class="addon-price addon-price-mutation">
                                 {{ current_variant.price | money }}
@@ -302,17 +297,21 @@
                     <a class="active" href="#pro-dec" data-toggle="tab" role="tab" aria-selected="true">
                         {{ 'products.product.description' | t }}
                     </a>
-                    <a href="#pro-review" data-toggle="tab" role="tab" aria-selected="false">
-                        {{ 'addon.product.reviews' | t }}
-                    </a>
+
+                    {% if settings.addon_product_reviews %}
+                        <a href="#pro-review" data-toggle="tab" role="tab" aria-selected="false">
+                            {{ 'addon.product.reviews' | t }}
+                        </a>
+                    {% endif %}
+
                 </div>
                 <div class="description-review-text tab-content">
                     <div class="tab-pane active show fade" id="pro-dec" role="tabpanel">
                         <p>{{ product.content }}</p>
                     </div>
-                    <div class="tab-pane fade" id="pro-review" role="tabpanel">
-                        <a href="#">{{ 'addon.product.be_first_to_write_review' | t }}</a>
-                    </div>
+                    
+                    {% include 'addon-product-review' %}
+
                 </div>
             </div>
         </div>

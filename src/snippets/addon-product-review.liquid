@@ -1,0 +1,68 @@
+{% if settings.addon_product_reviews %}
+
+<div class="tab-pane fade" id="pro-review" role="tabpanel">
+    <a onclick="openReviewForm()" href="javascript:void(0)">
+        {{ 'addon.product.be_first_to_write_review' | t }}
+    </a>
+    <div 
+        id="review-form"
+        class="text-left" 
+        style="width:50%;margin:auto;display:none">
+        <form>
+            <label>Name</label>
+            <input 
+                type="text" 
+                id="username" 
+                class="form-control" />
+            <label>Review</label>
+            <textarea 
+                id="review" 
+                class="form-control"></textarea><br/>
+            <div 
+                class="quick-view-rating"
+                style="cursor:pointer">    
+                <i 
+                    id="ssr-1" 
+                    class="ion-android-star-outline"
+                    onclick="selectStarRating(1)"></i>    
+                <i 
+                    id="ssr-2" 
+                    class="ion-android-star-outline"
+                    onclick="selectStarRating(2)"></i>    
+                <i 
+                    id="ssr-3" 
+                    class="ion-android-star-outline"
+                    onclick="selectStarRating(3)"></i>    
+                <i 
+                    id="ssr-4" 
+                    class="ion-android-star-outline"
+                    onclick="selectStarRating(4)"></i>    
+                <i 
+                    id="ssr-5" 
+                    class="ion-android-star-outline"
+                    onclick="selectStarRating(5)"></i>
+            </div> <br/>
+            <input type="hidden" id="stars" />
+            <input 
+                type="hidden" 
+                id="review-product-id"
+                value="{{ product.id }}"  />
+            <input 
+                type="hidden"
+                id="blank-image-url"
+                value="{{ 'comment-blank.jpg' | asset_url }}" />
+            <button
+                id="submit-review-btn"
+                onclick="submitReview(event)" 
+                class="btn btn-primary">Submit</button>
+            <p id="submit-review-response"></p>
+        </form>
+    </div>
+    <div 
+        id="product-review-markup"
+        class="news-details-bottom" 
+        style="width:70%;margin:auto">
+    </div>
+</div>
+
+{% endif %}
