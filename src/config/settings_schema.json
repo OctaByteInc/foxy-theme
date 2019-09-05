@@ -108,56 +108,5 @@
         "info": "Will be scaled down to 32 x 32px"
       }
     ]
-  },
-  {
-    "name": "Addon",
-    "settings":[
-      {
-        "type": "header",
-        "content": "Curreny Converter"
-      },
-      {
-        "type": "checkbox",
-        "id": "currency_converter_enable",
-        "label": "Enable curreny converter",
-        "default": false
-      },
-      {
-        "type":"checkbox",
-        "id": "currency_converter_location",
-        "label": "Enable Geo Location to convert currency based on user location",
-        "default": true
-      },
-      {
-        "type": "header",
-        "content": "WishList"
-      },
-      {
-        "type":"checkbox",
-        "id":"addon_wishlist",
-        "label": "Enable wish list",
-        "default":true
-      },
-      {
-        "type": "header",
-        "content": "Product Swatches"
-      },
-      {
-        "type": "checkbox",
-        "id": "addon_product_swatches",
-        "label": "Enable product swatches",
-        "default": true
-      },
-      {
-        "type":"header",
-        "content": "Product Reviews"
-      },
-      {
-        "type":"checkbox",
-        "id":"addon_product_reviews",
-        "label": "Enable reviews on products",
-        "default": true
-      }
-    ]
   }
 ]
