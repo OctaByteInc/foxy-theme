@@ -144,7 +144,7 @@ function reviewmarkup(review){
         html += '    class="blog-top text-left"';
         html += '    style="margin-top:20px !important;">';
         html += '    <div class="news-allreply">';
-        html += '        <img src="'+image+'" alt=""></a>';
+        html += '        <img style="width:70px;height:70px" src="'+image+'" alt=""></a>';
         html += '    </div>';
         html += '    <div class="blog-img-details">';
         html += '        <div class="blog-title">';
