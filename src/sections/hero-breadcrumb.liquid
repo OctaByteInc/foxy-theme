@@ -27,7 +27,7 @@
     {%- endcase -%}
 {%- endcapture -%}
 {% if section.settings.hero_image != blank %}
-    {%- assign imageURL = section.settings.hero_image | img_url: '192x500' -%}
+    {%- assign imageURL = section.settings.hero_image | img_url: '1920x500' -%}
     {%- capture bgImage -%}
         background-image: url('{{ imageURL }}')
     {%- endcapture -%}
