@@ -20,7 +20,10 @@
             {%- assign name = 'breadcrumb.login' | t -%}
         {%- when 'article' -%}
             {{ 'breadcrumb.article' | t }}
-            {%- assign name = article.title | truncatewords: 5 -%}                
+            {%- assign name = article.title | truncatewords: 5 -%}
+        {%- when 'search' -%}
+            {{ 'breadcrumb.search' | t }}
+            {%- assign name = 'breadcrumb.search' | t -%}                
         {%- else -%}
             {{ shop.name }}
             {%- assign name = nil -%}
