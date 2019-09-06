@@ -20,7 +20,7 @@
                     <h2 class="animated">{{ section.settings.collection_heading }}</h2>
                     <p class="animated"> {{ section.settings.collection_desc }} </p>
                     {% assign collection = collections[section.settings.collection] %}   
-                    <a class="btn-hover slider-btn-style animated" href="{{ collection.url }}">{{ 'general.shop_now' | t }}</a>
+                    <a class="btn-hover slider-btn-style animated" href="{{ section.settings.collection }}">{{ 'general.shop_now' | t }}</a>
                 </div>
             </div>
         </div>
@@ -43,9 +43,9 @@
           "label": "Pick image for banner *Recommend size 1920x785*"
       },
       {
-          "type": "collection",
+          "type": "url",
           "id": "collection",
-          "label": "Select a collection"
+          "label": "Select where you want to redirect your user"
       },
       {
           "type": "text",
