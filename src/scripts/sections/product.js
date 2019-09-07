@@ -44,7 +44,7 @@ register('product', {
     // Called whenever user change any option in product form
     onFormOptionChange(event) {
         const variant = event.dataset.variant;
-        
+
         this.renderVariantImage(variant);
         this.renderPrice(variant);
         this.renderAddToCart(variant);

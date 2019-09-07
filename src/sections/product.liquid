@@ -233,21 +233,32 @@
                                     value="1" min="1" 
                                     class="cart-plus-minus-box">
                             </div>
+                            {%- if product.variants.size == 1 -%}
+                                {%- assign cartSelectClass = 's-add-to-cart btn-hover-black' -%}
+                                {%- assign cartText = 'products.product.add_to_cart' | t -%}
+                                {%- assign variantId = product.variants[0].id -%}
+                            {%- else -%}
+                                {%- assign cartText = 'products.product.select_variant' | t -%}
+                            {%- endif -%}
                             <div class="quickview-btn-cart">
                                 <a 
-                                    data-add-to-cart 
-                                    href="javascript:void(0)">{{ 'products.product.select_variant' | t }}</a>
+                                    data-add-to-cart
+                                    class="{{ cartSelectClass }}"
+                                    data-variant-id = "{{ variantId }}" 
+                                    href="javascript:void(0)">{{ cartText }}</a>
                             </div>
                             <div class="quickview-btn-wishlist">
-                                <a class="btn-hover" href="javascript:void(0)">
-                                    <i
-                                        data-product-handle="{{ product.handle }}"
-                                        data-product-title="{{ product.title }}" 
-                                        data-product-image="{{ product.featured_image | img_url: '80x80' }}" 
-                                        data-product-sale-price="{{ product.price | money }}" 
-                                        data-product-regular-price="{{ product.compare_at_price | money }}" 
-                                        class="ion-ios-heart-outline addon-wishlist"></i>
-                                </a>
+                                {%- if settings.addon_wishlist -%}
+                                    <a class="btn-hover" href="javascript:void(0)">
+                                        <i
+                                            data-product-handle="{{ product.handle }}"
+                                            data-product-title="{{ product.title }}" 
+                                            data-product-image="{{ product.featured_image | img_url: '80x80' }}" 
+                                            data-product-sale-price="{{ product.price | money }}" 
+                                            data-product-regular-price="{{ product.compare_at_price | money }}" 
+                                            class="ion-ios-heart-outline addon-wishlist"></i>
+                                    </a>        
+                                {%- endif -%}
                             </div>
                         </div>
                         {% endform %}

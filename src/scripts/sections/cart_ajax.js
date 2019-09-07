@@ -27,7 +27,9 @@ register('header', {
                 btn.text('Added in cart');
 
                 // Notify cart count in Header
-                $('#cart-notify').text(state.item_count);
+                const cartNotify = $('#cart-notify');
+                cartNotify.text(state.item_count);
+                cartNotify.removeClass('d-none');
             });
         });
     }
