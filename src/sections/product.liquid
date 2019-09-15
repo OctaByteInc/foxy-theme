@@ -222,7 +222,9 @@
                             
                         {% endunless %}
                         
-                        {{ form | payment_button }}
+                        {% if settings.addon_product_buy_now %}
+                            {{ form | payment_button }}
+                        {% endif %}
 
                         <div class="quickview-plus-minus">
                             <div class="cart-plus-minus">
